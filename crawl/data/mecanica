@@ -1,0 +1,1408 @@
+
+html
+[if IE 7 ]>  <html lang="ro" class="isie ie7 oldie no-js"> <![endif]
+[if IE 8 ]>  <html lang="ro" class="isie ie8 oldie no-js"> <![endif]
+[if IE 9 ]>  <html lang="ro" class="isie ie9 no-js"> <![endif]
+ Meta 
+
+
+
+
+
+Facultatea de Autovehicule Rutiere, Mecatronică și Mecanică - Universitatea Tehnica din Cluj-Napoca
+
+
+
+
+
+
+ Path to manifest.json 
+
+ Icons for Apple Devices 
+
+
+
+
+
+
+    // Initialize the service worker
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/serviceworker.js', {
+            scope: '.' // <--- THIS BIT IS REQUIRED
+        }).then(function (registration) {
+            // Registration was successful
+            console.log('django-progressive-web-app: ServiceWorker registration successful with scope: ', registration.scope);
+        }, function (err) {
+            // registration failed :(
+            console.log('django-progressive-web-app: ServiceWorker registration failed: ', err);
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+div id="preloader"></div
+div id="loading-area"></div
+ header 
+
+ top bar 
+
+
+
+
+
+  Strada Memorandumului 28, Cluj-Napoca 400114  
+
+
+
+
+EN
+FR
+DE
+Intranet
+Telefoane
+
+
+li><a href="https://twitter.com/utcluj" aria-label="Pagina de twitter" class="fa fa-twitter"></a></li
+
+
+
+
+
+ top bar END
+
+
+
+
+a href="https://www.utcluj.ro/media/documents/2019/grad_de_incredere_ridicat_aracis_2018-2023.pdf" aria-label="Către acreditarea aracis"><img src="/static/images/aracis2018.jpg" width="210" height="60" alt="Acreditare Universitatea Tehnică din Cluj-Napoca 2018" style="width:60%;cursor:pointer;" target="_blank"></a
+
+
+
+
+
+ Număr de telefon
+0264 401 200
+
+
+ Adresa de e-mail
+contact@utcluj.ro
+
+li>
+                                <h6 class="text-primary"><i class="fa fa-clock-o"></i> Program</h6>
+                                <span>Lun - Vin: 7:30 - 15:30</span>
+                            </li
+
+
+Contact Admitere
+0264 401 328
+
+
+
+
+
+
+
+ main header 
+
+
+
+
+ website logo 
+
+ nav toggle button 
+
+Deschide meniul
+
+
+
+
+
+
+
+Deschidere modul căutare
+
+
+
+table .gstl-50 {
+    margin-bottom: 0px;
+}
+
+ Quik search 
+
+
+
+      (function() {
+        var cx = '009089677185215201678:b4cyscpbjg4';
+        var gcse = document.createElement('script');
+        gcse.type = 'text/javascript';
+        gcse.async = true;
+        gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(gcse, s);
+      })();
+    
+
+input name="search"  type="text" class="form-control" placeholder="Scrieți ce doriți să căutați.."
+
+
+Închidere modul căutare
+
+
+
+ Universitatea
+
+ Despre universitate 
+ Conducerea 
+ Educație 
+ Cercetare 
+ Facultăți 
+ Relații Internaționale 
+ Contact 
+ Asigurarea calității 
+ Structura Universității Tehnice 
+ Comisia de etică 
+ Concurs posturi didactice 2019 
+ Alegeri 2019 
+ Concurs posturi didactice pe perioada determinată 2019 
+
+
+ Admitere
+
+ Admitere Licență 
+ Birou Admitere 
+ Admitere Master 
+ Admitere Doctorat 
+ Facilități 
+
+
+ Sunt student
+
+ Portal Studenți 
+ Organizații Studentești 
+ Mobilități 
+ Centrul de Consiliere si Orientare in Cariera 
+ Regulamente Studenți 
+ Ghidul Studentului Licență 
+ Ghidul Studentului Master 
+ International Students Handbook 
+ Oportunități de angajare 
+ Societatea Antreprenorială Studențească 
+ Cabinet medical/stomatologic 
+
+
+ Vizitează 
+
+
+
+
+
+
+ main header END 
+
+ header END 
+div class="redzone">
+    <div class="container">
+        <div class="sixteen columns">
+            <div class="redzone_title">Bine ati venit la Universitatea Tehnica din Cluj-Napoca</div>
+            <p><a href="http://www.utcluj.ro/media/documents/2014/Certificat_ARACIS_2013.pdf" target="_blank">"Grad de incredere ridicat" - ARACIS (2013 - 2018)</a></p>
+            <p><a href="http://www.utcluj.ro/media/documents/2013/2011_clasament_universitati.pdf" target="_blank">"Universitate de cercetare avansata si educatie" - Ordinul MECTS nr. 5262 din 5.09.2011</a></p>
+        </div>
+    </div>
+</div
+
+
+
+
+Bine ați venit la Universitatea Tehnică din Cluj-Napoca!
+
+"Grad de incredere ridicat" - ARACIS 2018-2023
+
+"Universitate de cercetare avansata si educatie" - Ordinul MECTS nr. 5262 din 5.09.2011
+
+
+
+
+
+
+
+Universitatea
+
+
+
+
+Despre universitate
+Conducerea
+Educație
+Cercetare
+Facultăți
+Relații Internaționale
+Contact
+Asigurarea calității
+Structura Universității Tehnice
+Comisia de etică
+Concurs posturi didactice 2019
+Alegeri 2019
+Concurs posturi didactice pe perioada determinată 2019
+
+Admitere
+
+
+
+
+Admitere Licență
+Birou Admitere
+Admitere Master
+Admitere Doctorat
+Facilități
+
+Sunt student
+
+
+
+
+Portal Studenți
+Organizații Studentești
+Mobilități
+Centrul de Consiliere si Orientare in Cariera
+Regulamente Studenți
+Ghidul Studentului Licență
+Ghidul Studentului Master
+International Students Handbook
+Oportunități de angajare
+Societatea Antreprenorială Studențească
+Cabinet medical/stomatologic
+
+
+div class="widget widget_categories">
+    <h4 class="widget-title"><a href="/universitatea/despre/">Universitatea</a></h4>
+    <ul>
+        
+            <li class="">
+                <a href="/universitatea/despre/" >Despre universitate</a>
+            </li>
+        
+            <li class="">
+                <a href="/universitatea/conducere/" >Conducerea</a>
+            </li>
+        
+            <li class="">
+                <a href="/universitatea/educatie/" >Educație</a>
+            </li>
+        
+            <li class="">
+                <a href="http://research.utcluj.ro/index.php/acasa.html" target="_blank">Cercetare</a>
+            </li>
+        
+            <li class="">
+                <a href="/universitatea/facultati/" >Facultăți</a>
+            </li>
+        
+            <li class="">
+                <a href="http://bri.utcluj.ro" target="_blank">Relații Internaționale</a>
+            </li>
+        
+            <li class="">
+                <a href="/universitatea/contact/" >Contact</a>
+            </li>
+        
+            <li class="">
+                <a href="http://dac.utcluj.ro/" target="_blank">Asigurarea calității</a>
+            </li>
+        
+            <li class="">
+                <a href="/universitatea/structura/" >Structura Universității Tehnice</a>
+            </li>
+        
+            <li class="">
+                <a href="/comisia-de-etica/" >Comisia de etică</a>
+            </li>
+        
+            <li class="">
+                <a href="/universitatea/concurs-posturi-didactice-2019/" >Concurs posturi didactice 2019</a>
+            </li>
+        
+            <li class="">
+                <a href="/alegeri/2019/" >Alegeri 2019</a>
+            </li>
+        
+            <li class="">
+                <a href="/universitatea/concurs-posturi-didactice-determinata-2019/" >Concurs posturi didactice pe perioada determinată 2019</a>
+            </li>
+        
+    </ul>
+</div>
+
+<div class="widget widget_categories">
+    <h4 class="widget-title"><a href="/universitatea/despre/">Admitere</a></h4>
+    <ul>
+        
+            <li class="active">
+                <a href="/admitere/licenta/" >Admitere Licență</a>
+            </li>
+        
+            <li class="">
+                <a href="/birou-admitere/" >Birou Admitere</a>
+            </li>
+        
+            <li class="">
+                <a href="/admitere/master/" >Admitere Master</a>
+            </li>
+        
+            <li class="">
+                <a href="http://iosud.utcluj.ro/admitere.html" target="_blank">Admitere Doctorat</a>
+            </li>
+        
+            <li class="">
+                <a href="/universitatea/facilitati/" >Facilități</a>
+            </li>
+        
+    </ul>
+</div>
+
+<div class="widget widget_categories">
+    <h4 class="widget-title"><a href="/universitatea/despre/">Universitatea</a></h4>
+    <ul>
+        
+            <li class="">
+                <a href="https://sinu.utcluj.ro/" target="_blank">Portal Studenți</a>
+            </li>
+        
+            <li class="">
+                <a href="/studenti/organizatii/" >Organizații Studentești</a>
+            </li>
+        
+            <li class="">
+                <a href="/studenti/mobilitati/" >Mobilități</a>
+            </li>
+        
+            <li class="">
+                <a href="/ococ/" >Centrul de Consiliere si Orientare in Cariera</a>
+            </li>
+        
+            <li class="">
+                <a href="/universitatea/despre/regulamente/regulamente-studenti/" >Regulamente Studenți</a>
+            </li>
+        
+            <li class="">
+                <a href="https://www.utcluj.ro/media/astatic/documente/ghidul_studentului_licenta_2019.pdf" target="_blank">Ghidul Studentului Licență</a>
+            </li>
+        
+            <li class="">
+                <a href="https://www.utcluj.ro/media/astatic/documente/ghidul_studentului_master_2019.pdf" target="_blank">Ghidul Studentului Master</a>
+            </li>
+        
+            <li class="">
+                <a href="http://www.utcluj.ro/media/documents/2015/International_Student_Handbook.pdf" target="_blank">International Students Handbook</a>
+            </li>
+        
+            <li class="">
+                <a href="/studenti/oportunitati_de_angajare/" >Oportunități de angajare</a>
+            </li>
+        
+            <li class="">
+                <a href="https://sas.utcluj.ro/" target="_blank">Societatea Antreprenorială Studențească</a>
+            </li>
+        
+            <li class="">
+                <a href="/cabinet-medical-stomatologic/" >Cabinet medical/stomatologic</a>
+            </li>
+        
+    </ul>
+</div
+div class="menu_content_title"><a href="/universitatea/despre/">Universitatea</a></div>
+<ul>
+    
+        <li class="">
+            <a href="/universitatea/despre/" >Despre universitate</a>
+            
+                <div class="sub_menu">
+                    <ul>
+                        
+                            
+                                <li class=""><a href="/universitatea/despre/istoric/" >Istoric</a></li>
+                            
+                        
+                            
+                                <li class=""><a href="/universitatea/despre/mesaj-conducere/" >Mesajul Conducerii</a></li>
+                            
+                        
+                            
+                                <li class=""><a href="/universitatea/despre/prezent/" >Universitatea Tehnică în prezent</a></li>
+                            
+                        
+                            
+                                <li class=""><a href="/universitatea/despre/informatii-publice/" >Informații Publice</a></li>
+                            
+                        
+                            
+                                <li class=""><a href="/universitatea/despre/regulamente/" >Regulamente, Proceduri și Hotărâri</a></li>
+                            
+                        
+                    </ul>
+                </div>
+            
+        </li>
+    
+        <li class="">
+            <a href="/universitatea/conducere/" >Conducerea</a>
+            
+                <div class="sub_menu">
+                    <ul>
+                        
+                            
+                                <li class=""><a href="/universitatea/conducere/consiliu-administratie/" >Rectorat</a></li>
+                            
+                        
+                            
+                                <li class=""><a href="/universitatea/conducere/senat/" >Senat</a></li>
+                            
+                        
+                    </ul>
+                </div>
+            
+        </li>
+    
+        <li class="">
+            <a href="/universitatea/educatie/" >Educație</a>
+            
+                <div class="sub_menu">
+                    <ul>
+                        
+                            
+                                <li class=""><a href="/universitatea/educatie/licenta/" >Studii universitare de licență</a></li>
+                            
+                        
+                            
+                                <li class=""><a href="/universitatea/educatie/master/" >Studii universitare de masterat</a></li>
+                            
+                        
+                            
+                                <li class=""><a href="http://iosud.utcluj.ro/" target="_blank">Studii universitare de doctorat</a></li>
+                            
+                        
+                            
+                                <li class=""><a href="/universitatea/educatie/educatie-continua/" >Educație Continuă</a></li>
+                            
+                        
+                    </ul>
+                </div>
+            
+        </li>
+    
+        <li class="">
+            <a href="http://research.utcluj.ro/index.php/acasa.html" target="_blank">Cercetare</a>
+            
+        </li>
+    
+        <li class="">
+            <a href="/universitatea/facultati/" >Facultăți</a>
+            
+        </li>
+    
+        <li class="">
+            <a href="http://bri.utcluj.ro" target="_blank">Relații Internaționale</a>
+            
+        </li>
+    
+        <li class="">
+            <a href="/universitatea/contact/" >Contact</a>
+            
+        </li>
+    
+        <li class="">
+            <a href="http://dac.utcluj.ro/" target="_blank">Asigurarea calității</a>
+            
+        </li>
+    
+        <li class="">
+            <a href="/universitatea/structura/" >Structura Universității Tehnice</a>
+            
+        </li>
+    
+        <li class="">
+            <a href="/comisia-de-etica/" >Comisia de etică</a>
+            
+        </li>
+    
+        <li class="">
+            <a href="/universitatea/concurs-posturi-didactice-2019/" >Concurs posturi didactice 2019</a>
+            
+        </li>
+    
+        <li class="">
+            <a href="/alegeri/2019/" >Alegeri 2019</a>
+            
+        </li>
+    
+        <li class="">
+            <a href="/universitatea/concurs-posturi-didactice-determinata-2019/" >Concurs posturi didactice pe perioada determinată 2019</a>
+            
+        </li>
+    
+</ul>
+
+<div class="menu_content_title"><a href="/admitere/">Vreau sa devin student</a></div>
+<ul>
+    
+        <li class="active">
+            <a href="/admitere/licenta/" >Admitere Licență</a>
+            
+                <div class="sub_menu">
+                    <ul>
+                        
+                            <li class=""><a href="/admitere/licenta/arhitectura-si-urbanism/" >Facultatea de Arhitectură și Urbanism</a></li>
+                        
+                            <li class=""><a href="/admitere/licenta/automatica-si-calculatoare/" >Facultatea de Automatică și Calculatoare</a></li>
+                        
+                            <li class=""><a href="/admitere/licenta/constructii/" >Facultatea de Construcții</a></li>
+                        
+                            <li class=""><a href="/admitere/licenta/constructii-de-masini/" >Facultatea de Construcții de Masini</a></li>
+                        
+                            <li class=""><a href="/admitere/licenta/electronica-telecomunicatii-si-tehnologia-informatiei/" >Facultatea de Electronică, Telecomunicații si Tehnologia Informației</a></li>
+                        
+                            <li class=""><a href="/admitere/licenta/instalatii/" >Facultatea de Instalații</a></li>
+                        
+                            <li class=""><a href="/admitere/licenta/inginerie-electrica/" >Facultatea de Inginerie Electrică</a></li>
+                        
+                            <li class="active"><a href="/admitere/licenta/mecanica/" >Facultatea de Autovehicule Rutiere, Mecatronică și Mecanică</a></li>
+                        
+                            <li class=""><a href="/admitere/licenta/ingineria-materialelor-si-a-mediului/" >Facultatea de Ingineria Materialelor și a Mediului</a></li>
+                        
+                            <li class=""><a href="/admitere/licenta/cunbm-inginerie/" >Facultatea de Inginerie CUNBM</a></li>
+                        
+                            <li class=""><a href="/admitere/licenta/cunbm-litere/" >Facultatea de Litere CUNBM</a></li>
+                        
+                            <li class=""><a href="/admitere/licenta/cunbm-stiinte/" >Facultatea de Stiinte CUNBM</a></li>
+                        
+                            <li class=""><a href="/admitere/licenta/f/extensii-alba-iulia/" >Extensie Alba Iulia</a></li>
+                        
+                            <li class=""><a href="/admitere/licenta/f/extensii-bistrita/" >Extensie Bistrita</a></li>
+                        
+                            <li class=""><a href="/admitere/licenta/f/extensii-satu-mare/" >Extensie Satu Mare</a></li>
+                        
+                            <li class=""><a href="/admitere/licenta/f/extensii-zalau/" >Extensie Zalau</a></li>
+                        
+                    </ul>
+                </div>
+            
+        </li>
+    
+        <li class="">
+            <a href="/birou-admitere/" >Birou Admitere</a>
+            
+        </li>
+    
+        <li class="">
+            <a href="/admitere/master/" >Admitere Master</a>
+            
+        </li>
+    
+        <li class="">
+            <a href="http://iosud.utcluj.ro/admitere.html" target="_blank">Admitere Doctorat</a>
+            
+        </li>
+    
+        <li class="">
+            <a href="/universitatea/facilitati/" >Facilități</a>
+            
+                <div class="sub_menu">
+                    <ul>
+                        
+                            <li class=""><a href="/biblioteca/" >Biblioteca Universității Tehnice din Cluj-Napoca</a></li>
+                        
+                            <li class=""><a href="/clubul-cultural-studentesc/" >Clubul Cultural Studențesc</a></li>
+                        
+                            <li class=""><a href="/centrul-de-natatie/" >Complexul de Natație</a></li>
+                        
+                            <li class=""><a href="/campus/" >Campusul Studențesc</a></li>
+                        
+                    </ul>
+                </div>
+            
+        </li>
+    
+</ul>
+
+<div class="menu_content_title"><a href="/studenti/">Sunt student</a></div>
+<ul>
+    
+        <li class="">
+            <a href="https://sinu.utcluj.ro/">Portal Studenți</a>
+            
+        </li>
+    
+        <li class="">
+            <a href="/studenti/organizatii/">Organizații Studentești</a>
+            
+        </li>
+    
+        <li class="">
+            <a href="/studenti/mobilitati/">Mobilități</a>
+            
+        </li>
+    
+        <li class="">
+            <a href="/ococ/">Centrul de Consiliere si Orientare in Cariera</a>
+            
+                <div class="sub_menu">
+                    <ul>
+                        
+                            <li class=""><a href="/ococ/prezentare/">Centrul de Consiliere si Orientare in Cariera</a></li>
+                        
+                            <li class=""><a href="/ococ/echipa/">Echipa OCOC</a></li>
+                        
+                            <li class=""><a href="/ococ/atributii/">Atribuții OCOC</a></li>
+                        
+                            <li class=""><a href="/ococ/resurse/">Resurse OCOC</a></li>
+                        
+                            <li class=""><a href="/ococ/contact/">Contact OCOC</a></li>
+                        
+                            <li class=""><a href="/ococ/servicii/">Servicii OCOC</a></li>
+                        
+                    </ul>
+                </div>
+            
+        </li>
+    
+        <li class="">
+            <a href="/universitatea/despre/regulamente/regulamente-studenti/">Regulamente Studenți</a>
+            
+        </li>
+    
+        <li class="">
+            <a href="https://www.utcluj.ro/media/astatic/documente/ghidul_studentului_licenta_2019.pdf">Ghidul Studentului Licență</a>
+            
+        </li>
+    
+        <li class="">
+            <a href="https://www.utcluj.ro/media/astatic/documente/ghidul_studentului_master_2019.pdf">Ghidul Studentului Master</a>
+            
+        </li>
+    
+        <li class="">
+            <a href="http://www.utcluj.ro/media/documents/2015/International_Student_Handbook.pdf">International Students Handbook</a>
+            
+        </li>
+    
+        <li class="">
+            <a href="/studenti/oportunitati_de_angajare/">Oportunități de angajare</a>
+            
+        </li>
+    
+        <li class="">
+            <a href="https://sas.utcluj.ro/">Societatea Antreprenorială Studențească</a>
+            
+        </li>
+    
+        <li class="">
+            <a href="/cabinet-medical-stomatologic/">Cabinet medical/stomatologic</a>
+            
+        </li>
+    
+</ul
+
+
+Facultatea de Autovehicule Rutiere, Mecatronică și Mecanică
+
+
+ 
+Informaţii despre admitere pot fi obţinute și de la adresa http://www.admitere.armm.utcluj.ro
+
+
+
+
+Cifrele de şcolarizare pentru admiterea septembrie 2019:
+
+
+
+ 
+
+
+
+
+ FACULTATEA
+
+
+ DOMENIUL
+
+
+  
+
+
+BUGET
+
+
+Români de pretutindeni repartizare 2019-2020
+
+
+TAXA
+
+
+               <th  width="100">
+               <p><strong>TOTAL LOCURI</strong></p>
+               </th>
+            
+
+cu bursă
+fără bursă
+
+
+
+ Autovehicule rutiere, mecatronica si mecanica
+
+
+ Ingineria autovehiculelor 
+
+ 
+
+0
+
+
+0
+
+
+0
+
+
+10
+
+
+            <td  width="100">
+               <p><strong>120</strong></p>
+            </td>
+            
+
+
+ Ingineria transporturilor 
+
+ 
+
+10
+
+
+0 
+
+
+1
+
+
+15
+
+
+            <td  width="100">
+               <p><strong>55</strong></p>
+            </td>
+            
+
+
+Inginerie mecanica 
+
+
+Cluj-Napoca
+
+
+44
+
+
+1
+
+
+0 
+
+
+28
+
+
+            <td  width="100">
+               <p><strong>120</strong></p>
+            </td>
+            
+
+
+Alba Iulia
+
+
+15
+
+
+0 
+
+
+0 
+
+
+3
+
+
+            <td  width="100">
+               <p><strong>50</strong></p>
+            </td>
+            
+
+
+ Mecatronica si robotica 
+
+
+ 
+
+
+0
+
+
+0 
+
+
+0
+
+
+5
+
+
+            <td  width="100">
+               <p><strong>75</strong></p>
+            </td>
+            
+
+
+ TOTAL FACULTATE 
+
+
+  
+
+
+69
+
+
+1
+
+
+1
+
+
+61
+
+
+            <td  width="100">
+               <p><strong>420</strong></p>
+            </td>
+            
+
+
+
+> Pentru candidaţii care doresc sa se inscrie la domeniul "Ingineria Autovehiculelor" (specializarea Autovehicule Rutiere):
+Înscrierea candidaţilor: 10-12* septembrie între orele 9:00 și 15:00  *In 12  septembrie  nu se fac înscrieri la extensia Satu Mare Înscrierile se fac pe str. G. Bariţiu nr. 26-28, Cluj-Napoca . Proba de concurs: 13  septembrie , ora 9:00 Afişarea rezultatelor iniţiale: 13 septembrie , ora 22:00 Confirmarea statutului de admis: + Etapa I: 16 şi 17 septembrie între orele 9:00 și 15:00 + Afișare rezultate finale:17 septembrie, ora 22:00 Confirmarea statutului de admis se face prin: * depunerea diplomei de bacalaureat în original și a foii matricole în original la dosarul de înscriere în cazul celor admiși la buget (dacă diploma/foaia matricolă nu au fost depuse în dosar la înscriere) * achitarea la Biroul Taxe a sumei de 500 lei, reprezentând o parte din taxa de școlarizare pâna cel mai tarziu în ultima zi a primei etape de confirmări (pentru cei care ocupă un loc la taxă în data de 13 septembrie 2019) și depunerea unei copii a chitanței doveditoare, la comisia de admitere la care candidatul a fost declarat admis. Confirmări şi glisări  , conform Calendarului de Admitere 2019. Detalii aici. Testul de Matematică constă din 30 de intrebari tip grilă, formulate după modelul problemelor propuse in Culegerea de Teste Grilă ce poate fi accesata aici. Un model de test este disponibil aici. Tematica este aceeasi cu Programa pentru Bacalaureat M_mate-info 2019 (https://www.edu.ro/bacalaureat) Subiectele date la concursul de admitere din iulie 2019 sunt disponibile aici.  
+
+
+
+
+Componentele mediei de admitere (şi ponderea procentuală):
+
+
+
+
+a) Nota la testul grilă la matematică (60%) + Nota la proba de bacalaureat la una din materiile: Matematică, Fizică si Informatică (20%) + Media la Bac(20%)
+
+
+
+
+b) sau Nota de la testul de grilă de Matematică (60%) + Media la BAC (40%)
+
+
+
+
+ 
+Media finală se calculeaza cu 2 zecimale, fără rotunjire!  Criteriile de departajare în cazul unor medii finale egale sunt:     1) Nota la testul de matematică;   2) Media la examenul de Bacalaureat;   3) Nota la proba de la Bacalaureat aleasa de candidat pentru calculul mediei de admitere,   4) Nota la matematică la Bacalaureat. Criteriile de admitere fără concurs (pentru olimpici) sunt disponibile aici. Clasamentul se realizează în ordinea mediilor (se aplică principiul - MEDIA BATE OPŢIUNEA) Detalii aici si aici.
+> Pentru candidaţii care doresc să se înscrie la domeniile Ingineria Transporturilor(specializarea Ingineria Transporturilor și a Traficului),Inginerie Mecanică(specializările: Mașini și Instalații pentru Agricultură șI Industrie Alimentară, Mecanică fină și nanotehnologii și Sisteme și Echipamente Termice),Mecatronică și Robotică(specializarea Mecatronică) :
+Înscrierea candidaţilor: 10-13* septembrie între orele 9:00 și 15:00  *În 13 septembrie nu se fac înscrieri la extensiile UTCN Înscrierile se fac pe str. G. Bariţiu nr. 26-28 şi la extensiile universitare Alba Iulia, Bistriţa, Satu Mare, Zalău. Afişarea rezultatelor iniţiale: 13 septembrie, ora 22:00 Confirmarea statutului de admis: + Etapa I: 16 şi 17 septembrie între orele 9:00 și 15:00 + Afișare rezultate finale: 13 septembrie, ora 22:00 Confirmarea statutului de admis se face prin: * depunerea diplomei de bacalaureat în original și a foii matricole în original la dosarul de înscriere în cazul celor admiși la buget (dacă diploma/foaia matricolă nu au fost depuse în dosar la înscriere) * achitarea la Biroul Taxe a sumei de 500 lei, reprezentând o parte din taxa de școlarizare pâna cel mai tarziu în ultima zi a primei etape de confirmări (pentru cei care ocupă un loc la taxă în data de 13 septembrie 2019) și depunerea unei copii a chitanței doveditoare, la comisia de admitere la care candidatul a fost declarat admis.
+Confirmări şi glisări  , conform Calendarului de Admitere 2019. Detalii aici.
+
+
+
+
+Admiterea se face pe bază de concurs de dosare. Un candidat depune UN SINGUR DOSAR la Comisia cu concurs de dosare, putând opta pentru toate domeniile celor 6 facultăţi (exceptând  domeniul   Ingineria Autovehiculelor din cadrul  Facultăţii de  Autovehicule Rutiere, Mecatronică si Mecanică): Construcţii, Construcţii de Maşini; Inginerie Electrică; Ingineria Materialelor şi a Mediului; Instalaţii;Autovehicule Rutiere, Mecatronică si Mecanică.  Indiferent de numărul de opţiuni trecute in fişa de înscriere se va achita NUMAI o singură taxă de înscriere!
+
+
+
+
+
+
+
+Calculul mediei de admitere pentru candidaţii care se înscriu la Comisia cu concurs de dosare:
+
+
+ 
+
+
+
+Media de admitere se poate stabili in unul din cele doua moduri, la alegerea candidatului: 1. media de la examenul de bacalaureat in proporție de 100% sau, 2. pentru absolvenții care au susținut la examenul de bacalaureat una din probele: matematică, informatică, fizică, chimie, economie, se poate ca această notă să fie considerată in proporție de 60% în calculul mediei de admitere, dacă doresc: 
+
+
+
+
+Componentele mediei de admitere (pentru cei ce optează să-și considere notele de la examenul de bacalaureat):
+Pondere din nota finală
+
+
+a) Media de la examenul de bacalaureat
+40%
+
+
+b) Nota de la proba de bacalaureat (la alegere) la una din materiile: Matematică, Informatică, Fizică, Chimie, Economie
+60%
+
+
+
+Media finală se calculează cu 2 zecimale, fără rotunjire!  Criteriile de admitere fără concurs (pentru olimpici) sunt disponibile aici si aici. Nu se admite depăşirea numărului de locuri la un domeniu. În cazul în care pentru ultimul loc sunt mai mulţi candidaţi cu aceeaşi medie generală, se vor aplica în ordine, următoarele criterii de departajare:           1. Nota cea mai mare obținută la Bacalaureat la una din materiile: matematică, informatică, fizică, chimie, economie;           2. Media la examenul de Bacalaureat;           3. Cea mai mare notă de la probele examenului de Bacalaureat.
+Clasamentul se realizează in ordinea mediilor (se aplica principiul - MEDIA BATE OPȚIUNEA) Detalii aici.
+
+
+
+
+** - Austria, Belgia, Bulgaria, Cehia, Cipru, Croatia, Danemarca, Estonia, Finlanda, Franța, Germania, Grecia, Irlanda, Italia, Letonia, Lituania, Luxemburg, Malta, Regatul Unit al Marii Britanii și al Irlandei de Nord, Olanda, Polonia, Portugalia, România, Slovacia, Slovenia, Spania, Suedia, Ungaria, Islanda, Lichtenstein, Norvegia *** - https://www.utcluj.ro/admitere/licenta Lista cu actele necesare pentru înscriere este disponibilă aici.
+Medii de admitere din sesiunea iulie 2019
+ 
+
+
+
+Domeniul
+Buget
+Taxa
+
+
+min
+max
+min
+max
+
+
+    Ingineria autovehiculelor
+
+6.78
+
+
+8.88
+
+
+6.30
+
+
+6.76
+
+
+
+    Ingineria Transporturilor
+
+6.05
+
+
+8.90
+
+
+-
+
+
+-
+
+
+
+    Ingineria mecanică (Cluj-Napoca)
+
+6.01
+
+
+8.95
+
+6.91
+8.74
+
+
+    Ingineria mecanică (Alba Iulia)
+
+6.05
+
+
+8.54
+
+8.28
+8.85
+
+
+    Mecatronică si robotică
+
+8.68
+
+
+9.85
+
+
+6.59
+
+
+9.11
+
+
+
+
+ 
+Taxa de înscriere  la admitere este de 150 lei din care:    -50 lei taxa de admitere la Universitatea Tehnică din Cluj-Napoca;    -100 lei taxa; pentru procesarea dosarului. candidaţii care îşi depun dosar la mai multe comisii, la a doua și urmatoarele comisii vor achita numai taxa de procesare a dosarului conform  Regulamentului de Admitere la nivel licență 2019 . Sunt scutiţi de taxa de înscriere (150 lei), indiferent de numărul de comisii la care se înscriu şi numai dacă depun la dosar acte doveditoare candidaţii care fac parte din una din urmatoarele categorii:    -Copiii personalului didactic, didactic auxiliar aflat in activitate sau pensionat din sistemul de învăţământ;    -Candidaţii orfani de unul sau ambii parinti ce au activat in sistemul de învăţământ;    -Candidaţii orfani de ambii parinti;    -Candidaţii proveniţi de la casele de copii sau din plasament familial;    -Salariaţii Universităţii Tehnice din Cluj-Napoca, precum şi copiii acestora; Sunt scutiţi de achitarea taxei de admitere (50 lei)  candidaţii orfani de un părinte dacă depun la dosar acte doveditoare. Taxa anuală de şcolarizare pentru cei admişi la taxă este de 3.400 lei pentru linia de predare in limba română şi 3.600 lei pentru linia de predare in limba engleză. Reduceri de taxe pentru candidaţii orfani, proveniţi din centre de plasament sau cu situaţii sociale deosebite:     -Reducere taxă de şcolarizare până la 100%,     -Reducere taxă de cămin până la 100%,     -Cartela de masă gratuită. Cuantumul acestor reduceri, precum şi criteriile de acordare a lor se decid de catre Hotărârea Conducerii Universităţii, la inceputul fiecărui an universitar.
+
+
+
+
+
+
+
+Legături utile
+
+
+
+
+STUDENȚI/ABSOLVENȚI
+
+Acte de studii
+Alumni
+Bibliotecă
+Birou admitere
+Consiliere și orientare în carieră
+Pregătire pedagogică
+Librărie
+Organizații studențești
+Relații internaționale
+
+Societatea Antreprenorială Studențească
+
+
+
+
+
+
+ANGAJAȚI
+
+Anunțuri de angajare
+Casa de ajutor reciproc
+Centrul de comunicații
+Concurs posturi didactice 2019
+Comisia de etică
+Departamentul de Informatică
+Formulare
+Gradații de merit
+Menținerea calității de titular
+Regulamente și proceduri
+Sindicat
+Tipografia
+
+
+
+
+
+PUBLIC
+
+Achiziții
+Arhiva
+Cercetare
+Complex natație
+DECIDFR
+Editura
+Fonduri structurale
+Identitate
+Imagine & Relații Publice
+Management universitar
+Organigrama
+ProInvent
+Relația cu mediul socio-economic
+
+
+
+
+
+Informații de contact
+
+
+Adresa Strada Memorandumului 28, Cluj-Napoca 400114 
+Telefon+4 0264 401 200
+Fax+4 0264 592 055
+
+
+
+
+
+Locația
+
+
+
+div class="footer-bottom" sty>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 text-left"> <span>© Toate drepturile rezervate Universității Tehnice din Cluj-Napoca</span> </div>
+                        <div class="col-md-4 text-center"> <span> Design With <i class="fa fa-heart text-red heart"></i> By RdxTheme </span> </div>
+                        <div class="col-md-4 text-right "> <a href="about-2.html"> About</a> <a href="help.html"> Help Desk</a> <a href="privacy-policy.html"> Privacy Policy</a> </div>
+                    </div>
+                </div>
+            </div
+
+
+
+
+
+Toate drepturile rezervate © Universitatea Tehnică din Cluj-Napoca
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ Modal 
+
+
+
+
+Facultățile Universității Tehnice din Cluj-Napoca
+
+
+
+
+
+                    Facultatea de Arhitectură și Urbanism
+                
+
+fau.utcluj.ro
+
+
+
+
+                    Facultatea de Automatică și Calculatoare
+                
+
+ac.utcluj.ro
+
+
+
+
+                    Facultatea de Autovehicule Rutiere, Mecatronică si Mecanică
+                
+
+armm.utcluj.ro
+
+
+
+
+                    Facultatea de Construcții
+                
+
+constructii.utcluj.ro
+
+
+
+
+                    Facultatea de Construcții de Mașini
+                
+
+cm.utcluj.ro
+
+
+
+
+                    Facultatea de Electronica, Telecomunicații si Tehnologia Informației
+                
+
+etti.utcluj.ro
+
+
+
+
+                    Facultatea de Ingineria Materialelor și a Mediului
+                
+
+imm.utcluj.ro
+
+
+
+
+                    Facultatea de Inginerie Electrică
+                
+
+ie.utcluj.ro
+
+
+
+
+                    Facultatea de Instalații
+                
+
+instalatii.utcluj.ro
+
+
+
+
+                    Centrul Universitar Nord Baia Mare
+                
+
+
+
+                    Facultatea de Inginerie
+                
+
+inginerie.utcluj.ro
+
+
+
+
+                    Facultatea de Litere
+                
+
+litere.utcluj.ro
+
+
+
+
+                    Facultatea de Știinte
+                
+
+stiinte.utcluj.ro
+
+
+
+
+                    Extensii universitare
+                
+
+
+
+                    Extensia Alba-Iulia
+                
+
+albaiulia.utcluj.ro
+
+
+
+
+                    Extensia Bistrița
+                
+
+bistrita.utcluj.ro
+
+
+
+
+                    Extensia Satu Mare
+                
+
+satumare.utcluj.ro
+
+
+
+
+                    Extensia Zalău
+                
+
+zalau.utcluj.ro
+
+
+
+
+
+Închidere
+
+
+
+
+
+
+
+
+
+
+ Google fonts 
+
+
+
+
+ jquery.min js 
+
+ bootstrap.min js 
+
+ Form js 
+
+
+ waypoints js 
+
+ counterup js 
+
+
+jQuery(document).ready(function() {
+   // 'use strict';
+//dz_rev_slider_1();
+}); /*ready*/
+
+
+  var loadDeferredStyles = function() {
+    var addStylesNode = document.getElementById("deferred-styles");
+    var replacement = document.createElement("div");
+    replacement.innerHTML = addStylesNode.textContent;
+    document.body.appendChild(replacement)
+    addStylesNode.parentElement.removeChild(addStylesNode);
+  };
+  var raf = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+      window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+  if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
+  else window.addEventListener('load', loadDeferredStyles);
+
+
+
+window.addEventListener("load", function(){
+window.cookieconsent.initialise({
+  "palette": {
+    "popup": {
+      "background": "#aa0000",
+      "text": "#ffdddd"
+    },
+    "button": {
+      "background": "#ff0000"
+    }
+  },
+  "theme": "edgeless",
+  "content": {
+    "message": "Acestă pagină web folosește cookies pentru a asigura o experiență mai plăcută.",
+    "dismiss": "Am înteles",
+    "link": "Află mai multe",
+    "href": "/termeni-si-conditii"
+  }
+})});
+
+ Global site tag (gtag.js) - Google Analytics 
+
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-120285510-1');
+
+script src="/static/js/snowfall.jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $(document).snowfall();
+    });
+</script
+
+
