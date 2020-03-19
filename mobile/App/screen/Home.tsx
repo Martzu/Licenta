@@ -47,9 +47,7 @@ export default function Home({navigation}){
 
     return (
         <View style={styles.mapContainer}>
-            <View style={styles.statusBar}/>
             <View>
-                <View style={styles.statusBar}/>
                 <Mapview style={styles.map} region={region}>
                     <Marker
                         onPress={() => setVisible(!visible)}
