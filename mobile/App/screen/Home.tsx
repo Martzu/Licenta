@@ -1,7 +1,6 @@
 import {Button, Dimensions, Image, Modal, Platform, StatusBar, StyleSheet, Text, View} from 'react-native';
 import CurrentLocation from "../types/CurrentLocation";
 import * as Location from 'expo-location';
-
 import * as Permissions from 'expo-permissions';
 import * as React from 'react';
 import {useState, useEffect} from 'react';
@@ -9,8 +8,17 @@ import Mapview, {Region} from 'react-native-maps';
 import {Marker} from "react-native-maps";
 import MarkerCoordinates from "../types/MarkerCoordinates";
 import Coords from "../types/Coords";
+import MapViewDirections from 'react-native-maps-directions';
 
 let descriptionImage = require('../icons/bg.jpg');
+
+
+const GOOGLE_API_KEY = 'AIzaSyBDlY8RJxrk2UVf2dSe5Z9Ults6ylGqUVE';
+
+const testCoordinates = {
+    latitude: 47.6,
+    longitude: 25.86667
+};
 
 async function getLocation(){
     let currentLocation: CurrentLocation = {coords: undefined, timestamp: 0};
@@ -25,6 +33,203 @@ async function getLocation(){
 }
 
 
+const customMapStyle = [
+    {
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "color": "#212121"
+            }
+        ]
+    },
+    {
+        "elementType": "labels.icon",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#757575"
+            }
+        ]
+    },
+    {
+        "elementType": "labels.text.stroke",
+        "stylers": [
+            {
+                "color": "#212121"
+            }
+        ]
+    },
+    {
+        "featureType": "administrative",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "color": "#757575"
+            }
+        ]
+    },
+    {
+        "featureType": "administrative.country",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#9e9e9e"
+            }
+        ]
+    },
+    {
+        "featureType": "administrative.land_parcel",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "administrative.locality",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#bdbdbd"
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#757575"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.park",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "color": "#181818"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.park",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#616161"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.park",
+        "elementType": "labels.text.stroke",
+        "stylers": [
+            {
+                "color": "#1b1b1b"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#2c2c2c"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#8a8a8a"
+            }
+        ]
+    },
+    {
+        "featureType": "road.arterial",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "color": "#373737"
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "color": "#3c3c3c"
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway.controlled_access",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "color": "#4e4e4e"
+            }
+        ]
+    },
+    {
+        "featureType": "road.local",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#616161"
+            }
+        ]
+    },
+    {
+        "featureType": "transit",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#757575"
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "color": "#000000"
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#2b2c2e"
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#3d3d3d"
+            }
+        ]
+    }
+];
+
+
 export default function Home({navigation}){
 
     const [visible, setVisible] = useState(false);
@@ -34,24 +239,33 @@ export default function Home({navigation}){
         })();
     },[]);
 
+    const [viewDirections, setViewDirections] = useState(false);
 
-    const [region, setRegion] = useState<Region>({latitude: 0, latitudeDelta: 0, longitude: 0, longitudeDelta: 0});
+    const [region, setRegion] = useState<Region>({latitude: 0, latitudeDelta: 0.0001, longitude: 0, longitudeDelta: 0.032});
 
     const [markerCoordinates, setMarkerCoordinates] = useState<MarkerCoordinates>({latitude: 0, longitude: 0, title: ""});
 
     const computeLocation = async () => {
         let currentLocation = await getLocation();
-        setRegion({latitude: currentLocation.coords.latitude, longitude: currentLocation.coords.longitude, latitudeDelta: 0, longitudeDelta:0 });
+        setRegion({latitude: currentLocation.coords.latitude, longitude: currentLocation.coords.longitude, latitudeDelta: 0.03, longitudeDelta:0.02 });
         setMarkerCoordinates({latitude: currentLocation.coords.latitude, longitude: currentLocation.coords.longitude, title: 'Hello'});
     };
 
     return (
         <View style={styles.mapContainer}>
             <View>
-                <Mapview style={styles.map} region={region}>
+                <Mapview style={styles.map} region={region} customMapStyle={customMapStyle}>
                     <Marker
                         onPress={() => setVisible(!visible)}
                         coordinate={markerCoordinates}/>
+                    <Marker
+                        onPress={() => setViewDirections(!viewDirections)}
+                        coordinate={testCoordinates}/>
+                    {
+                        viewDirections === true ? <MapViewDirections origin={{latitude: region.latitude, longitude: region.longitude}} destination={testCoordinates} apikey={GOOGLE_API_KEY} strokeWidth={3} strokeColor="hotpink"/> :
+                            <View/>
+                    }
+
                 </Mapview>
             </View>
 
@@ -111,6 +325,7 @@ const styles = StyleSheet.create({
     },
 
     map: {
+        backgroundColor: '#343434',
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').height,
         position: 'absolute',

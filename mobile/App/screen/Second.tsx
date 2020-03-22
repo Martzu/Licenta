@@ -12,11 +12,13 @@ import {
 } from 'react-native';
 import * as React from 'react';
 import TouchableItem from "@react-navigation/stack/lib/typescript/src/views/TouchableItem";
-import {TouchableNativeFeedback} from "react-native-gesture-handler";
+import {ScrollView, TouchableNativeFeedback} from "react-native-gesture-handler";
 import {SafeAreaView} from "react-navigation";
 import {useEffect, useState} from "react";
 import FadeInAnimation from "../animations/FadeIn";
 import Home from "./Home";
+import Entry from "../components/Entry";
+import Admissions from "../components/Admissions";
 
 
 let uniOn = require('../icons/UniOn.png');
@@ -186,12 +188,12 @@ export default function Second({navigation}){
             </Animated.View>
 
             <Animated.View style={styles.middleContainer}>
-                {
-                    !firstMapsIcon && <Home navigation={navigation}/> ||
-                    <FadeInAnimation>
-                        <Text>dddaas</Text>
-                    </FadeInAnimation>
+                {!firstMapsIcon && <Home navigation={navigation}/> ||
+                    <Admissions/>
+
                 }
+
+
 
             </Animated.View>
 
@@ -201,11 +203,14 @@ export default function Second({navigation}){
 
 const styles = StyleSheet.create({
 
+    admission:{
+        margin: 'auto'
+    },
 
     buttonContainer:{
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     statusBar:{
         height: StatusBar.currentHeight,
@@ -234,6 +239,7 @@ const styles = StyleSheet.create({
     topContainer:{
         flex: 1,
         flexDirection: 'row',
+        flexWrap: 'nowrap',
         justifyContent: 'space-around',
         alignItems: 'center',
         backgroundColor: '#343434',
@@ -242,6 +248,6 @@ const styles = StyleSheet.create({
         flex: 7,
         justifyContent: 'center',
         alignItems: 'stretch',
-        backgroundColor: '#ff0000',
+        backgroundColor: '#343434',
     }
 });
