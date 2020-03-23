@@ -36,6 +36,9 @@ export default function Second({navigation}){
         navigation.navigate('Home');
     };
 
+    function calculateTimeToDestination(){
+
+    };
 
     function handleButtonPress(source: string) {
         changeSize(source);

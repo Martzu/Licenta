@@ -9,11 +9,11 @@ import {Marker} from "react-native-maps";
 import MarkerCoordinates from "../types/MarkerCoordinates";
 import Coords from "../types/Coords";
 import MapViewDirections from 'react-native-maps-directions';
+import DirectionsScreen from "../components/DirectionsScreen";
 
 let descriptionImage = require('../icons/bg.jpg');
 
 
-const GOOGLE_API_KEY = 'AIzaSyBDlY8RJxrk2UVf2dSe5Z9Ults6ylGqUVE';
 
 const testCoordinates = {
     latitude: 47.6,
@@ -233,11 +233,19 @@ const customMapStyle = [
 export default function Home({navigation}){
 
     const [visible, setVisible] = useState(false);
+
     useEffect( () => {
         (async() => {
             await computeLocation();
         })();
     },[]);
+
+    function handleOnPressMarker(){
+
+
+    };
+
+    const [destination, setDestination] = useState<Region>();
 
     const [viewDirections, setViewDirections] = useState(false);
 
@@ -262,23 +270,22 @@ export default function Home({navigation}){
                         onPress={() => setViewDirections(!viewDirections)}
                         coordinate={testCoordinates}/>
                     {
-                        viewDirections === true ? <MapViewDirections origin={{latitude: region.latitude, longitude: region.longitude}} destination={testCoordinates} apikey={GOOGLE_API_KEY} strokeWidth={3} strokeColor="hotpink"/> :
-                            <View/>
+                        /*viewDirections === true ? <MapViewDirections origin={region} destination={testCoordinates} apikey={GOOGLE_API_KEY} strokeWidth={3} strokeColor="hotpink"/> :
+                            <View/>*/
+                        //viewDirections === true ? <DirectionsScreen/> : <View/>
                     }
 
                 </Mapview>
             </View>
 
 
-            <View style={styles.topContainer}>
-                <Button title="Screen 2" onPress = {() => navigation.navigate('Second')}/>
-                <Button title='Navigate' onPress={() => console.log("yes")}/>
-            </View>
-
             <View style={styles.middleContainer}/>
 
             <View style={styles.bottomContainer}>
-                { visible && <Image source={descriptionImage} style={styles.descriptionImage}/>}
+                { visible && <Image source={descriptionImage} style={styles.descriptionImage}/> ||
+                    viewDirections && <DirectionsScreen destinationCoords={testCoordinates} destination={"Manastirea Humorului"} originCoords={region}/>
+
+                }
             </View>
 
         </View>

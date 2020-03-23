@@ -10,6 +10,7 @@
     "@react-native-community/masked-view": "^0.1.7",
     "@react-navigation/native": "latest",
     "@react-navigation/stack": "^5.1.1",
+    "axios": "^0.19.2",
     "expo": "~36.0.0",
     "expo-location": "^8.0.0",
     "react": "~16.9.0",

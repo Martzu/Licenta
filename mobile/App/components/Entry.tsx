@@ -8,18 +8,17 @@ let Cancel = require('../icons/Cancel.png');
 let Location = require('../icons/Location.png');
 let Box = require('../icons/Box.png');
 
-function dummy() {
-
-};
-
-export default function Entry(){
+interface EntryProps{
+    faculty: string;
+}
+export default function Entry(props: EntryProps){
     return(
 
             <ImageBackground source={Box} style={styles.container}>
                 <View style={styles.auxTopSection}/>
                 <View style={styles.topSection}>
                     <Text>
-                        Computer Science
+                        {props.faculty}
                     </Text>
                 </View>
 
