@@ -5,16 +5,19 @@ import {Region} from "react-native-maps";
 import PlaceCoordinate from "../types/PlaceCoordinate";
 import axios from 'axios';
 import {GOOGLE_API_KEY} from "../constants/Constants";
+import {alignEnum} from "react-native-svg/lib/typescript/lib/extract/extractViewBox";
 
 let Car = require('../icons/Car.png');
 let Walk = require('../icons/Walk.png');
 let Bicycle = require('../icons/Bicycle.png');
 
-let url = 'http://maps.googleapis.com/maps/api/directions/json?';
+let url = 'https://maps.googleapis.com/maps/api/directions/json?';
 
 
 interface directionsScreenProps{
 
+    showDirections: (show: boolean) => void,
+    setMode: (id: number) => void,
     destination: string,
     destinationCoords: PlaceCoordinate,
     originCoords: PlaceCoordinate
@@ -22,55 +25,69 @@ interface directionsScreenProps{
 
 export default function DirectionsScreen(props: directionsScreenProps){
 
+    const[bicycleTime, setBicycleTime] = useState("N/A");
+    const[drivingTime, setDrivingTime] = useState("N/A");
+    const[walkingTime, setWalkingTime] = useState("N/A");
+
     useEffect(() => {
         (async () => {
             //get from google the duration time of the journey
             const origin = props.originCoords.latitude + ',' + props.originCoords.longitude;
             const destination = props.destinationCoords.latitude + ',' + props.destinationCoords.longitude;
-            const result: any = await axios.get(url + `origin=${origin}&destination=${destination}&key=${GOOGLE_API_KEY}`);
-            debugger;
-            //setOk(result.routes[0].legs[0].steps[3].text);
+
+            const drivingResult: any = await axios.get(url + `origin=${origin}&destination=${destination}&key=${GOOGLE_API_KEY}`);
+            setDrivingTime(drivingResult.data.routes[0].legs[0].duration.text);
+
+            const walkingResult: any = await axios.get(url + `destination=${destination}&mode=walking&key=${GOOGLE_API_KEY}&origin=${origin}`);
+            setWalkingTime(walkingResult.data.routes[0].legs[0].duration.text);
+
+            const bicycleResult: any = await axios.get(url + `destination=${destination}&mode=bicycling&key=${GOOGLE_API_KEY}&origin=${origin}`);
+            setBicycleTime(bicycleResult.data.routes[0].legs[0].duration.text);
+
 
         })();
     },[]);
 
 
-    const [ok, setOk] = useState("");
+    function handlePress(id : number) {
+        props.setMode(id);
+        props.showDirections(true);
+    }
 
     return(
         <View style={styles.container}>
 
             <View style={styles.titleContainer}>
                 <Text>
-                    {props.destination + ok}
+                    {props.destination}
                 </Text>
             </View>
 
             <View style={styles.iconContainer}>
-                <TouchableHighlight>
+                <TouchableHighlight onPress={() => handlePress(1)}>
                     <Image source={Car} style={styles.image}/>
                 </TouchableHighlight>
 
-                <TouchableHighlight>
+                <TouchableHighlight onPress={() => handlePress(2)}>
                     <Image source={Walk} style={styles.image}/>
                 </TouchableHighlight>
 
-                <TouchableHighlight>
+                <TouchableHighlight onPress={() => handlePress(3)}>
                     <Image source={Bicycle} style={styles.image}/>
                 </TouchableHighlight>
             </View>
 
             <View style={styles.durationContainer}>
                 <Text style={styles.durationText}>
-                    5 min
+                    {drivingTime}
                 </Text>
 
                 <Text style={styles.durationText}>
-                    20 min
+                    {walkingTime}
                 </Text>
 
                 <Text style={styles.durationText}>
-                    14 min
+                    {bicycleTime}
                 </Text>
             </View>
 

@@ -10,14 +10,20 @@ import MarkerCoordinates from "../types/MarkerCoordinates";
 import Coords from "../types/Coords";
 import MapViewDirections from 'react-native-maps-directions';
 import DirectionsScreen from "../components/DirectionsScreen";
+import {BICYCLING, DRIVING, GOOGLE_API_KEY, WALKING} from "../constants/Constants";
 
 let descriptionImage = require('../icons/bg.jpg');
 
 
 
-const testCoordinates = {
+/*const testCoordinates = {
     latitude: 47.6,
     longitude: 25.86667
+};*/
+
+const testCoordinates = {
+    latitude: 47.55,
+    longitude: 25.9
 };
 
 async function getLocation(){
@@ -234,20 +240,21 @@ export default function Home({navigation}){
 
     const [visible, setVisible] = useState(false);
 
+
+
     useEffect( () => {
         (async() => {
             await computeLocation();
         })();
     },[]);
 
-    function handleOnPressMarker(){
-
-
-    };
-
     const [destination, setDestination] = useState<Region>();
 
+    const [mode, setMode] = useState(1);
+
     const [viewDirections, setViewDirections] = useState(false);
+
+    const[showDirections, setShowDirections] = useState(false);
 
     const [region, setRegion] = useState<Region>({latitude: 0, latitudeDelta: 0.0001, longitude: 0, longitudeDelta: 0.032});
 
@@ -270,9 +277,8 @@ export default function Home({navigation}){
                         onPress={() => setViewDirections(!viewDirections)}
                         coordinate={testCoordinates}/>
                     {
-                        /*viewDirections === true ? <MapViewDirections origin={region} destination={testCoordinates} apikey={GOOGLE_API_KEY} strokeWidth={3} strokeColor="hotpink"/> :
-                            <View/>*/
-                        //viewDirections === true ? <DirectionsScreen/> : <View/>
+                        showDirections === true ? <MapViewDirections origin={region} destination={testCoordinates} mode={mode === 1 ? DRIVING : mode === 2 ? WALKING : BICYCLING} apikey={GOOGLE_API_KEY} strokeWidth={3} strokeColor="hotpink"/> :
+                            <View/>
                     }
 
                 </Mapview>
@@ -283,7 +289,7 @@ export default function Home({navigation}){
 
             <View style={styles.bottomContainer}>
                 { visible && <Image source={descriptionImage} style={styles.descriptionImage}/> ||
-                    viewDirections && <DirectionsScreen destinationCoords={testCoordinates} destination={"Manastirea Humorului"} originCoords={region}/>
+                    viewDirections && <DirectionsScreen destinationCoords={testCoordinates} destination={"Manastirea Humorului"} originCoords={region} showDirections={setShowDirections} setMode={setMode}/>
 
                 }
             </View>
