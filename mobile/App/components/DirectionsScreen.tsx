@@ -58,7 +58,7 @@ export default function DirectionsScreen(props: directionsScreenProps){
         <View style={styles.container}>
 
             <View style={styles.titleContainer}>
-                <Text>
+                <Text style={{fontFamily: 'montserrat', color: "#98A3A7"}}>
                     {props.destination}
                 </Text>
             </View>
@@ -102,7 +102,9 @@ const styles = StyleSheet.create({
 
     durationText:{
         marginRight: 10,
-        marginLeft: 10
+        marginLeft: 10,
+        fontFamily: 'montserrat',
+        color: "#98A3A7"
     },
 
     container:{

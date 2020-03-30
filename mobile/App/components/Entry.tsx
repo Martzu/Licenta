@@ -1,6 +1,8 @@
 import * as React from 'react';
 import {Button, Image, ImageBackground, StyleSheet, Text, View} from "react-native";
 import {TouchableHighlight} from "react-native-gesture-handler";
+import * as Font from "expo-font";
+import {useEffect, useState} from "react";
 
 
 let Calendar = require('../icons/Calendar.png');
@@ -8,36 +10,41 @@ let Cancel = require('../icons/Cancel.png');
 let Location = require('../icons/Location.png');
 let Box = require('../icons/Box.png');
 
+
+
 interface EntryProps{
     faculty: string;
 }
 export default function Entry(props: EntryProps){
+
     return(
 
             <ImageBackground source={Box} style={styles.container}>
-                <View style={styles.auxTopSection}/>
-                <View style={styles.topSection}>
-                    <Text>
-                        {props.faculty}
-                    </Text>
-                </View>
+
+                    <View style={styles.auxTopSection}/>
+                    <View style={styles.topSection}>
+                        <Text style={{fontFamily: 'montserrat', color: "#98A3A7"}}>
+                            {props.faculty}
+                        </Text>
+                    </View>
 
 
-                <View style={styles.middleSection}>
-                    <TouchableHighlight>
-                        <Image source={Calendar} style={styles.button}/>
-                    </TouchableHighlight>
+                    <View style={styles.middleSection}>
+                        <TouchableHighlight>
+                            <Image source={Calendar} style={styles.button}/>
+                        </TouchableHighlight>
 
-                    <TouchableHighlight>
-                        <Image source={Location} style={styles.button}/>
-                    </TouchableHighlight>
-                </View>
+                        <TouchableHighlight>
+                            <Image source={Location} style={styles.button}/>
+                        </TouchableHighlight>
+                    </View>
 
-                <View style={styles.bottomSection}>
-                    <TouchableHighlight>
-                        <Image source={Cancel} style={styles.cancelButton}/>
-                    </TouchableHighlight>
-                </View>
+                    <View style={styles.bottomSection}>
+                        <TouchableHighlight>
+                            <Image source={Cancel} style={styles.cancelButton}/>
+                        </TouchableHighlight>
+                    </View>
+
 
             </ImageBackground>
 

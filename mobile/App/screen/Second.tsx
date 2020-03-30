@@ -153,7 +153,7 @@ export default function Second({navigation}){
 
     const[currentSelected, setCurrentSelected] = useState('');
 
-    const[enlargeAnimationUni] = useState(new Animated.Value(50));
+    const[enlargeAnimationUni] = useState(new Animated.Value(70));
     const[enlargeAnimationAcc] = useState(new Animated.Value(50));
     const[enlargeAnimationMaps] = useState(new Animated.Value(50));
 
@@ -161,7 +161,7 @@ export default function Second({navigation}){
 
     const [firstMapsIcon, setFirstMapsIcon] = useState(true);
     const [firstAccIcon, setFirstAccIcon] = useState(true);
-    const [firstUniIcon, setFirstUniIcon] = useState(true);
+    const [firstUniIcon, setFirstUniIcon] = useState(false);
 
     return (
 
@@ -178,7 +178,7 @@ export default function Second({navigation}){
 
                 <View style={styles.buttonContainer}>
                 <TouchableHighlight onPress={() => handleButtonPress('uni')} style={styles.topContainerButtonHighlight}>
-                    <Animated.Image source={firstUniIcon && uniOff || !firstUniIcon && uniOn} style={{borderRadius: 50, width: enlargeAnimationUni, height: enlargeAnimationUni}}/>
+                    <Animated.Image source={!firstUniIcon && uniOn || firstUniIcon && uniOff} style={{borderRadius: 50, width: enlargeAnimationUni, height: enlargeAnimationUni}}/>
                 </TouchableHighlight>
                 </View>
 
@@ -193,7 +193,6 @@ export default function Second({navigation}){
             <Animated.View style={styles.middleContainer}>
                 {!firstMapsIcon && <Home navigation={navigation}/> ||
                     <Admissions/>
-
                 }
 
 
