@@ -1,24 +1,15 @@
 import {
-    Button,
-    Image,
-    ImageBackground,
-    Platform,
     StatusBar,
     StyleSheet,
-    Text,
     TouchableHighlight,
     View,
-    Animated, ImageStyle, Dimensions
+    Animated
 } from 'react-native';
 import * as React from 'react';
-import TouchableItem from "@react-navigation/stack/lib/typescript/src/views/TouchableItem";
-import {ScrollView, TouchableNativeFeedback} from "react-native-gesture-handler";
-import {SafeAreaView} from "react-navigation";
 import {useEffect, useState} from "react";
-import FadeInAnimation from "../animations/FadeIn";
 import Home from "./Home";
-import Entry from "../components/Entry";
 import Admissions from "../components/Admissions";
+import CalendarScreen from "../components/CalendarScreen";
 
 
 let uniOn = require('../icons/UniOn.png');
@@ -27,6 +18,8 @@ let accOff = require('../icons/AccOff.png');
 let accOn = require('../icons/AccOn.png');
 let mapsOff = require('../icons/MapsOff.png');
 let mapsOn = require('../icons/MapsOn.png');
+let calOn = require('../icons/CalendarOn.png');
+let calOff = require('../icons/CalendarOff.png');
 
 
 export default function Second({navigation}){
@@ -36,10 +29,6 @@ export default function Second({navigation}){
         navigation.navigate('Home');
     };
 
-    function calculateTimeToDestination(){
-
-    };
-
     function handleButtonPress(source: string) {
         changeSize(source);
         switch (source) {
@@ -47,6 +36,15 @@ export default function Second({navigation}){
                 setFirstUniIcon(false);
                 setFirstMapsIcon(true);
                 setFirstAccIcon(true);
+                setFirstCalIcon(true);
+                break;
+            }
+
+            case 'cal':{
+                setFirstMapsIcon(true);
+                setFirstUniIcon(true);
+                setFirstAccIcon(true);
+                setFirstCalIcon(false);
                 break;
             }
 
@@ -54,6 +52,7 @@ export default function Second({navigation}){
                 setFirstMapsIcon(false);
                 setFirstAccIcon(true);
                 setFirstUniIcon(true);
+                setFirstCalIcon(true);
                 break;
             }
 
@@ -61,6 +60,7 @@ export default function Second({navigation}){
                 setFirstAccIcon(false);
                 setFirstUniIcon(true);
                 setFirstMapsIcon(true);
+                setFirstCalIcon(true);
                 break;
             }
 
@@ -103,6 +103,12 @@ export default function Second({navigation}){
                 {
                     toValue: 50,
                     duration: 200
+                }),
+            Animated.timing(
+                enlargeAnimationCal,
+                {
+                    toValue: 50,
+                    duration: 200
                 })
         ]).start()
             :
@@ -126,24 +132,63 @@ export default function Second({navigation}){
                         {
                             toValue: 50,
                             duration: 200
+                        }),
+                    Animated.timing(
+                        enlargeAnimationCal,
+                        {
+                            toValue: 50,
+                            duration: 200
                         })
                 ]).start():
-                Animated.parallel([
+                source === 'cal' ?
+                    Animated.parallel([
+                        Animated.timing(
+                            enlargeAnimationMaps,
+                            {
+                                toValue: 50,
+                                duration: 200
+                            }),
+                        Animated.timing(
+                            enlargeAnimationUni,
+                            {
+                                toValue: 50,
+                                duration: 200
+                            }),
+                        Animated.timing(
+                            enlargeAnimationAcc,
+                            {
+                                toValue: 50,
+                                duration: 200
+                            }),
+                        Animated.timing(
+                            enlargeAnimationCal,
+                            {
+                                toValue: 70,
+                                duration: 200
+                            })
+                    ]).start() :
+                    Animated.parallel([
 
-                    Animated.timing(
-                        enlargeAnimationAcc,
+                        Animated.timing(
+                            enlargeAnimationAcc,
                         {
                             toValue: 70,
                             duration: 200
                         }),
-                    Animated.timing(
-                        enlargeAnimationUni,
+                        Animated.timing(
+                            enlargeAnimationUni,
                         {
                             toValue: 50,
                             duration: 200
                         }),
-                    Animated.timing(
-                        enlargeAnimationMaps,
+                        Animated.timing(
+                            enlargeAnimationMaps,
+                        {
+                            toValue: 50,
+                            duration: 200
+                        }),
+                        Animated.timing(
+                            enlargeAnimationCal,
                         {
                             toValue: 50,
                             duration: 200
@@ -156,12 +201,14 @@ export default function Second({navigation}){
     const[enlargeAnimationUni] = useState(new Animated.Value(70));
     const[enlargeAnimationAcc] = useState(new Animated.Value(50));
     const[enlargeAnimationMaps] = useState(new Animated.Value(50));
+    const[enlargeAnimationCal] = useState(new Animated.Value(50));
 
     const[enlarge, setEnlarge] = useState(true);
 
     const [firstMapsIcon, setFirstMapsIcon] = useState(true);
     const [firstAccIcon, setFirstAccIcon] = useState(true);
     const [firstUniIcon, setFirstUniIcon] = useState(false);
+    const [firstCalIcon, setFirstCalIcon] = useState(true);
 
     return (
 
@@ -188,10 +235,17 @@ export default function Second({navigation}){
                     </TouchableHighlight>
                 </View>
 
+                <View style={styles.buttonContainer}>
+                    <TouchableHighlight onPress={() => handleButtonPress('cal')} style={styles.topContainerButtonHighlight}>
+                        <Animated.Image source={firstCalIcon && calOff || !firstCalIcon && calOn} style={{borderRadius: 50, width: enlargeAnimationCal, height: enlargeAnimationCal}}/>
+                    </TouchableHighlight>
+                </View>
+
             </Animated.View>
 
             <Animated.View style={styles.middleContainer}>
                 {!firstMapsIcon && <Home navigation={navigation}/> ||
+                    !firstCalIcon && <CalendarScreen/> ||
                     <Admissions/>
                 }
 
