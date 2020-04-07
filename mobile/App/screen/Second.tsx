@@ -10,6 +10,7 @@ import {useEffect, useState} from "react";
 import Home from "./Home";
 import Admissions from "../components/Admissions";
 import CalendarScreen from "../components/CalendarScreen";
+import Accommodation from "../components/Accommodation";
 
 
 let uniOn = require('../icons/UniOn.png');
@@ -246,6 +247,7 @@ export default function Second({navigation}){
             <Animated.View style={styles.middleContainer}>
                 {!firstMapsIcon && <Home navigation={navigation}/> ||
                     !firstCalIcon && <CalendarScreen/> ||
+                    !firstAccIcon && <Accommodation closeAccommodation={setFirstAccIcon} displayMap={setFirstMapsIcon}/> ||
                     <Admissions/>
                 }
 

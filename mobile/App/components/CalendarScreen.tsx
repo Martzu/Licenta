@@ -16,14 +16,16 @@ export default function CalendarScreen(){
 
     const [render, setRender] = useState(false);
 
+    let todayDate = new Date();
+
+    let currentMonthDays = new Date(todayDate.getFullYear(), todayDate.getMonth() + 1, 0).getDate();
+
     useEffect(() => {
-        let todayDate = new Date();
 
-        let currentMonthDays = new Date(todayDate.getFullYear(), todayDate.getMonth() + 1, 0).getDate();
-
-        for(let i = 1; i <= currentMonthDays; i++){
-            days[days.length] = {dayNumber: i.toString(), description: "Going for a ride", month: Months[todayDate.getMonth()], textColor: i === todayDate.getDate() ? '#00e600' : '#000000'};
-        }
+        if(days.length === 0){
+            for(let i = 1; i <= currentMonthDays; i++){
+                days[days.length] = {dayNumber: i.toString(), description: "Going for a ride", month: Months[todayDate.getMonth()], textColor: i === todayDate.getDate() ? '#00e600' : '#000000'};
+        }}
 
         setRender(true);
 

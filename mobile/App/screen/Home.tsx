@@ -235,6 +235,14 @@ const customMapStyle = [
     }
 ];
 
+interface MapsProps{
+    //TODO 2 modes, one for navigation one for display sau atuncea cand afisez maimulte chestii pun alt pop up windows pe onPress la markere
+    //TODO pot sa ma folosesc ca oricum o sa am un origin si un array de markere. Daca array u are 1 element, inseamna ca trebuie navigation catre el si dau display la un pop up. Altfel la celalalt pop up.
+
+    currentLocation: MarkerCoordinates;
+
+    destination: MarkerCoordinates[];
+};
 
 export default function Home({navigation}){
 
