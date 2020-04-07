@@ -11,8 +11,9 @@ import Coords from "../types/Coords";
 import MapViewDirections from 'react-native-maps-directions';
 import DirectionsScreen from "../components/DirectionsScreen";
 import {BICYCLING, DRIVING, GOOGLE_API_KEY, WALKING} from "../constants/Constants";
+import AccommodationDetails from "../components/AccommodationDetails";
 
-let descriptionImage = require('../icons/bg.jpg');
+
 
 
 
@@ -20,6 +21,9 @@ let descriptionImage = require('../icons/bg.jpg');
     latitude: 47.6,
     longitude: 25.86667
 };*/
+
+let currentLocationMarker = require('../icons/CurrentLocationMarker.png');
+let otherLocationMarker = require('../icons/OtherLocationMarker.png');
 
 const testCoordinates = {
     latitude: 47.55,
@@ -239,12 +243,12 @@ interface MapsProps{
     //TODO 2 modes, one for navigation one for display sau atuncea cand afisez maimulte chestii pun alt pop up windows pe onPress la markere
     //TODO pot sa ma folosesc ca oricum o sa am un origin si un array de markere. Daca array u are 1 element, inseamna ca trebuie navigation catre el si dau display la un pop up. Altfel la celalalt pop up.
 
-    currentLocation: MarkerCoordinates;
 
-    destination: MarkerCoordinates[];
+    destinations: MarkerCoordinates[];
+
 };
 
-export default function Home({navigation}){
+export default function Home(props: MapsProps){
 
     const [visible, setVisible] = useState(false);
 
@@ -255,6 +259,17 @@ export default function Home({navigation}){
             await computeLocation();
         })();
     },[]);
+
+    function handleMarkerPress(destination: MarkerCoordinates){
+        let destinationRegion: Region = {latitude: destination.latitude, latitudeDelta: 0.0001, longitude: destination.longitude, longitudeDelta: 0.032};
+        setDestinationName(destination.title);
+        setDestination(destinationRegion);
+        setViewDirections(!viewDirections);
+        setShowDirections(!showDirections);
+
+    };
+
+    const [destinationName, setDestinationName] = useState('');
 
     const [destination, setDestination] = useState<Region>();
 
@@ -280,14 +295,29 @@ export default function Home({navigation}){
                 <Mapview style={styles.map} region={region} customMapStyle={customMapStyle}>
                     <Marker
                         onPress={() => setVisible(!visible)}
-                        coordinate={markerCoordinates}/>
-                    <Marker
-                        onPress={() => setViewDirections(!viewDirections)}
-                        coordinate={testCoordinates}/>
+                        pinColor={'blue'}
+                        key={1}
+                        coordinate={markerCoordinates}>
+
+                        <Image source={currentLocationMarker} style={{height:45, width:40}}/>
+                    </Marker>
+
                     {
-                        showDirections === true ? <MapViewDirections origin={region} destination={testCoordinates} mode={mode === 1 ? DRIVING : mode === 2 ? WALKING : BICYCLING} apikey={GOOGLE_API_KEY} strokeWidth={3} strokeColor="hotpink"/> :
+                        props.destinations.map(destination =>
+                            <Marker
+                                onPress={() => handleMarkerPress(destination)}
+                                coordinate={destination}>
+                                <Image source={otherLocationMarker} style={{height:45, width:40}}/>
+                            </Marker>
+                        )
+                    }
+
+                    {
+                        showDirections === true ? <MapViewDirections origin={region} destination={destination} mode={mode === 1 ? DRIVING : mode === 2 ? WALKING : BICYCLING} apikey={GOOGLE_API_KEY} strokeWidth={3} strokeColor="hotpink"/> :
                             <View/>
                     }
+
+
 
                 </Mapview>
             </View>
@@ -296,9 +326,8 @@ export default function Home({navigation}){
             <View style={styles.middleContainer}/>
 
             <View style={styles.bottomContainer}>
-                { visible && <Image source={descriptionImage} style={styles.descriptionImage}/> ||
-                    viewDirections && <DirectionsScreen destinationCoords={testCoordinates} destination={"Manastirea Humorului"} originCoords={region} showDirections={setShowDirections} setMode={setMode}/>
-
+                { visible && <AccommodationDetails address={'stefan cel mare 91'} distance={'2.7 km'} title={'casa cu doi brazi'}/> ||
+                    viewDirections && <DirectionsScreen destinationCoords={testCoordinates} destination={destinationName} originCoords={region} showDirections={setShowDirections} setMode={setMode}/>
                 }
             </View>
 

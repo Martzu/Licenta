@@ -1,10 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 3021,
-  "expoServerNgrokUrl": "https://mb-48w.anonymous.app.exp.direct",
-  "packagerNgrokUrl": "https://packager.ua-fpb.anonymous.app.exp.direct",
-  "ngrokPid": 3146,
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "webpackServerPort": null
 }

@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Image, StyleSheet, Text, TouchableHighlight, View} from "react-native";
+import {Image, ImageBackground, StyleSheet, Text, TouchableHighlight, View} from "react-native";
 import {useEffect, useState} from "react";
 import {Region} from "react-native-maps";
 import PlaceCoordinate from "../types/PlaceCoordinate";
@@ -13,6 +13,7 @@ let Bicycle = require('../icons/Bicycle.png');
 
 let url = 'https://maps.googleapis.com/maps/api/directions/json?';
 
+let descriptionImage = require('../icons/AccPopUp.png');
 
 interface directionsScreenProps{
 
@@ -56,42 +57,42 @@ export default function DirectionsScreen(props: directionsScreenProps){
 
     return(
         <View style={styles.container}>
+            <ImageBackground source={descriptionImage} style={styles.imageBackground}>
+                <View style={styles.titleContainer}>
+                    <Text style={{fontFamily: 'montserrat', color: "#98A3A7"}}>
+                        {props.destination}
+                    </Text>
+                </View>
 
-            <View style={styles.titleContainer}>
-                <Text style={{fontFamily: 'montserrat', color: "#98A3A7"}}>
-                    {props.destination}
-                </Text>
-            </View>
+                <View style={styles.iconContainer}>
+                    <TouchableHighlight onPress={() => handlePress(1)}>
+                        <Image source={Car} style={styles.image}/>
+                    </TouchableHighlight>
 
-            <View style={styles.iconContainer}>
-                <TouchableHighlight onPress={() => handlePress(1)}>
-                    <Image source={Car} style={styles.image}/>
-                </TouchableHighlight>
+                    <TouchableHighlight onPress={() => handlePress(2)}>
+                        <Image source={Walk} style={styles.image}/>
+                    </TouchableHighlight>
 
-                <TouchableHighlight onPress={() => handlePress(2)}>
-                    <Image source={Walk} style={styles.image}/>
-                </TouchableHighlight>
+                    <TouchableHighlight onPress={() => handlePress(3)}>
+                        <Image source={Bicycle} style={styles.image}/>
+                    </TouchableHighlight>
+                </View>
 
-                <TouchableHighlight onPress={() => handlePress(3)}>
-                    <Image source={Bicycle} style={styles.image}/>
-                </TouchableHighlight>
-            </View>
+                <View style={styles.durationContainer}>
+                    <Text style={styles.durationText}>
+                        {drivingTime}
+                    </Text>
 
-            <View style={styles.durationContainer}>
-                <Text style={styles.durationText}>
-                    {drivingTime}
-                </Text>
+                    <Text style={styles.durationText}>
+                        {walkingTime}
+                    </Text>
 
-                <Text style={styles.durationText}>
-                    {walkingTime}
-                </Text>
+                    <Text style={styles.durationText}>
+                        {bicycleTime}
+                    </Text>
+                </View>
 
-                <Text style={styles.durationText}>
-                    {bicycleTime}
-                </Text>
-            </View>
-
-
+            </ImageBackground>
 
 
         </View>
@@ -107,22 +108,26 @@ const styles = StyleSheet.create({
         color: "#98A3A7"
     },
 
+    imageBackground:{
+        width: 250,
+        height: 160
+    },
+
+
     container:{
         flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'stretch',
-        backgroundColor: '#343434',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
 
     iconContainer:{
         flex: 0.5,
         flexDirection: 'row',
         justifyContent: 'center',
-        backgroundColor: '#343434'
     },
 
     titleContainer:{
+        marginTop: 10,
         flex: 0.3,
         justifyContent: 'center',
         alignItems: 'center'
@@ -130,9 +135,9 @@ const styles = StyleSheet.create({
 
     durationContainer:{
         flex: 0.2,
+        marginBottom: 15,
         flexDirection: 'row',
         justifyContent: 'center',
-        backgroundColor: '#343434'
     },
 
     image:{

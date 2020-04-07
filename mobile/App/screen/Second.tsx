@@ -11,6 +11,7 @@ import Home from "./Home";
 import Admissions from "../components/Admissions";
 import CalendarScreen from "../components/CalendarScreen";
 import Accommodation from "../components/Accommodation";
+import MarkerCoordinates from "../types/MarkerCoordinates";
 
 
 let uniOn = require('../icons/UniOn.png');
@@ -22,6 +23,12 @@ let mapsOn = require('../icons/MapsOn.png');
 let calOn = require('../icons/CalendarOn.png');
 let calOff = require('../icons/CalendarOff.png');
 
+
+//47.516924599 25.8585465658
+const destinations:  MarkerCoordinates[] = [
+    {latitude: 47.516924599, longitude: 25.8585465658, title: 'Voronet'},
+    {latitude: 47.6, longitude: 25.86667, title: 'Manastirea Humorului'}
+];
 
 export default function Second({navigation}){
 
@@ -245,7 +252,7 @@ export default function Second({navigation}){
             </Animated.View>
 
             <Animated.View style={styles.middleContainer}>
-                {!firstMapsIcon && <Home navigation={navigation}/> ||
+                {!firstMapsIcon && <Home destinations={destinations}/> ||
                     !firstCalIcon && <CalendarScreen/> ||
                     !firstAccIcon && <Accommodation closeAccommodation={setFirstAccIcon} displayMap={setFirstMapsIcon}/> ||
                     <Admissions/>
