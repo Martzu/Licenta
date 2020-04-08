@@ -7,11 +7,13 @@ import {
 } from 'react-native';
 import * as React from 'react';
 import {useEffect, useState} from "react";
-import Home from "./Home";
+
 import Admissions from "../components/Admissions";
 import CalendarScreen from "../components/CalendarScreen";
 import Accommodation from "../components/Accommodation";
 import MarkerCoordinates from "../types/MarkerCoordinates";
+import Home from "./Home";
+import LocationData from "../types/LocationData";
 
 
 let uniOn = require('../icons/UniOn.png');
@@ -25,9 +27,17 @@ let calOff = require('../icons/CalendarOff.png');
 
 
 //47.516924599 25.8585465658
-const destinations:  MarkerCoordinates[] = [
-    {latitude: 47.516924599, longitude: 25.8585465658, title: 'Voronet'},
-    {latitude: 47.6, longitude: 25.86667, title: 'Manastirea Humorului'}
+const destinationsStartData:  LocationData[] = [
+
+    {location: {latitude: 47.516924599, longitude: 25.8585465658, title: 'Voronet'}, accommodationDetails: {title: "", address: "", distance: ""}}
+
+];
+
+const facultyCoordinates: MarkerCoordinates[] = [
+
+    {latitude: 47.63333, longitude: 26.25, title: 'Suceava'},
+    {latitude: 47.45, longitude: 26.3, title: 'Falticeni'},
+    {latitude: 47.35, longitude: 25.25, title: 'Dorna'}
 ];
 
 export default function Second({navigation}){
@@ -61,6 +71,7 @@ export default function Second({navigation}){
                 setFirstAccIcon(true);
                 setFirstUniIcon(true);
                 setFirstCalIcon(true);
+                setDestinations(destinationsStartData);
                 break;
             }
 
@@ -204,6 +215,10 @@ export default function Second({navigation}){
                 ]).start();
     }
 
+
+
+    const[destinations, setDestinations] = useState<LocationData[]>(destinationsStartData);
+
     const[currentSelected, setCurrentSelected] = useState('');
 
     const[enlargeAnimationUni] = useState(new Animated.Value(70));
@@ -212,6 +227,8 @@ export default function Second({navigation}){
     const[enlargeAnimationCal] = useState(new Animated.Value(50));
 
     const[enlarge, setEnlarge] = useState(true);
+
+    const [currentLocation, setCurrentLocation] = useState<MarkerCoordinates>();
 
     const [firstMapsIcon, setFirstMapsIcon] = useState(true);
     const [firstAccIcon, setFirstAccIcon] = useState(true);
@@ -252,9 +269,9 @@ export default function Second({navigation}){
             </Animated.View>
 
             <Animated.View style={styles.middleContainer}>
-                {!firstMapsIcon && <Home destinations={destinations}/> ||
+                {!firstMapsIcon && <Home destinations={destinations} currentLocation={currentLocation}/> ||
                     !firstCalIcon && <CalendarScreen/> ||
-                    !firstAccIcon && <Accommodation closeAccommodation={setFirstAccIcon} displayMap={setFirstMapsIcon}/> ||
+                    !firstAccIcon && <Accommodation closeAccommodation={setFirstAccIcon} displayMap={setFirstMapsIcon} setAccommodationDetails={setDestinations} coordinates={facultyCoordinates} setCurrentLocation={setCurrentLocation}/> ||
                     <Admissions/>
                 }
 

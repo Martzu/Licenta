@@ -1,19 +1,15 @@
 
 import * as React from 'react';
 import {Text, View, StyleSheet, Image, ImageBackground} from "react-native";
+import AccommodationData from "../types/AccommodationData";
 
 
 let descriptionImage = require('../icons/AccPopUp.png');
 
-interface AccommodationDetailsProps{
-    title: string,
-    distance: string,
-    address: string
-};
 
-export default function AccommodationDetails(props: AccommodationDetailsProps){
+
+export default function AccommodationDetails(props: AccommodationData){
     return(
-
 
         <View style={styles.container}>
             <ImageBackground source={descriptionImage} style={styles.imageBackground}>

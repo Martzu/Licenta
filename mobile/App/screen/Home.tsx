@@ -1,4 +1,15 @@
-import {Button, Dimensions, Image, Modal, Platform, StatusBar, StyleSheet, Text, View} from 'react-native';
+import {
+    ActivityIndicator,
+    Button,
+    Dimensions,
+    Image,
+    Modal,
+    Platform,
+    StatusBar,
+    StyleSheet,
+    Text,
+    View
+} from 'react-native';
 import CurrentLocation from "../types/CurrentLocation";
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
@@ -12,6 +23,7 @@ import MapViewDirections from 'react-native-maps-directions';
 import DirectionsScreen from "../components/DirectionsScreen";
 import {BICYCLING, DRIVING, GOOGLE_API_KEY, WALKING} from "../constants/Constants";
 import AccommodationDetails from "../components/AccommodationDetails";
+import LocationData from "../types/LocationData";
 
 
 
@@ -240,34 +252,50 @@ const customMapStyle = [
 ];
 
 interface MapsProps{
-    //TODO 2 modes, one for navigation one for display sau atuncea cand afisez maimulte chestii pun alt pop up windows pe onPress la markere
-    //TODO pot sa ma folosesc ca oricum o sa am un origin si un array de markere. Daca array u are 1 element, inseamna ca trebuie navigation catre el si dau display la un pop up. Altfel la celalalt pop up.
+    currentLocation: MarkerCoordinates,
+    destinations: LocationData[];
 
-
-    destinations: MarkerCoordinates[];
-
-};
+}
 
 export default function Home(props: MapsProps){
 
     const [visible, setVisible] = useState(false);
 
-
+    const [render, setRender] = useState(false);
 
     useEffect( () => {
         (async() => {
-            await computeLocation();
+            await computeLocation(props.destinations.length);
+            setRender(true);
         })();
     },[]);
 
-    function handleMarkerPress(destination: MarkerCoordinates){
-        let destinationRegion: Region = {latitude: destination.latitude, latitudeDelta: 0.0001, longitude: destination.longitude, longitudeDelta: 0.032};
-        setDestinationName(destination.title);
-        setDestination(destinationRegion);
-        setViewDirections(!viewDirections);
-        setShowDirections(!showDirections);
 
-    };
+    function handleMarkerPress(destination: LocationData){
+        let destinationRegion: Region = {latitude: destination.location.latitude, latitudeDelta: 0.0001, longitude: destination.location.longitude, longitudeDelta: 0.032};
+
+        if(props.destinations.length > 1){
+            setTitle(destination.accommodationDetails.title);
+            setDistance(destination.accommodationDetails.distance);
+            setAddress(destination.accommodationDetails.address);
+            setViewAccDetails(!viewAccDetails);
+        }
+        else{
+            setDestinationName(destination.location.title);
+            setDestination(destinationRegion);
+            setViewDirections(!viewDirections);
+            setShowDirections(!showDirections);
+        }
+
+    }
+
+    const [viewAccDetails, setViewAccDetails] = useState(false);
+
+    const [title, setTitle] = useState('');
+
+    const [distance, setDistance] = useState('');
+
+    const [address, setAddress] = useState('');
 
     const [destinationName, setDestinationName] = useState('');
 
@@ -277,22 +305,43 @@ export default function Home(props: MapsProps){
 
     const [viewDirections, setViewDirections] = useState(false);
 
-    const[showDirections, setShowDirections] = useState(false);
+    const [showDirections, setShowDirections] = useState(false);
 
     const [region, setRegion] = useState<Region>({latitude: 0, latitudeDelta: 0.0001, longitude: 0, longitudeDelta: 0.032});
 
-    const [markerCoordinates, setMarkerCoordinates] = useState<MarkerCoordinates>({latitude: 0, longitude: 0, title: ""});
+    const [markerCoordinates, setMarkerCoordinates] = useState<MarkerCoordinates>(props.destinations.length > 1 ? props.currentLocation : {latitude: 0, longitude: 0, title: ''});
 
-    const computeLocation = async () => {
-        let currentLocation = await getLocation();
-        setRegion({latitude: currentLocation.coords.latitude, longitude: currentLocation.coords.longitude, latitudeDelta: 0.03, longitudeDelta:0.02 });
-        setMarkerCoordinates({latitude: currentLocation.coords.latitude, longitude: currentLocation.coords.longitude, title: 'Hello'});
+    const computeLocation = async (length: number) => {
+        debugger;
+        let latitude: number, longitude: number;
+        if(length === 1){
+            let currentLocation = await getLocation();
+            latitude = currentLocation.coords.latitude;
+            longitude = currentLocation.coords.longitude;
+        }
+        else{
+            latitude = props.currentLocation.latitude;
+            longitude = props.currentLocation.longitude;
+        }
+
+        setRegion({latitude: latitude, longitude: longitude, latitudeDelta: 0.03, longitudeDelta:0.02 });
+        setMarkerCoordinates({latitude, longitude, title: 'Hello'});
+
+
+        const test = markerCoordinates;
+        debugger;
+        //setRegion({latitude: currentLocation.coords.latitude, longitude: currentLocation.coords.longitude, latitudeDelta: 0.03, longitudeDelta:0.02 });
+        //setMarkerCoordinates({latitude: currentLocation.coords.latitude, longitude: currentLocation.coords.longitude, title: 'Hello'});
     };
 
+    /*if(!render){
+        return <ActivityIndicator/>
+    }*/
     return (
         <View style={styles.mapContainer}>
             <View>
                 <Mapview style={styles.map} region={region} customMapStyle={customMapStyle}>
+
                     <Marker
                         onPress={() => setVisible(!visible)}
                         pinColor={'blue'}
@@ -301,15 +350,15 @@ export default function Home(props: MapsProps){
 
                         <Image source={currentLocationMarker} style={{height:45, width:40}}/>
                     </Marker>
-
                     {
-                        props.destinations.map(destination =>
-                            <Marker
+                        props.destinations.map(destination =>{
+
+                            return(<Marker
                                 onPress={() => handleMarkerPress(destination)}
-                                coordinate={destination}>
+                                coordinate={destination.location}>
                                 <Image source={otherLocationMarker} style={{height:45, width:40}}/>
-                            </Marker>
-                        )
+                            </Marker>);
+                        })
                     }
 
                     {
@@ -327,7 +376,8 @@ export default function Home(props: MapsProps){
 
             <View style={styles.bottomContainer}>
                 { visible && <AccommodationDetails address={'stefan cel mare 91'} distance={'2.7 km'} title={'casa cu doi brazi'}/> ||
-                    viewDirections && <DirectionsScreen destinationCoords={testCoordinates} destination={destinationName} originCoords={region} showDirections={setShowDirections} setMode={setMode}/>
+                    viewDirections && props.destinations.length === 1 && <DirectionsScreen destinationCoords={testCoordinates} destination={destinationName} originCoords={region} showDirections={setShowDirections} setMode={setMode}/>
+                                    || viewAccDetails && <AccommodationDetails title={title} distance={distance} address={address}/>
                 }
             </View>
 
