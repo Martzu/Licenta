@@ -1,0 +1,26 @@
+[
+    {
+        "address": "Str. Arany J\u00e1nos nr. 11, Cluj-Napoca",
+        "signUp": "9-11 13-15 ",
+        "exam": "17 ",
+        "results": "17 ",
+        "latitude": 46.7707372,
+        "longitude": 23.5821715
+    },
+    {
+        "address": " Str. Mihail Kogalniceanu nr. 1, Cluj-Napoca",
+        "signUp": "9-10 13-15 ",
+        "exam": "16 ",
+        "results": "16 ",
+        "latitude": 46.76754,
+        "longitude": 23.5914494
+    },
+    {
+        "address": " Str. Mihail Kogalniceanu nr. 1, Cluj-Napoca",
+        "signUp": "9-12 ",
+        "exam": "14 ",
+        "results": "16 ",
+        "latitude": 46.76754,
+        "longitude": 23.5914494
+    }
+]
