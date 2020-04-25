@@ -23,7 +23,7 @@ export default function Accommodation(props: AccommodationProps){
     function displayNavigate(){
         props.displayMap(false);
         props.closeAccommodation(true);
-    };
+    }
 
 
     return (

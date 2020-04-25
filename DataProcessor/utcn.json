@@ -1,0 +1,83 @@
+[
+    {
+        "address": "str. Observatorului nr. 34-36 Cluj-Napoca",
+        "signUpDate": "8-11 13-14",
+        "examDate": "17",
+        "resultsDate": "19",
+        "latitude": 46.7558368,
+        "longitude": 23.5925559,
+        "name": "Arhitectura si urbanism"
+    },
+    {
+        "address": "str. G. Bari\u0163iu nr. 26-28, Cluj-Napoca",
+        "signUpDate": "8-11",
+        "examDate": "13",
+        "resultsDate": "13",
+        "latitude": 46.7724476,
+        "longitude": 23.5856411,
+        "name": "Automatica si calculatoare"
+    },
+    {
+        "address": "str. G. Bari\u0163iu nr. 26-28, Cluj-Napoca",
+        "signUpDate": "8-11 13-14",
+        "examDate": "No exam",
+        "resultsDate": "14",
+        "latitude": 46.7724476,
+        "longitude": 23.5856411,
+        "name": "Constructii de masini"
+    },
+    {
+        "address": "str. G. Bari\u0163iu nr. 25 Cluj-Napoca",
+        "signUpDate": "8-11 13-14",
+        "examDate": "No exam",
+        "resultsDate": "14",
+        "latitude": 46.7720686,
+        "longitude": 23.5854946,
+        "name": "Constructii"
+    },
+    {
+        "address": "str. G. Bari\u0163iu nr. 26-28, Cluj-Napoca",
+        "signUpDate": "8-11",
+        "examDate": "13",
+        "resultsDate": "13",
+        "latitude": 46.7724476,
+        "longitude": 23.5856411,
+        "name": "Electronica telecomunicatii si tehnologia informatiei"
+    },
+    {
+        "address": "str. G. Bari\u0163iu nr. 26-28, Cluj-Napoca",
+        "signUpDate": "8-11 13-14",
+        "examDate": "No exam",
+        "resultsDate": "14",
+        "latitude": 46.7724476,
+        "longitude": 23.5856411,
+        "name": "Ingineria materialelor si a mediului"
+    },
+    {
+        "address": "str. G. Bari\u0163iu nr. 25 Cluj-Napoca",
+        "signUpDate": "8-11 13-14",
+        "examDate": "No exam",
+        "resultsDate": "14",
+        "latitude": 46.7720686,
+        "longitude": 23.5854946,
+        "name": "Inginerie electrica"
+    },
+    {
+        "address": "str. G. Bari\u0163iu nr. 26-28, Cluj-Napoca",
+        "signUpDate": "8-11 13-14",
+        "examDate": "No exam",
+        "resultsDate": "14",
+        "latitude": 46.7724476,
+        "longitude": 23.5856411,
+        "name": "Instalatii"
+    },
+    {
+        "address": "str. G. Bari\u0163iu nr. 26-28, Cluj-Napoca",
+        "signUpDate": "8-11",
+        "examDate": "13",
+        "resultsDate": "13",
+        "latitude": 46.7724476,
+        "longitude": 23.5856411,
+        "name": "Mecanica"
+    }
+]

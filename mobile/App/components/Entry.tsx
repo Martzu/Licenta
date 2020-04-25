@@ -5,7 +5,7 @@ import * as Font from "expo-font";
 import {useEffect, useState} from "react";
 
 
-let Calendar = require('../icons/Calendar.png');
+let Details = require('../icons/Details.png');
 let Cancel = require('../icons/Cancel.png');
 let Location = require('../icons/Location.png');
 let Box = require('../icons/Box.png');
@@ -31,7 +31,7 @@ export default function Entry(props: EntryProps){
 
                     <View style={styles.middleSection}>
                         <TouchableHighlight>
-                            <Image source={Calendar} style={styles.button}/>
+                            <Image source={Details} style={styles.button}/>
                         </TouchableHighlight>
 
                         <TouchableHighlight>
