@@ -4,6 +4,8 @@ import * as React from "react";
 import {Button, Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import * as Font from 'expo-font';
 import {useEffect, useState} from "react";
+import Faculty from "../types/Faculty";
+import axios from "axios";
 
 let AvailableOff = require('../icons/Available.png');
 let AvailableOn = require('../icons/AvailableOn.png');
@@ -11,32 +13,64 @@ let AvailableOn = require('../icons/AvailableOn.png');
 let GoingOff  = require('../icons/Going.png');
 let GoingOn = require('../icons/GoingOn.png');
 
+interface AdmissionsProps{
+    faculties: Faculty[],
+    setFaculties: (faculties: Faculty[]) => void,
+    setUserAdmissions: (userAdmissions: Faculty[]) => void,
+    userAdmissions: Faculty[]
+}
 
-let faculties = ['Computer Science', 'History', 'Literature', 'Foreign Language', 'Mechanics', 'Electrical Engineering'];
 
+export default function Admissions(props: AdmissionsProps){
 
-
-export default function Admissions(){
-
-    const[availableOn, setAvailableOn] = useState(true);
     const[goingOn, setGoingOn] = useState(false);
 
-    function handlePress(id: number){
-        let value = id !== 0;
-        setGoingOn(value);
-        setAvailableOn(!value);
-    };
+    const[faculties, setFaculties] = useState<Faculty[]>(props.faculties);
+
+    useEffect(() => {
+        props.userAdmissions.sort((faculty1, faculty2) => faculty1.name.localeCompare(faculty2.name));
+    },[props.userAdmissions]);
+
+    useEffect(() => {
+        props.faculties.sort((faculty1, faculty2) => faculty1.name.localeCompare(faculty2.name));
+    }, [props.faculties]);
+
+    async function handleCancelOrParticipate(currentFaculty: Faculty){
+        if(goingOn){
+            const response = await axios.delete('http://192.168.1.5:8080/faculty', {data: {username: 'a', facultyId: currentFaculty.id}});
+            if(response.status === 200){
+                let userAdmissions: Faculty[] = props.userAdmissions.filter(faculty => faculty.id !== currentFaculty.id);
+                setFaculties(userAdmissions);
+                props.setUserAdmissions(userAdmissions);
+                props.setFaculties([...props.faculties, currentFaculty]);
+            }
+        }
+        else{
+            const response = await axios.post('http://192.168.1.5:8080/faculty', {username: 'a', facultyId: currentFaculty.id});
+            if(response.status === 200){
+                let filteredFaculties = props.faculties.filter(faculty => faculty.id !== currentFaculty.id);
+                setFaculties(filteredFaculties);
+                props.setUserAdmissions([...props.userAdmissions, currentFaculty]);
+                props.setFaculties(filteredFaculties);
+            }
+        }
+    }
+
+    function handleOnPress(going: boolean){
+        setGoingOn(going);
+        setFaculties(going ? props.userAdmissions : props.faculties);
+    }
 
     return (
         <ScrollView style={{backgroundColor: "#343434"}}>
             <View style={styles.buttonFilterContainer}>
 
-                <TouchableOpacity onPress={() => handlePress(0)}>
-                    <ImageBackground source={availableOn ? AvailableOn : AvailableOff} style={styles.button}>
+                <TouchableOpacity onPress={() => handleOnPress(false)}>
+                    <ImageBackground source={!goingOn ? AvailableOn : AvailableOff} style={styles.button}>
                     </ImageBackground>
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={() => handlePress(1)}>
+                <TouchableOpacity onPress={() => handleOnPress(true)}>
                     <ImageBackground source={goingOn ? GoingOn : GoingOff} style={styles.button}>
                     </ImageBackground>
                 </TouchableOpacity>
@@ -44,9 +78,9 @@ export default function Admissions(){
             </View>
 
             {
-                faculties.map((faculty, index)=>
-                    <Entry faculty={faculty} key={index}/>
-                )
+                faculties.map((faculty, index) =>
+                        <Entry faculty={faculty} key={index} going={goingOn} handleBottomButtonClick={handleCancelOrParticipate}/>
+                    )
             }
         </ScrollView>
 

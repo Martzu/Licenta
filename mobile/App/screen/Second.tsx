@@ -14,7 +14,8 @@ import Accommodation from "../components/Accommodation";
 import MarkerCoordinates from "../types/MarkerCoordinates";
 import Home from "./Home";
 import LocationData from "../types/LocationData";
-
+import Faculty from "../types/Faculty";
+import axios from 'axios';
 
 let uniOn = require('../icons/UniOn.png');
 let uniOff = require('../icons/UniOff.png');
@@ -45,7 +46,7 @@ export default function Second({navigation}){
     function navigate(navigation){
         setFirstMapsIcon(!firstMapsIcon);
         navigation.navigate('Home');
-    };
+    }
 
     function handleButtonPress(source: string) {
         changeSize(source);
@@ -86,9 +87,21 @@ export default function Second({navigation}){
 
         }
 
-    };
+    }
 
     useEffect(() => {
+
+        (async() => {
+
+            const unAttendingFacultiesRequest = () => axios.post('http://192.168.1.5:8080/unattending', {username: 'a'});
+            const userAdmissionsRequest = () => axios.post('http://192.168.1.5:8080/user/faculties', {username: 'a'});
+
+            const [unAttendingFacultiesResponse, userAdmissionsResponse] = await axios.all([unAttendingFacultiesRequest(), userAdmissionsRequest()]);
+            setFaculties(unAttendingFacultiesResponse.data);
+            setUserAdmissions(userAdmissionsResponse.data);
+
+        })();
+
         setFirstMapsIcon(true);
         setFirstAccIcon(true);
         setFirstUniIcon(true);
@@ -221,6 +234,9 @@ export default function Second({navigation}){
 
     const[currentSelected, setCurrentSelected] = useState('');
 
+    const[faculties, setFaculties] = useState<Faculty[]>([]);
+    const[userAdmissions, setUserAdmissions] = useState<Faculty[]>([]);
+
     const[enlargeAnimationUni] = useState(new Animated.Value(70));
     const[enlargeAnimationAcc] = useState(new Animated.Value(50));
     const[enlargeAnimationMaps] = useState(new Animated.Value(50));
@@ -272,7 +288,7 @@ export default function Second({navigation}){
                 {!firstMapsIcon && <Home destinations={destinations} currentLocation={currentLocation}/> ||
                     !firstCalIcon && <CalendarScreen/> ||
                     !firstAccIcon && <Accommodation closeAccommodation={setFirstAccIcon} displayMap={setFirstMapsIcon} setAccommodationDetails={setDestinations} coordinates={facultyCoordinates} setCurrentLocation={setCurrentLocation}/> ||
-                    <Admissions/>
+                    <Admissions faculties={faculties} userAdmissions={userAdmissions} setFaculties={setFaculties} setUserAdmissions={setUserAdmissions}/>
                 }
 
 

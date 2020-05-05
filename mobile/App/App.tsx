@@ -13,6 +13,7 @@ export default function App() {
   useEffect(() => {
     (async () => {
       await Font.loadAsync({'montserrat': require('./assets/fonts/montserrat.ttf')});
+
       setRender(true);
     })();
   },[]);

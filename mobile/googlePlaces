@@ -1,0 +1,986 @@
+Google Places nearby Search postman result
+
+{
+   "html_attributions": [],
+   "next_page_token": "CqQCGgEAANLQcX9uC9ocq0DevdVeGGP_rY6c0zwqUTyFpdLVwvnkhJk7klZuYbJwIWfUlb4m683xY_nPGIF6NnJL3tK1B7e3SqP8jjualqHbnziTXmsRM1LzVY7BjqgG10biidQp3IeirpRjLavcWFJl1wA5P8NMD27yaXpFAkX8q9L7DuzkBSe--Lzt-5CymV-YTEABds74DI1miJGj3ISVxXXPOOc4M7X2k6Qvsz5xiqkCXwoRxjaONpb9KKofzRJsXX0uow_LaM0EFvuL1QkkCfVoYI3HWl5njfU-vmS87zcwKrGntwEFAt8QxTNkKQCLWXDr6Q0zpSrJh25-w_DXSe_TEwc-JREBYYITH1BSxDbP2S5nxLnJQ9WaJ8H_TreTkxdP7xIQcjJHDRD0HF3oqp3JuCtGHhoU4d-3Y2hevBxAmv_XEjaOprVEtHo",
+   "results": [
+      {
+         "geometry": {
+            "location": {
+               "lat": 47.554987,
+               "lng": 25.890935
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 47.55640727989272,
+                  "lng": 25.89207282989272
+               },
+               "southwest": {
+                  "lat": 47.55370762010728,
+                  "lng": 25.88937317010728
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/lodging-71.png",
+         "id": "6fc78d65d8cf98f29fb430c506a89a3e38cb6284",
+         "name": "Best Western Bucovina",
+         "opening_hours": {
+            "open_now": true
+         },
+         "photos": [
+            {
+               "height": 346,
+               "html_attributions": [
+                  "<a href=\"https://maps.google.com/maps/contrib/114509370608863809641\">Best Western Bucovina</a>"
+               ],
+               "photo_reference": "CmRaAAAAWCruHqa4gKeoX_Gyrhg9GVFfSEwJIc_MQkkIrpmUg0n5nfOSvyoLiORQUl6Fo0jMcvAkLF3JQVgw7CMD0kjtzBmoUXIL7r3uSqwVFT8hlU742bX3i7Ea0yziUTfMNFanEhA6PVFmfqZi9QSK-QbijNDVGhRFNQpZavO8N9izbyiWNrZ_CyjY0A",
+               "width": 612
+            }
+         ],
+         "place_id": "ChIJAYmPONaoNUcRzHeuGgo8Efs",
+         "plus_code": {
+            "compound_code": "HV3R+X9 Gura Humorului",
+            "global_code": "8GV7HV3R+X9"
+         },
+         "rating": 4.2,
+         "reference": "ChIJAYmPONaoNUcRzHeuGgo8Efs",
+         "scope": "GOOGLE",
+         "types": [
+            "spa",
+            "lodging",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 1792,
+         "vicinity": "Piața Republicii nr. 18, Gura Humorului"
+      },
+      {
+         "geometry": {
+            "location": {
+               "lat": 47.5532602,
+               "lng": 25.8877082
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 47.55465592989272,
+                  "lng": 25.88914487989273
+               },
+               "southwest": {
+                  "lat": 47.55195627010728,
+                  "lng": 25.88644522010728
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/lodging-71.png",
+         "id": "37bad97e9ed57137c43c2fe6359dad60bc0e1e75",
+         "name": "Simeria",
+         "photos": [
+            {
+               "height": 4032,
+               "html_attributions": [
+                  "<a href=\"https://maps.google.com/maps/contrib/112826472745521160640\">Catalin Catalin</a>"
+               ],
+               "photo_reference": "CmRaAAAA5e3pmtA8JVV_yFdh6buPcQMq_K_5ajL5IxEd5oNpnAvKKIOUgCeiqsJZKnc2gQidg1OMTwPhtR2vswsy-Kcn19qC1jdy2tKmK6nr85a1lATONQJN7na6nsGeoKNwulU9EhD0zgMp1lzTqp3FGHkH9_16GhRAZfYvjF4qrOGEYQNWWIOKj4pQtA",
+               "width": 3024
+            }
+         ],
+         "place_id": "ChIJPWoHA9ioNUcRjxQoJDHAdNI",
+         "plus_code": {
+            "compound_code": "HV3Q+83 Gura Humorului",
+            "global_code": "8GV7HV3Q+83"
+         },
+         "rating": 4.1,
+         "reference": "ChIJPWoHA9ioNUcRjxQoJDHAdNI",
+         "scope": "GOOGLE",
+         "types": [
+            "lodging",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 354,
+         "vicinity": "Strada Mihail Kogălniceanu nr. 2, Gura Humorului"
+      },
+      {
+         "geometry": {
+            "location": {
+               "lat": 47.5522496,
+               "lng": 25.8806966
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 47.55353682989272,
+                  "lng": 25.88190127989272
+               },
+               "southwest": {
+                  "lat": 47.55083717010727,
+                  "lng": 25.87920162010727
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/lodging-71.png",
+         "id": "49587680b4a08191b2ac2cfef5476043839adbc5",
+         "name": "Hilde's Residence",
+         "opening_hours": {
+            "open_now": true
+         },
+         "photos": [
+            {
+               "height": 1080,
+               "html_attributions": [
+                  "<a href=\"https://maps.google.com/maps/contrib/104702233522237618943\">L T</a>"
+               ],
+               "photo_reference": "CmRaAAAAQaVb6ir2npqKGryyy_U3PRyN32o-YoeyZ7ODa6CsvwK4ohC2aopvQ2vk4mXztSP0O0A4YR17Nt-JdLAhbdr9AuQztOSRwPClrSSFvYxXeVjH28OcmB3uF5YgK87iCm8cEhDH9xVeDHz19X0tDC8PAuixGhSrxvFOCBAbvxRbqxpUoSmEGV67PQ",
+               "width": 1920
+            }
+         ],
+         "place_id": "ChIJ9aWLCdOoNUcRD5NPxNqD-PA",
+         "plus_code": {
+            "compound_code": "HV2J+V7 Gura Humorului",
+            "global_code": "8GV7HV2J+V7"
+         },
+         "rating": 4.6,
+         "reference": "ChIJ9aWLCdOoNUcRD5NPxNqD-PA",
+         "scope": "GOOGLE",
+         "types": [
+            "lodging",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 511,
+         "vicinity": "Strada Șipotului nr. 2, Gura Humorului"
+      },
+      {
+         "geometry": {
+            "location": {
+               "lat": 47.5505285,
+               "lng": 25.8723197
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 47.55189477989272,
+                  "lng": 25.87371492989272
+               },
+               "southwest": {
+                  "lat": 47.54919512010728,
+                  "lng": 25.87101527010728
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/lodging-71.png",
+         "id": "f650c1966de7eaaf1954a5d5f2fe740ddde56cc5",
+         "name": "Casa Humor",
+         "opening_hours": {
+            "open_now": true
+         },
+         "photos": [
+            {
+               "height": 1000,
+               "html_attributions": [
+                  "<a href=\"https://maps.google.com/maps/contrib/118112439088161345125\">Pension Casa Humor 4*</a>"
+               ],
+               "photo_reference": "CmRaAAAAEYzLMqYJb56PfoBuTovjkMozwsVu77AYS9wAOn6yK6AZKOaPp3MfwHEa9cjH25cOa-y4DpuP0_kydbxaeVzyd6igVE8jikXLzXTycicV5oVirK_76FdYrGNW-9QpON5BEhAynqQHa9bzMf3WBm7-F6C-GhQpW_LvTaIM4aNVlQ4j7PKhUo9XyA",
+               "width": 1000
+            }
+         ],
+         "place_id": "ChIJ_TubxTKvNUcRyudMp4GtNjA",
+         "plus_code": {
+            "compound_code": "HV2C+6W Gura Humorului",
+            "global_code": "8GV7HV2C+6W"
+         },
+         "rating": 4.6,
+         "reference": "ChIJ_TubxTKvNUcRyudMp4GtNjA",
+         "scope": "GOOGLE",
+         "types": [
+            "lodging",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 861,
+         "vicinity": "Strada Ștefan cel Mare nr. 5 bis, Gura Humorului"
+      },
+      {
+         "geometry": {
+            "location": {
+               "lat": 47.555089,
+               "lng": 25.901462
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 47.55652877989272,
+                  "lng": 25.90285947989272
+               },
+               "southwest": {
+                  "lat": 47.55382912010727,
+                  "lng": 25.90015982010728
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/lodging-71.png",
+         "id": "8d5b82324da34adad7c256f6ae2afaf2a0dda40b",
+         "name": "Ramona",
+         "opening_hours": {
+            "open_now": true
+         },
+         "photos": [
+            {
+               "height": 374,
+               "html_attributions": [
+                  "<a href=\"https://maps.google.com/maps/contrib/109775551230762814316\">Ramona</a>"
+               ],
+               "photo_reference": "CmRaAAAAv7d9vUwxVjW-jaV92haoWcynQJ_UzsXQsrw05wHqGz-ZaOBfoDMaJLjF8rpXLjLJY39YwLA4Ic4AYpHac24o7MVCMJXP3qvz7-QwwQ3QQSvbSxfhSyuAxpbbotjvc7hoEhAzLmZWCXNbHyJAQNFHh4S2GhTnLYucHnHk62CRgtjO_jwzSGJV5w",
+               "width": 578
+            }
+         ],
+         "place_id": "ChIJVfU2cyepNUcRYlWvtYRcaQk",
+         "plus_code": {
+            "compound_code": "HW42+2H Gura Humorului",
+            "global_code": "8GV7HW42+2H"
+         },
+         "rating": 3.7,
+         "reference": "ChIJVfU2cyepNUcRYlWvtYRcaQk",
+         "scope": "GOOGLE",
+         "types": [
+            "lodging",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 98,
+         "vicinity": "Strada Stejarului 15, Gura Humorului"
+      },
+      {
+         "geometry": {
+            "location": {
+               "lat": 47.5534368,
+               "lng": 25.895861
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 47.55477767989272,
+                  "lng": 25.89726027989272
+               },
+               "southwest": {
+                  "lat": 47.55207802010727,
+                  "lng": 25.89456062010728
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/lodging-71.png",
+         "id": "69a1a5ad1243cf207df4af6d69b94733c6714390",
+         "name": "Vila Boem",
+         "opening_hours": {
+            "open_now": true
+         },
+         "photos": [
+            {
+               "height": 720,
+               "html_attributions": [
+                  "<a href=\"https://maps.google.com/maps/contrib/108570943596416429890\">A Google User</a>"
+               ],
+               "photo_reference": "CmRaAAAAYvXLTF-NMt_kAVNDyWTVrGWJb2jBjXHflF9DWGYqlRbaqrPWEFngEfWYsdlgqYg91tq-NgLwRvjuPCKrH_B6FFXlY7fos0hpndRNPjNBl2bRxLj3eElTiqyWrdgKTYZiEhApvS6fkMfE-m1J-M9wQPXbGhS6vQb20xTTiOLqxiClsOQjxP4SyA",
+               "width": 960
+            }
+         ],
+         "place_id": "ChIJJQAAANSoNUcRego70HH0kY4",
+         "plus_code": {
+            "compound_code": "HV3W+98 Gura Humorului",
+            "global_code": "8GV7HV3W+98"
+         },
+         "rating": 4.8,
+         "reference": "ChIJJQAAANSoNUcRego70HH0kY4",
+         "scope": "GOOGLE",
+         "types": [
+            "lodging",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 99,
+         "vicinity": "Strada Locotenent Viorel Mărceanu nr. 1, Gura Humorului"
+      },
+      {
+         "geometry": {
+            "location": {
+               "lat": 47.5394996,
+               "lng": 25.8711465
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 47.54094442989272,
+                  "lng": 25.87241907989272
+               },
+               "southwest": {
+                  "lat": 47.53824477010728,
+                  "lng": 25.86971942010728
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/lodging-71.png",
+         "id": "e8ca8936ff36fede051566de8e827e6341e5e43a",
+         "name": "Complex Lions Bucovina",
+         "opening_hours": {
+            "open_now": true
+         },
+         "photos": [
+            {
+               "height": 2268,
+               "html_attributions": [
+                  "<a href=\"https://maps.google.com/maps/contrib/107137795728801804309\">catalin radu</a>"
+               ],
+               "photo_reference": "CmRaAAAAJ4sbDRHFum4mXkRne3-VUV9JwSgy8NhJyoPvBL43tEgroJJvtnbOeYvH-f0_lGYqWc7G1SXE7KQL7tsFj73Tu-G1EDYTdW2UKt2EQuK8CpbRDy__Jax4mU23bwc7z34jEhDVX6IA8ndvYtu2tJPM701cGhTL933UdbIDg7QBsX3z07AzL1ofTg",
+               "width": 4032
+            }
+         ],
+         "place_id": "ChIJOcw67bWoNUcRVW-jTNVOn_Y",
+         "plus_code": {
+            "compound_code": "GVQC+QF Gura Humorului",
+            "global_code": "8GV7GVQC+QF"
+         },
+         "rating": 4.2,
+         "reference": "ChIJOcw67bWoNUcRVW-jTNVOn_Y",
+         "scope": "GOOGLE",
+         "types": [
+            "lodging",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 294,
+         "vicinity": "Aleea Piatra Pinului, Gura Humorului"
+      },
+      {
+         "geometry": {
+            "location": {
+               "lat": 47.53972659999999,
+               "lng": 25.8737324
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 47.54123067989272,
+                  "lng": 25.87509347989272
+               },
+               "southwest": {
+                  "lat": 47.53853102010728,
+                  "lng": 25.87239382010727
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/lodging-71.png",
+         "id": "9ab2ae1421504470215fc8643de1e64fb79197df",
+         "name": "Piatra Pinului Ski & Spa",
+         "photos": [
+            {
+               "height": 2988,
+               "html_attributions": [
+                  "<a href=\"https://maps.google.com/maps/contrib/108317288692595278833\">Elena Cristina Drenea</a>"
+               ],
+               "photo_reference": "CmRZAAAAJNtzHWHD77ieH6_7Gd9-RdyyzVsE5p9tmKGntouZeD21CVWws5OkYACdkAu57SRNDRj5m4sRXwTYHwK4mPMl5wYu6jXX_iuSdPigIeL-E16yWtBi18IQhu29sez7PWTREhBKV6dUH4KUY9hS0B2UZXRAGhRCmwCkRgXjDGNU7Y87M6B9l4xBtA",
+               "width": 5312
+            }
+         ],
+         "place_id": "ChIJ90y5-8moNUcRjmCrmYe86Fk",
+         "plus_code": {
+            "compound_code": "GVQF+VF Gura Humorului",
+            "global_code": "8GV7GVQF+VF"
+         },
+         "rating": 4.6,
+         "reference": "ChIJ90y5-8moNUcRjmCrmYe86Fk",
+         "scope": "GOOGLE",
+         "types": [
+            "lodging",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 195,
+         "vicinity": "Aleea Piatra Pinului, Gura Humorului"
+      },
+      {
+         "geometry": {
+            "location": {
+               "lat": 47.5552407,
+               "lng": 25.8876792
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 47.55654852989272,
+                  "lng": 25.88908087989272
+               },
+               "southwest": {
+                  "lat": 47.55384887010727,
+                  "lng": 25.88638122010728
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/lodging-71.png",
+         "id": "3e5aacb58a80e88e2e00c6b007b6a5af6f06690a",
+         "name": "Hotel/Restaurant Buchenland",
+         "opening_hours": {
+            "open_now": true
+         },
+         "photos": [
+            {
+               "height": 2016,
+               "html_attributions": [
+                  "<a href=\"https://maps.google.com/maps/contrib/105259371431543116626\">A Google User</a>"
+               ],
+               "photo_reference": "CmRaAAAArwXMrRJOYErtZPAXdaUaJygU8ZK7Vskb37t6t9qqdFNWol5NrvRhrcfbOWDnRU3jBr3KBmDP0royOT_ehazeHe3d6SQ8ZyvePaoLr9hqMBV81yTBPs-2_WM6EoySTcarEhCNR4rwA0AOEkAjtWDsDkpvGhQYQJ9ussTUfvuvQUn5KA-3pQaOeA",
+               "width": 1504
+            }
+         ],
+         "place_id": "ChIJkUSlepupNUcR4JEwtsO6e7c",
+         "plus_code": {
+            "compound_code": "HV4Q+33 Gura Humorului",
+            "global_code": "8GV7HV4Q+33"
+         },
+         "rating": 4.7,
+         "reference": "ChIJkUSlepupNUcR4JEwtsO6e7c",
+         "scope": "GOOGLE",
+         "types": [
+            "lodging",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 11,
+         "vicinity": "strada Uzinei nr 4, Gura Humorului"
+      },
+      {
+         "geometry": {
+            "location": {
+               "lat": 47.5516456,
+               "lng": 25.8690154
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 47.55305112989272,
+                  "lng": 25.87009222989272
+               },
+               "southwest": {
+                  "lat": 47.55035147010728,
+                  "lng": 25.86739257010728
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/lodging-71.png",
+         "id": "bc30df6d68a607da0406870a3912b865b280c93d",
+         "name": "Toaca Bellevue",
+         "opening_hours": {
+            "open_now": true
+         },
+         "photos": [
+            {
+               "height": 317,
+               "html_attributions": [
+                  "<a href=\"https://maps.google.com/maps/contrib/103092880226951260193\">Hotel Toaca Bellevue</a>"
+               ],
+               "photo_reference": "CmRaAAAADu7sBCWQpA9naUlLR4UkT4DoIId_cLH8sXTpSKl6O7b1gaOvti60fVI5FDBdAitLOJUdxb-uwuFI9pqIGrWZ9g3hf4ostoI3zx4okIHggJTV95P9EMYNlkLBmXtfHeJ6EhAEmOeXJYJQ5gmhT-8hqFMLGhTjC4HXDGx1BFETsxFokGlHatwMEA",
+               "width": 1321
+            }
+         ],
+         "place_id": "ChIJd2cg3TKvNUcRZ_jNf5qAbBw",
+         "plus_code": {
+            "compound_code": "HV29+MJ Gura Humorului",
+            "global_code": "8GV7HV29+MJ"
+         },
+         "rating": 4.2,
+         "reference": "ChIJd2cg3TKvNUcRZ_jNf5qAbBw",
+         "scope": "GOOGLE",
+         "types": [
+            "lodging",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 590,
+         "vicinity": "Strada Gheorghe Lazar nr. 12, Gura Humorului"
+      },
+      {
+         "geometry": {
+            "location": {
+               "lat": 47.5368978,
+               "lng": 25.8619804
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 47.53836627989272,
+                  "lng": 25.86330672989272
+               },
+               "southwest": {
+                  "lat": 47.53566662010728,
+                  "lng": 25.86060707010728
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/lodging-71.png",
+         "id": "35be080a5e2cce0bbc507533a118403062ed7a38",
+         "name": "Roua Voronetului",
+         "opening_hours": {
+            "open_now": true
+         },
+         "photos": [
+            {
+               "height": 2592,
+               "html_attributions": [
+                  "<a href=\"https://maps.google.com/maps/contrib/110758410865669622603\">Pensiunea Roua Voronetului</a>"
+               ],
+               "photo_reference": "CmRaAAAAimdBVwuYF3M2toG-Tvieb_fnH8ABIl3or2QV0PGgY7Z0l7dnX5cXKjBw5UpcOmlo5xF1Lvq6g27nSENM4jafEy2_Cl3orp37wNFefgBEHnwF9B44uu2NfJUsFpU9YNGyEhAWb8ode5DMp-UbFb3twdBdGhRzJJQA_f7rSI0504W72Rt8r5ZpwQ",
+               "width": 3872
+            }
+         ],
+         "place_id": "ChIJU6P1pbSoNUcR_3L5sXkccsk",
+         "plus_code": {
+            "compound_code": "GVP6+QQ Gura Humorului",
+            "global_code": "8GV7GVP6+QQ"
+         },
+         "rating": 4.1,
+         "reference": "ChIJU6P1pbSoNUcR_3L5sXkccsk",
+         "scope": "GOOGLE",
+         "types": [
+            "lodging",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 228,
+         "vicinity": "Strada Voroneț Nr. 8 BIS, Gura Humorului"
+      },
+      {
+         "geometry": {
+            "location": {
+               "lat": 47.5399172,
+               "lng": 25.8731987
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 47.54133707989273,
+                  "lng": 25.87455517989272
+               },
+               "southwest": {
+                  "lat": 47.53863742010729,
+                  "lng": 25.87185552010727
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/lodging-71.png",
+         "id": "577898ae2108796185ca91e3503aac453fbd32e1",
+         "name": "La Conac in Bucovina",
+         "photos": [
+            {
+               "height": 1367,
+               "html_attributions": [
+                  "<a href=\"https://maps.google.com/maps/contrib/107841671904979618210\">A Google User</a>"
+               ],
+               "photo_reference": "CmRaAAAAmF9zgpm_GAovNv9Jqz2QPGntBWypyaslyOTQEhe12DPuD7YtLDkcoW6F9D7bS7i4v20t8tIlQJC8yOwv0NvU1k6ORmrXveWkT-51NDjtxQX6HY8j1iFM41IrEScHsoJAEhB8hUlAae-w7N3LEv8SF3YwGhTqHqYxvW2ZEBAOihFk2dSTiwxveQ",
+               "width": 2048
+            }
+         ],
+         "place_id": "ChIJg0ilAcqoNUcRcKnVEYqMnOE",
+         "plus_code": {
+            "compound_code": "GVQF+X7 Gura Humorului",
+            "global_code": "8GV7GVQF+X7"
+         },
+         "rating": 4.6,
+         "reference": "ChIJg0ilAcqoNUcRcKnVEYqMnOE",
+         "scope": "GOOGLE",
+         "types": [
+            "lodging",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 727,
+         "vicinity": "Aleea Piatra Pinului, Gura Humorului"
+      },
+      {
+         "geometry": {
+            "location": {
+               "lat": 47.5515243,
+               "lng": 25.8745006
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 47.55302202989272,
+                  "lng": 25.87619807989272
+               },
+               "southwest": {
+                  "lat": 47.55032237010728,
+                  "lng": 25.87349842010728
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/lodging-71.png",
+         "id": "1f8c909ff616a277ba00d49764e8f31708e7c17f",
+         "name": "Bucovina Residence & SPA",
+         "opening_hours": {
+            "open_now": true
+         },
+         "photos": [
+            {
+               "height": 3264,
+               "html_attributions": [
+                  "<a href=\"https://maps.google.com/maps/contrib/101861313320799399841\">Pensiunea Bucovina Residence</a>"
+               ],
+               "photo_reference": "CmRaAAAADqHbAez9BqmUbI598g6uVHOnwHhi2HNg3CZ0uLgbBMk4Utsd5A_ih7coKpQAuIGvZnVq3T71wzWSfGKGtLz1AlvWJGMzzeRKTgHeG7UFqnDLq6JFAwBWBw8Mauy1VHSUEhA-zCGPcncLmFKOeL3KiqNoGhQraTtXBB6AFOGxKaLq1EvSb6BkEA",
+               "width": 4928
+            }
+         ],
+         "place_id": "ChIJ67Y6Fi2vNUcRCWxVmgPyNTs",
+         "plus_code": {
+            "compound_code": "HV2F+JR Gura Humorului",
+            "global_code": "8GV7HV2F+JR"
+         },
+         "rating": 4.6,
+         "reference": "ChIJ67Y6Fi2vNUcRCWxVmgPyNTs",
+         "scope": "GOOGLE",
+         "types": [
+            "spa",
+            "lodging",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 172,
+         "vicinity": "Strada General Eremia Grigorescu nr. 11 bis, Gura Humorului"
+      },
+      {
+         "geometry": {
+            "location": {
+               "lat": 47.5516766,
+               "lng": 25.8805697
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 47.55292147989272,
+                  "lng": 25.88200092989272
+               },
+               "southwest": {
+                  "lat": 47.55022182010728,
+                  "lng": 25.87930127010728
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/lodging-71.png",
+         "id": "4cc9e3e3911e5a096bc5b9699173e8360673e34d",
+         "name": "Pension Maria",
+         "photos": [
+            {
+               "height": 3840,
+               "html_attributions": [
+                  "<a href=\"https://maps.google.com/maps/contrib/114442642852912093074\">Winder Blue</a>"
+               ],
+               "photo_reference": "CmRaAAAATvaga7zh0acuvPLzRquLRv-Fv7VnxG8B5sjUrrjULGW6OSlSDSxsNl6mcyZv3Rt_DXgpv1I22rQuEO_KzHjJytTmnl-JT53s4Eo-FaAMzAMrb5Oh0Ds_BXdETuMJLpn2EhDKhBekLOPYMXi2g8-sRVZBGhTqWgrqHT4wuQpPWi2a1c4_ZzH8vg",
+               "width": 5120
+            }
+         ],
+         "place_id": "ChIJNxgL_dKoNUcRYMx00uW5pEY",
+         "plus_code": {
+            "compound_code": "HV2J+M6 Gura Humorului",
+            "global_code": "8GV7HV2J+M6"
+         },
+         "rating": 4.1,
+         "reference": "ChIJNxgL_dKoNUcRYMx00uW5pEY",
+         "scope": "GOOGLE",
+         "types": [
+            "lodging",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 68,
+         "vicinity": "Strada Ștefan cel Mare Nr. 52, Gura Humorului"
+      },
+      {
+         "geometry": {
+            "location": {
+               "lat": 47.5405002,
+               "lng": 25.8775976
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 47.54187462989272,
+                  "lng": 25.87891822989272
+               },
+               "southwest": {
+                  "lat": 47.53917497010728,
+                  "lng": 25.87621857010727
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/lodging-71.png",
+         "id": "f57db89099c57d216a922a8e6dcc5f0984da7c93",
+         "name": "Cabana Sura Getilor Arinis",
+         "opening_hours": {
+            "open_now": true
+         },
+         "photos": [
+            {
+               "height": 1536,
+               "html_attributions": [
+                  "<a href=\"https://maps.google.com/maps/contrib/109114183089702539483\">A Google User</a>"
+               ],
+               "photo_reference": "CmRaAAAAR9pJWD7Ph94IAXBl3MUj6jvXAr31JknXpb1R19dmdJgcAU7bHPfaP6My0SAN_T6eu7xSrhe9PIfhJW0QLs9VSlJc1idil5i3p103iI2iN9WMwOG3kj03vdSRwpD0g8roEhA9UAeGS_xKL4sI9_6fM0yKGhRnsuDTJ7AB4rGKJ9MzRW7WEx18Bw",
+               "width": 2048
+            }
+         ],
+         "place_id": "ChIJH-GLcPipNUcR9C-0luXc9I4",
+         "plus_code": {
+            "compound_code": "GVRH+62 Gura Humorului",
+            "global_code": "8GV7GVRH+62"
+         },
+         "rating": 4.5,
+         "reference": "ChIJH-GLcPipNUcR9C-0luXc9I4",
+         "scope": "GOOGLE",
+         "types": [
+            "lodging",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 27,
+         "vicinity": "Alea, Aleea Piatra Pinului nr. 612-614, Gura Humorului"
+      },
+      {
+         "geometry": {
+            "location": {
+               "lat": 47.5304572,
+               "lng": 25.8635625
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 47.53179857989272,
+                  "lng": 25.86504462989272
+               },
+               "southwest": {
+                  "lat": 47.52909892010728,
+                  "lng": 25.86234497010728
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/lodging-71.png",
+         "id": "c22819c027041346b45c6bfae8326acdd71e226b",
+         "name": "El Quatro",
+         "opening_hours": {
+            "open_now": true
+         },
+         "photos": [
+            {
+               "height": 2988,
+               "html_attributions": [
+                  "<a href=\"https://maps.google.com/maps/contrib/100691133625905927236\">Vasile Lebada</a>"
+               ],
+               "photo_reference": "CmRaAAAAnXCY7b2c6MPkh6Wg_yCS_RnyCWpNQf6lvrir9z1VKoj1DhmfQ38nh_H3He-dknc2_nkVBXJH92Hvne8o3pnU4jt8boYK8b4pzSP70nlwYWDo6mifD8Kh_dEewPNIae3jEhD1ClnFLtWUPfNLEw77MpT2GhTi8lDvAqD1WDC77oDyoLqbJUaKOg",
+               "width": 5312
+            }
+         ],
+         "place_id": "ChIJrajO5q2oNUcR24FCyvl1j1c",
+         "plus_code": {
+            "compound_code": "GVJ7+5C Voroneț",
+            "global_code": "8GV7GVJ7+5C"
+         },
+         "rating": 4.3,
+         "reference": "ChIJrajO5q2oNUcR24FCyvl1j1c",
+         "scope": "GOOGLE",
+         "types": [
+            "spa",
+            "lodging",
+            "restaurant",
+            "food",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 295,
+         "vicinity": "Strada Voroneț nr. 30, Voroneț"
+      },
+      {
+         "geometry": {
+            "location": {
+               "lat": 47.5554156,
+               "lng": 25.8934333
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 47.55678347989272,
+                  "lng": 25.89474487989272
+               },
+               "southwest": {
+                  "lat": 47.55408382010727,
+                  "lng": 25.89204522010728
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/lodging-71.png",
+         "id": "7670670eee87d6347dc7dc90f06af3f2dfb2d183",
+         "name": "Hotel Carpaţi",
+         "photos": [
+            {
+               "height": 3397,
+               "html_attributions": [
+                  "<a href=\"https://maps.google.com/maps/contrib/108663247945772510557\">A Google User</a>"
+               ],
+               "photo_reference": "CmRaAAAA5jXtVKP_UWU0fenpUdzcpqA9N3VE7Vw2uBmSQR8dTp67-on9ScD0aN4K-gUsvgZYKraMlkX3g1bvNtQn5ja-RKpP-8MdAj-958eICrcVemaPoh03q-B_ahRBidgU5SkXEhBfhr5FMMVJA60xmveEquE5GhRpix9AEqqSE8evYbOPynxjBGbBtA",
+               "width": 2868
+            }
+         ],
+         "place_id": "ChIJW9M4zteoNUcRsXhP4FyPU3Q",
+         "plus_code": {
+            "compound_code": "HV4V+59 Gura Humorului",
+            "global_code": "8GV7HV4V+59"
+         },
+         "rating": 3.6,
+         "reference": "ChIJW9M4zteoNUcRsXhP4FyPU3Q",
+         "scope": "GOOGLE",
+         "types": [
+            "lodging",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 33,
+         "vicinity": "Strada 9 Mai nr 9, Gura Humorului"
+      },
+      {
+         "geometry": {
+            "location": {
+               "lat": 47.5536495,
+               "lng": 25.8807099
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 47.55511077989272,
+                  "lng": 25.88164127989272
+               },
+               "southwest": {
+                  "lat": 47.55241112010728,
+                  "lng": 25.87894162010728
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/lodging-71.png",
+         "id": "0fa3156ffd3a8dbe50f28af1afbdd9956f649ad0",
+         "name": "La Roată",
+         "opening_hours": {
+            "open_now": true
+         },
+         "photos": [
+            {
+               "height": 3694,
+               "html_attributions": [
+                  "<a href=\"https://maps.google.com/maps/contrib/111164167532823898295\">La Roată</a>"
+               ],
+               "photo_reference": "CmRaAAAAAiagt3PnBljZLKfdU5kaqqR88ttQDp_h__vsiYeNYoUlfB7J8i-zPC4YnXOKz85VUwhW1teqfta1d9fN0wshdA_4JRkMTQ5o2DANoWIJAXDa6hyWklir0M7nNwov3trGEhA2MmZCI8A4IKU6BXk5LRnHGhR3j-hMRFyriw8Zplg7jHjn-a1dDg",
+               "width": 5533
+            }
+         ],
+         "place_id": "ChIJ92m9pdSoNUcR0IXvBD8MfWQ",
+         "plus_code": {
+            "compound_code": "HV3J+F7 Gura Humorului",
+            "global_code": "8GV7HV3J+F7"
+         },
+         "rating": 4.7,
+         "reference": "ChIJ92m9pdSoNUcR0IXvBD8MfWQ",
+         "scope": "GOOGLE",
+         "types": [
+            "lodging",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 234,
+         "vicinity": "Strada Wurzburg nr. 21F, Gura Humorului"
+      },
+      {
+         "geometry": {
+            "location": {
+               "lat": 47.51892900000001,
+               "lng": 25.8620038
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 47.52027882989272,
+                  "lng": 25.86361342989272
+               },
+               "southwest": {
+                  "lat": 47.51757917010728,
+                  "lng": 25.86091377010728
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/lodging-71.png",
+         "id": "3e0b102214626847ea8207fc69a3502cf2baaec0",
+         "name": "Perla Bucovinei",
+         "opening_hours": {
+            "open_now": true
+         },
+         "photos": [
+            {
+               "height": 3744,
+               "html_attributions": [
+                  "<a href=\"https://maps.google.com/maps/contrib/112502905660780408246\">Perla Bucovinei</a>"
+               ],
+               "photo_reference": "CmRaAAAAI4BYWqLOnwW4Bk-G2JNRDul7C9losV6tgWp0RQ-ljcwPVYoJNvDDpIzdYRDdSHxZDPTfXSjEGB6Kp11hus3KvKoXAydrbodEsafRQnvONxBH13fDQKx3SQVQkBhBwPHYEhCR5z_ROhXWyMNxkDEKUoswGhTrFQj7ukdKyRFP0K6ZxfiH2DC0Uw",
+               "width": 5616
+            }
+         ],
+         "place_id": "ChIJIxHuJx2mNUcRbO5-W5k5XSQ",
+         "plus_code": {
+            "compound_code": "GV96+HR Voroneț",
+            "global_code": "8GV7GV96+HR"
+         },
+         "rating": 4.5,
+         "reference": "ChIJIxHuJx2mNUcRbO5-W5k5XSQ",
+         "scope": "GOOGLE",
+         "types": [
+            "lodging",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 345,
+         "vicinity": "Strada Voroneț nr. 152B, Voroneț"
+      },
+      {
+         "geometry": {
+            "location": {
+               "lat": 47.5550724,
+               "lng": 25.8909856
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 47.55632097989272,
+                  "lng": 25.89241672989272
+               },
+               "southwest": {
+                  "lat": 47.55362132010728,
+                  "lng": 25.88971707010728
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/lodging-71.png",
+         "id": "d0c8682e82b326a2ae1b8aadd8099de2afea5be9",
+         "name": "Best Western Bucovina-Club De Munte",
+         "opening_hours": {
+            "open_now": true
+         },
+         "photos": [
+            {
+               "height": 350,
+               "html_attributions": [
+                  "<a href=\"https://maps.google.com/maps/contrib/102450147975725961799\">A Google User</a>"
+               ],
+               "photo_reference": "CmRaAAAArci3pc9-DR4DPAacGrhyFYe0RN4gb8SdgcTB5HT-W_AQYjUUFw5qq_JWARaasb3rtz6Rioa-t3H6NgxAAb4aZvK2vRQIlAtato2eb-4B_VxY7I4gThiVRw8YQIGzG-lkEhD9KASwxG7bXS3DPlG27mYAGhS4Hq-jGTbAbpdl9Ss_yVhWaRUwQA",
+               "width": 350
+            }
+         ],
+         "place_id": "ChIJ2eGeONaoNUcRbW_c5XAbiok",
+         "plus_code": {
+            "compound_code": "HV4R+29 Gura Humorului",
+            "global_code": "8GV7HV4R+29"
+         },
+         "rating": 4.5,
+         "reference": "ChIJ2eGeONaoNUcRbW_c5XAbiok",
+         "scope": "GOOGLE",
+         "types": [
+            "lodging",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 11,
+         "vicinity": "4, Bucovina Avenue, Gura Humorului"
+      }
+   ],
+   "status": "OK"
+}

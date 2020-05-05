@@ -27,6 +27,6 @@ public class AppUser {
         this.password = password;
     }
 
-    @ManyToMany(mappedBy = "appUsers")
+    @ManyToMany(mappedBy = "appUsers", cascade = {CascadeType.ALL})
     private List<Faculty> faculties;
 }

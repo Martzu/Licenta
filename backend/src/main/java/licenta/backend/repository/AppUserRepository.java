@@ -1,6 +1,7 @@
 package licenta.backend.repository;
 
 import licenta.backend.model.AppUser;
+import licenta.backend.model.Faculty;
 import org.springframework.data.repository.Repository;
 
 import java.util.List;
@@ -12,7 +13,8 @@ public interface AppUserRepository extends Repository<AppUser, Integer> {
 
     public AppUser save(AppUser appUser);
 
-    public void removeById(Integer id);
+    public Optional<AppUser> findByUsername(String username);
 
+    public void removeAppUserByFacultiesIn(List<Faculty> faculties);
 
 }

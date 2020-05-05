@@ -1,20 +1,38 @@
 import * as React from 'react';
-import {Button, Image, ImageBackground, StyleSheet, Text, View} from "react-native";
+import {Button, Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {TouchableHighlight} from "react-native-gesture-handler";
 import * as Font from "expo-font";
 import {useEffect, useState} from "react";
-
+import Faculty from "../types/Faculty";
+import axios from 'axios';
 
 let Details = require('../icons/Details.png');
 let Cancel = require('../icons/Cancel.png');
 let Location = require('../icons/Location.png');
 let Box = require('../icons/Box.png');
+let FacultyDetails = require('../icons/FacultyDetails.png');
+let Participate = require('../icons/Participate.png');
 
-
+function displayFromText(textToDisplay: string){
+    let result;
+    const splitElements = textToDisplay.split(" ");
+    if(splitElements.length > 4){
+        let abbreviation = '';
+        splitElements.forEach(element => abbreviation += element[0] !== 's' ? element[0].toUpperCase() + '.' : '');
+        result = abbreviation.substring(0, abbreviation.length - 1);
+    }
+    else{
+        result = textToDisplay;
+    }
+    return result;
+}
 
 interface EntryProps{
-    faculty: string;
+    faculty: Faculty;
+    handleBottomButtonClick: (faculty: Faculty) => void;
+    going: boolean;
 }
+
 export default function Entry(props: EntryProps){
 
     return(
@@ -23,26 +41,26 @@ export default function Entry(props: EntryProps){
 
                     <View style={styles.auxTopSection}/>
                     <View style={styles.topSection}>
-                        <Text style={{fontFamily: 'montserrat', color: "#98A3A7"}}>
-                            {props.faculty}
+                        <Text style={styles.text}>
+                            {displayFromText(props.faculty.name)}
                         </Text>
                     </View>
 
 
                     <View style={styles.middleSection}>
-                        <TouchableHighlight>
-                            <Image source={Details} style={styles.button}/>
-                        </TouchableHighlight>
+                        <TouchableOpacity>
+                            <Image source={props.going ? Details : FacultyDetails} style={styles.button}/>
+                        </TouchableOpacity>
 
-                        <TouchableHighlight>
+                        <TouchableOpacity>
                             <Image source={Location} style={styles.button}/>
-                        </TouchableHighlight>
+                        </TouchableOpacity>
                     </View>
 
                     <View style={styles.bottomSection}>
-                        <TouchableHighlight>
-                            <Image source={Cancel} style={styles.cancelButton}/>
-                        </TouchableHighlight>
+                        <TouchableOpacity onPress={() => props.handleBottomButtonClick(props.faculty)}>
+                            <Image source={props.going ? Cancel : Participate} style={props.going ? styles.cancelButton : styles.participateButton}/>
+                        </TouchableOpacity>
                     </View>
 
 
@@ -55,6 +73,21 @@ export default function Entry(props: EntryProps){
 
 const styles = StyleSheet.create({
 
+
+    text:{
+        marginTop: 7,
+        fontFamily: 'montserrat',
+        color: "#98A3A7",
+        textAlign: 'center',
+        marginLeft: 10,
+        marginRight: 10
+    },
+
+    participateButton:{
+        height: 60,
+        width: 200
+    },
+
     container:{
         display: 'flex',
         flex: 0.4,
@@ -63,7 +96,7 @@ const styles = StyleSheet.create({
         marginLeft: 50,
         marginTop: 30,
         marginRight: 50,
-        height: 250,
+        height: 270,
         backgroundColor: "#343434"
     },
 

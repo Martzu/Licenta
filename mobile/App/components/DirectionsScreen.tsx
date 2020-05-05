@@ -22,7 +22,7 @@ interface directionsScreenProps{
     destination: string,
     destinationCoords: PlaceCoordinate,
     originCoords: PlaceCoordinate
-};
+}
 
 export default function DirectionsScreen(props: directionsScreenProps){
 
