@@ -5,6 +5,8 @@ import * as Font from "expo-font";
 import {useEffect, useState} from "react";
 import Faculty from "../types/Faculty";
 import axios from 'axios';
+import LocationData from "../types/LocationData";
+import displayFromText from '../constants/Constants';
 
 let Details = require('../icons/Details.png');
 let Cancel = require('../icons/Cancel.png');
@@ -13,22 +15,11 @@ let Box = require('../icons/Box.png');
 let FacultyDetails = require('../icons/FacultyDetails.png');
 let Participate = require('../icons/Participate.png');
 
-function displayFromText(textToDisplay: string){
-    let result;
-    const splitElements = textToDisplay.split(" ");
-    if(splitElements.length > 4){
-        let abbreviation = '';
-        splitElements.forEach(element => abbreviation += element[0] !== 's' ? element[0].toUpperCase() + '.' : '');
-        result = abbreviation.substring(0, abbreviation.length - 1);
-    }
-    else{
-        result = textToDisplay;
-    }
-    return result;
-}
+
 
 interface EntryProps{
     faculty: Faculty;
+    handleFacultyLocationPress: (destinations: LocationData[]) => void;
     handleBottomButtonClick: (faculty: Faculty) => void;
     going: boolean;
 }
@@ -52,7 +43,11 @@ export default function Entry(props: EntryProps){
                             <Image source={props.going ? Details : FacultyDetails} style={styles.button}/>
                         </TouchableOpacity>
 
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => props.handleFacultyLocationPress([
+                            {
+                                location: {latitude: props.faculty.latitude, longitude: props.faculty.longitude, title: props.faculty.name},
+                                accommodationDetails: {title: '0', distance: '0', address: '0'}
+                            }])}>
                             <Image source={Location} style={styles.button}/>
                         </TouchableOpacity>
                     </View>

@@ -24,7 +24,7 @@ export default function FacultySelectionAcc(props: FacultySelectionAccProps){
     }
 
     function accommodationsFromRegion(){
-        return `https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyBDlY8RJxrk2UVf2dSe5Z9Ults6ylGqUVE&location=${props.coordinates.latitude},${props.coordinates.longitude}&radius=5000&keyword=hotel`;
+        return `https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyBDlY8RJxrk2UVf2dSe5Z9Ults6ylGqUVE&location=${props.coordinates.latitude},${props.coordinates.longitude}&radius=800&keyword=hotel`;
     }
 
     async function handleFacultyClick() {
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
 
     text:{
         color: "#98A3A7",
-        fontSize: 22,
+        fontSize: 20,
         fontFamily: 'montserrat'
     },
 

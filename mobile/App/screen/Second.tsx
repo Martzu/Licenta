@@ -3,7 +3,7 @@ import {
     StyleSheet,
     TouchableHighlight,
     View,
-    Animated
+    Animated, ActivityIndicator
 } from 'react-native';
 import * as React from 'react';
 import {useEffect, useState} from "react";
@@ -41,7 +41,7 @@ const facultyCoordinates: MarkerCoordinates[] = [
     {latitude: 47.35, longitude: 25.25, title: 'Dorna'}
 ];
 
-export default function Second({navigation}){
+export default function Second(){
 
     function navigate(navigation){
         setFirstMapsIcon(!firstMapsIcon);
@@ -98,22 +98,14 @@ export default function Second({navigation}){
 
             const [unAttendingFacultiesResponse, userAdmissionsResponse] = await axios.all([unAttendingFacultiesRequest(), userAdmissionsRequest()]);
             setFaculties(unAttendingFacultiesResponse.data);
+            setFacultiesName(unAttendingFacultiesResponse.data.map(faculty => faculty.name));
             setUserAdmissions(userAdmissionsResponse.data);
-
+            setRender(true);
         })();
-
-        setFirstMapsIcon(true);
-        setFirstAccIcon(true);
-        setFirstUniIcon(true);
 
     },[]);
 
     function changeSize(source:string){
-
-        //setCurrentSelected(source);
-        //setEnlarge(!enlarge);
-
-        let shrunk = new Animated.Value(70);
 
         source === "uni" ?
         Animated.parallel([
@@ -228,13 +220,19 @@ export default function Second({navigation}){
                 ]).start();
     }
 
-
+    function handleFacultyLocationPress(destinations: LocationData[]){
+        setFirstMapsIcon(false);
+        setDestinations(destinations);
+    }
 
     const[destinations, setDestinations] = useState<LocationData[]>(destinationsStartData);
 
     const[currentSelected, setCurrentSelected] = useState('');
 
+    const[render, setRender] = useState(false);
+
     const[faculties, setFaculties] = useState<Faculty[]>([]);
+    const[facultiesName, setFacultiesName] = useState<string[]>([]);
     const[userAdmissions, setUserAdmissions] = useState<Faculty[]>([]);
 
     const[enlargeAnimationUni] = useState(new Animated.Value(70));
@@ -251,6 +249,9 @@ export default function Second({navigation}){
     const [firstUniIcon, setFirstUniIcon] = useState(false);
     const [firstCalIcon, setFirstCalIcon] = useState(true);
 
+    if(!render) {
+        return <ActivityIndicator/>
+    }
     return (
 
         <View style={styles.container}>
@@ -258,15 +259,10 @@ export default function Second({navigation}){
 
             <Animated.View style={styles.topContainer}>
 
-                <View style={styles.buttonContainer}>
-                <TouchableHighlight onPress={() => handleButtonPress('maps')} style={styles.topContainerButtonHighlight}>
-                    <Animated.Image source={firstMapsIcon && mapsOff || !firstMapsIcon && mapsOn} style={{borderRadius: 50, width: enlargeAnimationMaps, height: enlargeAnimationMaps}}/>
-                </TouchableHighlight>
-                </View>
 
                 <View style={styles.buttonContainer}>
                 <TouchableHighlight onPress={() => handleButtonPress('uni')} style={styles.topContainerButtonHighlight}>
-                    <Animated.Image source={!firstUniIcon && uniOn || firstUniIcon && uniOff} style={{borderRadius: 50, width: enlargeAnimationUni, height: enlargeAnimationUni}}/>
+                    <Animated.Image source={firstUniIcon && uniOff || !firstUniIcon && uniOn} style={{borderRadius: 50, width: enlargeAnimationUni, height: enlargeAnimationUni}}/>
                 </TouchableHighlight>
                 </View>
 
@@ -286,9 +282,9 @@ export default function Second({navigation}){
 
             <Animated.View style={styles.middleContainer}>
                 {!firstMapsIcon && <Home destinations={destinations} currentLocation={currentLocation}/> ||
-                    !firstCalIcon && <CalendarScreen/> ||
-                    !firstAccIcon && <Accommodation closeAccommodation={setFirstAccIcon} displayMap={setFirstMapsIcon} setAccommodationDetails={setDestinations} coordinates={facultyCoordinates} setCurrentLocation={setCurrentLocation}/> ||
-                    <Admissions faculties={faculties} userAdmissions={userAdmissions} setFaculties={setFaculties} setUserAdmissions={setUserAdmissions}/>
+                    !firstCalIcon && <CalendarScreen userAdmissions={userAdmissions}/> ||
+                    !firstAccIcon && <Accommodation closeAccommodation={setFirstAccIcon} displayMap={setFirstMapsIcon} setAccommodationDetails={setDestinations} setCurrentLocation={setCurrentLocation} faculties={[...faculties, ...userAdmissions]}/> ||
+                    <Admissions faculties={faculties} userAdmissions={userAdmissions} setFaculties={setFaculties} setUserAdmissions={setUserAdmissions} handleFacultyLocationPress={handleFacultyLocationPress}/>
                 }
 
 

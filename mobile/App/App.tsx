@@ -3,6 +3,7 @@ import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
 import MyStack from "./container/MyStack";
 import * as Font from "expo-font";
 import Expo from 'expo';
+import Second from "./screen/Second";
 
 
 
@@ -22,7 +23,7 @@ export default function App() {
     return <ActivityIndicator/>
   }
   return (
-      <MyStack/>
+      <Second/>
   );
 }
 

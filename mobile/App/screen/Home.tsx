@@ -37,10 +37,6 @@ import LocationData from "../types/LocationData";
 let currentLocationMarker = require('../icons/CurrentLocationMarker.png');
 let otherLocationMarker = require('../icons/OtherLocationMarker.png');
 
-const testCoordinates = {
-    latitude: 47.55,
-    longitude: 25.9
-};
 
 async function getLocation(){
     let currentLocation: CurrentLocation = {coords: undefined, timestamp: 0};
@@ -286,6 +282,7 @@ export default function Home(props: MapsProps){
             setViewDirections(!viewDirections);
             setShowDirections(!showDirections);
         }
+        setRegion(destinationRegion);
 
     }
 
@@ -334,9 +331,11 @@ export default function Home(props: MapsProps){
         //setMarkerCoordinates({latitude: currentLocation.coords.latitude, longitude: currentLocation.coords.longitude, title: 'Hello'});
     };
 
-    /*if(!render){
-        return <ActivityIndicator/>
-    }*/
+
+
+    useEffect(() => {
+        setShowDirections(false);
+    },[viewDirections]);
     return (
         <View style={styles.mapContainer}>
             <View>
@@ -362,7 +361,7 @@ export default function Home(props: MapsProps){
                     }
 
                     {
-                        showDirections === true ? <MapViewDirections origin={region} destination={destination} mode={mode === 1 ? DRIVING : mode === 2 ? WALKING : BICYCLING} apikey={GOOGLE_API_KEY} strokeWidth={3} strokeColor="hotpink"/> :
+                        showDirections === true ? <MapViewDirections origin={markerCoordinates} destination={destination} mode={mode === 1 ? DRIVING : mode === 2 ? WALKING : BICYCLING} apikey={GOOGLE_API_KEY} strokeWidth={3} strokeColor="hotpink"/> :
                             <View/>
                     }
 
@@ -376,7 +375,7 @@ export default function Home(props: MapsProps){
 
             <View style={styles.bottomContainer}>
                 { visible && <AccommodationDetails address={'stefan cel mare 91'} distance={'2.7 km'} title={'casa cu doi brazi'}/> ||
-                    viewDirections && props.destinations.length === 1 && <DirectionsScreen destinationCoords={testCoordinates} destination={destinationName} originCoords={region} showDirections={setShowDirections} setMode={setMode}/>
+                    viewDirections && props.destinations.length === 1 && <DirectionsScreen destinationCoords={props.destinations[0].location} destination={destinationName} originCoords={markerCoordinates} showDirections={setShowDirections} setMode={setMode}/>
                                     || viewAccDetails && <AccommodationDetails title={title} distance={distance} address={address}/>
                 }
             </View>

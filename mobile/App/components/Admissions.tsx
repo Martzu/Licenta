@@ -6,6 +6,7 @@ import * as Font from 'expo-font';
 import {useEffect, useState} from "react";
 import Faculty from "../types/Faculty";
 import axios from "axios";
+import LocationData from "../types/LocationData";
 
 let AvailableOff = require('../icons/Available.png');
 let AvailableOn = require('../icons/AvailableOn.png');
@@ -17,6 +18,7 @@ interface AdmissionsProps{
     faculties: Faculty[],
     setFaculties: (faculties: Faculty[]) => void,
     setUserAdmissions: (userAdmissions: Faculty[]) => void,
+    handleFacultyLocationPress: (destinations: LocationData[]) => void,
     userAdmissions: Faculty[]
 }
 
@@ -79,7 +81,7 @@ export default function Admissions(props: AdmissionsProps){
 
             {
                 faculties.map((faculty, index) =>
-                        <Entry faculty={faculty} key={index} going={goingOn} handleBottomButtonClick={handleCancelOrParticipate}/>
+                        <Entry faculty={faculty} key={index} going={goingOn} handleBottomButtonClick={handleCancelOrParticipate} handleFacultyLocationPress={props.handleFacultyLocationPress}/>
                     )
             }
         </ScrollView>

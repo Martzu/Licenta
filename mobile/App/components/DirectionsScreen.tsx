@@ -38,13 +38,13 @@ export default function DirectionsScreen(props: directionsScreenProps){
 
             const drivingResult: any = await axios.get(url + `origin=${origin}&destination=${destination}&key=${GOOGLE_API_KEY}`);
             setDrivingTime(drivingResult.data.routes[0].legs[0].duration.text);
-
+            debugger
             const walkingResult: any = await axios.get(url + `destination=${destination}&mode=walking&key=${GOOGLE_API_KEY}&origin=${origin}`);
             setWalkingTime(walkingResult.data.routes[0].legs[0].duration.text);
-
+            debugger
             const bicycleResult: any = await axios.get(url + `destination=${destination}&mode=bicycling&key=${GOOGLE_API_KEY}&origin=${origin}`);
             setBicycleTime(bicycleResult.data.routes[0].legs[0].duration.text);
-
+            debugger
 
         })();
     },[]);
