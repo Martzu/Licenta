@@ -5,6 +5,9 @@ import LocationData from "../types/LocationData";
 import MarkerCoordinates from "../types/MarkerCoordinates";
 import Faculty from "../types/Faculty";
 import displayFromText from '../constants/Constants';
+import {useState} from "react";
+import AccommodationMainPage from "./AcommodationMainPage";
+import AccommodationForm from "./AccommodationForm";
 
 
 
@@ -25,18 +28,28 @@ export default function Accommodation(props: AccommodationProps){
         props.closeAccommodation(true);
     }
 
+    const [displayPages, setDisplayPages] = useState<boolean[]>([true, false, false]);
 
     return (
-        <ScrollView>
-            <Text style={styles.text}>
-                Please tap a faculty. {'\n'} We will give you the closest accommodations in the areas!
-            </Text>
+        <View>
             {
-                props.faculties.map((faculty, index) =>
-                    <FacultySelectionAcc faculty={displayFromText(faculty.name)} key={index} displayNavigate={displayNavigate} setAccommodationDetails={props.setAccommodationDetails} coordinates={{longitude: faculty.longitude, latitude: faculty.latitude, title: ''}} setCurrentLocation={props.setCurrentLocation}/>
-                )
+                displayPages[1] && <ScrollView>
+                    <Text style={styles.text}>
+                        Please tap a faculty. {'\n'} We will give you the closest accommodations in the areas!
+                    </Text>
+                    {
+                        props.faculties.map((faculty, index) =>
+                            <FacultySelectionAcc faculty={displayFromText(faculty.name)} key={index} displayNavigate={displayNavigate} setAccommodationDetails={props.setAccommodationDetails} coordinates={{longitude: faculty.longitude, latitude: faculty.latitude, title: ''}} setCurrentLocation={props.setCurrentLocation}/>
+                        )
+                    }
+                </ScrollView> ||
+
+                displayPages[0] && <AccommodationMainPage setDisplayPages={setDisplayPages}/> ||
+
+                displayPages[2] && <AccommodationForm setDisplayPages={setDisplayPages}/>
             }
-        </ScrollView>
+
+        </View>
 
     );
 };
