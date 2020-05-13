@@ -14,7 +14,7 @@ import CurrentLocation from "../types/CurrentLocation";
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 import * as React from 'react';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useRef} from 'react';
 import Mapview, {Region} from 'react-native-maps';
 import {Marker} from "react-native-maps";
 import MarkerCoordinates from "../types/MarkerCoordinates";
@@ -255,6 +255,8 @@ interface MapsProps{
 
 export default function Home(props: MapsProps){
 
+    const mapRef = useRef(null);
+
     const [visible, setVisible] = useState(false);
 
     const [render, setRender] = useState(false);
@@ -274,7 +276,9 @@ export default function Home(props: MapsProps){
             setTitle(destination.accommodationDetails.title);
             setDistance(destination.accommodationDetails.distance);
             setAddress(destination.accommodationDetails.address);
+            setPhoneNumber(destination.accommodationDetails.phoneNumber);
             setViewAccDetails(!viewAccDetails);
+            setWebsite(destination.accommodationDetails.website);
         }
         else{
             setDestinationName(destination.location.title);
@@ -282,6 +286,9 @@ export default function Home(props: MapsProps){
             setViewDirections(!viewDirections);
             setShowDirections(!showDirections);
         }
+
+        mapRef.current.animateCamera({center:destinationRegion}, {duration: 2000});
+
         setRegion(destinationRegion);
 
     }
@@ -289,6 +296,10 @@ export default function Home(props: MapsProps){
     const [viewAccDetails, setViewAccDetails] = useState(false);
 
     const [title, setTitle] = useState('');
+
+    const [phoneNumber, setPhoneNumber] = useState('');
+
+    const [website, setWebsite] = useState('');
 
     const [distance, setDistance] = useState('');
 
@@ -339,7 +350,7 @@ export default function Home(props: MapsProps){
     return (
         <View style={styles.mapContainer}>
             <View>
-                <Mapview style={styles.map} region={region} customMapStyle={customMapStyle}>
+                <Mapview style={styles.map} region={region} customMapStyle={customMapStyle} ref={mapRef}>
 
                     <Marker
                         onPress={() => setVisible(!visible)}
@@ -374,9 +385,9 @@ export default function Home(props: MapsProps){
             <View style={styles.middleContainer}/>
 
             <View style={styles.bottomContainer}>
-                { visible && <AccommodationDetails address={'stefan cel mare 91'} distance={'2.7 km'} title={'casa cu doi brazi'}/> ||
+                { visible && <AccommodationDetails address={'stefan cel mare 91'} distance={'2.7 km'} title={'casa cu doi brazi'} phoneNumber={''} website={''}/> ||
                     viewDirections && props.destinations.length === 1 && <DirectionsScreen destinationCoords={props.destinations[0].location} destination={destinationName} originCoords={markerCoordinates} showDirections={setShowDirections} setMode={setMode}/>
-                                    || viewAccDetails && <AccommodationDetails title={title} distance={distance} address={address}/>
+                                    || viewAccDetails && <AccommodationDetails title={title} distance={distance} address={address} phoneNumber={phoneNumber} website={website}/>
                 }
             </View>
 

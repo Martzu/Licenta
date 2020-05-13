@@ -9,23 +9,19 @@ import {useState} from "react";
 import AccommodationMainPage from "./AcommodationMainPage";
 import AccommodationForm from "./AccommodationForm";
 
-
-
-
-
 interface AccommodationProps{
     setCurrentLocation: (currentLocation: MarkerCoordinates) => void,
     displayMap: (show: boolean) => void,
-    closeAccommodation: (show: boolean) => void,
     setAccommodationDetails: (accommodationDetails: LocationData[]) => void,
-    faculties: Faculty[]
+    faculties: Faculty[],
+    setMultiplier: (multiplier: number) => void
 }
 
 export default function Accommodation(props: AccommodationProps){
 
     function displayNavigate(){
         props.displayMap(false);
-        props.closeAccommodation(true);
+        //props.closeAccommodation(true);
     }
 
     const [displayPages, setDisplayPages] = useState<boolean[]>([true, false, false]);
@@ -46,7 +42,7 @@ export default function Accommodation(props: AccommodationProps){
 
                 displayPages[0] && <AccommodationMainPage setDisplayPages={setDisplayPages}/> ||
 
-                displayPages[2] && <AccommodationForm setDisplayPages={setDisplayPages}/>
+                displayPages[2] && <AccommodationForm setDisplayPages={setDisplayPages} setMultiplier={props.setMultiplier}/>
             }
 
         </View>

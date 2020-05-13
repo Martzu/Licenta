@@ -21,6 +21,7 @@ interface EntryProps{
     faculty: Faculty;
     handleFacultyLocationPress: (destinations: LocationData[]) => void;
     handleBottomButtonClick: (faculty: Faculty) => void;
+    setOverlayVisible: (visible: boolean) => void;
     going: boolean;
 }
 
@@ -39,7 +40,7 @@ export default function Entry(props: EntryProps){
 
 
                     <View style={styles.middleSection}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => props.setOverlayVisible(true)}>
                             <Image source={props.going ? Details : FacultyDetails} style={styles.button}/>
                         </TouchableOpacity>
 

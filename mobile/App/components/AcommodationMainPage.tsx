@@ -1,5 +1,7 @@
-import {Image, Text, TouchableOpacity, View, StyleSheet, KeyboardAvoidingView, StatusBar} from "react-native";
+import {Image, Text, TouchableOpacity, View, StyleSheet, KeyboardAvoidingView, StatusBar, Dimensions} from "react-native";
 import * as React from "react";
+
+
 
 let NoAccommodation = require('../icons/NoAcommodation.png');
 let GotAccommodation = require('../icons/GotAcommodation.png');
@@ -34,7 +36,7 @@ const styles = StyleSheet.create({
     container:{
         display: 'flex',
         alignItems: 'center',
-        flexDirection: 'column'
+        flexDirection: 'column',
     },
 
     text:{

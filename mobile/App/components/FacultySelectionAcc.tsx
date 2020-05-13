@@ -5,7 +5,6 @@ import axios from 'axios';
 import AccommodationData from "../types/AccommodationData";
 import MarkerCoordinates from "../types/MarkerCoordinates";
 import {GOOGLE_API_KEY} from "../constants/Constants";
-import Coords from "../types/Coords";
 
 let Faculty = require('../icons/FacultySelection.png');
 
@@ -27,14 +26,29 @@ export default function FacultySelectionAcc(props: FacultySelectionAccProps){
         return `https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyBDlY8RJxrk2UVf2dSe5Z9Ults6ylGqUVE&location=${props.coordinates.latitude},${props.coordinates.longitude}&radius=800&keyword=hotel`;
     }
 
+    async function getWebsite(accommodationId: string): Promise<string>{
+        const result = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?key=${GOOGLE_API_KEY}&place_id=${accommodationId}&fields=website`);
+        return result.data.result['website'];
+    }
+
+    async function getPhoneNumber(accommodationId: string): Promise<string> {
+
+        const result = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?key=${GOOGLE_API_KEY}&place_id=${accommodationId}&fields=formatted_phone_number`);
+        return result.data.result['formatted_phone_number'];
+    }
+
     async function handleFacultyClick() {
         let data: LocationData[] = [];
         props.setCurrentLocation(props.coordinates);
         const accommodationResult: any = await axios.get(accommodationsFromRegion());
-        accommodationResult.data.results.map(place => {
-           let accommodationDetail: AccommodationData = {title: '', address: '', distance: ''};
+        console.log(accommodationResult.data);
+        accommodationResult.data.results.map(async place => {
+           let accommodationDetail: AccommodationData = {title: '', address: '', distance: '', phoneNumber: '', website: ''};
            accommodationDetail.title = place.name;
            accommodationDetail.address = place.vicinity;
+           accommodationDetail.phoneNumber = await getPhoneNumber(place.place_id);
+           accommodationDetail.website = await getWebsite(place.place_id);
+           console.log(accommodationDetail.phoneNumber);
            let accommodationLocation: MarkerCoordinates = {latitude: place.geometry.location.lat, longitude: place.geometry.location.lng, title: accommodationDetail.title};
            //let accommodationLocation = place.geometry.location;
            (async (accommodationDetail : AccommodationData) => {

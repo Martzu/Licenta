@@ -249,13 +249,15 @@ export default function Second(){
     const [firstUniIcon, setFirstUniIcon] = useState(false);
     const [firstCalIcon, setFirstCalIcon] = useState(true);
 
+    const [multiplier, setMultiplier] = useState(1);
+
     if(!render) {
         return <ActivityIndicator/>
     }
     return (
 
         <View style={styles.container}>
-            <View style={styles.statusBar}/>
+            <View style={{height: multiplier * StatusBar.currentHeight, backgroundColor: '#343434'}}/>
 
             <Animated.View style={styles.topContainer}>
 
@@ -283,7 +285,7 @@ export default function Second(){
             <Animated.View style={styles.middleContainer}>
                 {!firstMapsIcon && <Home destinations={destinations} currentLocation={currentLocation}/> ||
                     !firstCalIcon && <CalendarScreen userAdmissions={userAdmissions}/> ||
-                    !firstAccIcon && <Accommodation closeAccommodation={setFirstAccIcon} displayMap={setFirstMapsIcon} setAccommodationDetails={setDestinations} setCurrentLocation={setCurrentLocation} faculties={[...faculties, ...userAdmissions]}/> ||
+                    !firstAccIcon && <Accommodation displayMap={setFirstMapsIcon} setAccommodationDetails={setDestinations} setCurrentLocation={setCurrentLocation} faculties={[...faculties, ...userAdmissions]} setMultiplier={setMultiplier}/> ||
                     <Admissions faculties={faculties} userAdmissions={userAdmissions} setFaculties={setFaculties} setUserAdmissions={setUserAdmissions} handleFacultyLocationPress={handleFacultyLocationPress}/>
                 }
 
@@ -306,9 +308,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    statusBar:{
-        height: StatusBar.currentHeight,
-    },
+
     image:{
         width: 50,
         height: 50,

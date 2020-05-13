@@ -7,6 +7,8 @@ export default interface Faculty{
     signUpPlace: string,
     signUpDate: string,
     examDate: string,
-    resultsDate: string
+    resultsDate: string,
+    facultyAdmissionFee: number,
+    universityAdmissionFee: number
 
 }
