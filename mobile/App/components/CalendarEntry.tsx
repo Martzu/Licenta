@@ -1,4 +1,4 @@
-import {Image, Text, View, StyleSheet, ImageBackground} from "react-native";
+import {Image, Text, View, StyleSheet, ImageBackground, TouchableHighlight, TouchableOpacity} from "react-native";
 import * as React from "react";
 import CalendarEntryProps from "../types/CalendarEntryProps";
 
@@ -9,21 +9,26 @@ let description = require('../icons/Description.png');
 
 export default function CalendarEntry(props: CalendarEntryProps){
     return (
-       <View style={styles.container}>
-            <ImageBackground source={date} style={styles.date}>
-                <Text style={[styles.dateTextDay, {color: props.textColor}]}>
-                    {props.dayNumber}
-                </Text>
-                <Text style={[styles.dateTextMonth, {color: props.textColor}]}>
-                    {props.month}
-                </Text>
-            </ImageBackground>
-            <ImageBackground source={description} style={styles.description}>
-                <Text style={[styles.descriptionText, {color: props.textColor}]}>
-                    {props.description}
-                </Text>
-            </ImageBackground>
-       </View>
+        <TouchableHighlight onPress={() => {
+            props.setCurrentSelectedDayData(props.wholeDescription);
+            props.setDisplayCalendarDayDate(true);
+        }} underlayColor={'rgba(255, 255,0,0.0)'}>
+            <View style={styles.container}>
+                <ImageBackground source={date} style={styles.date}>
+                    <Text style={[styles.dateTextDay, {color: props.textColor}]}>
+                        {props.dayNumber}
+                    </Text>
+                    <Text style={[styles.dateTextMonth, {color: props.textColor}]}>
+                        {props.month}
+                    </Text>
+                </ImageBackground>
+                <ImageBackground source={description} style={styles.description}>
+                    <Text style={[styles.descriptionText, {color: props.textColor}]}>
+                        {props.description}
+                    </Text>
+                </ImageBackground>
+            </View>
+        </TouchableHighlight>
 
     );
 };

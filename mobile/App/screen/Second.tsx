@@ -16,6 +16,7 @@ import Home from "./Home";
 import LocationData from "../types/LocationData";
 import Faculty from "../types/Faculty";
 import axios from 'axios';
+import UserAccommodation from "../types/UserAccommodation";
 
 let uniOn = require('../icons/UniOn.png');
 let uniOff = require('../icons/UniOff.png');
@@ -30,23 +31,12 @@ let calOff = require('../icons/CalendarOff.png');
 //47.516924599 25.8585465658
 const destinationsStartData:  LocationData[] = [
 
-    {location: {latitude: 47.516924599, longitude: 25.8585465658, title: 'Voronet'}, accommodationDetails: {title: "", address: "", distance: ""}}
+    {location: {latitude: 47.516924599, longitude: 25.8585465658, title: 'Voronet'}, accommodationDetails: {title: "", address: "", distance: "", phoneNumber: '', website: ''}}
 
 ];
 
-const facultyCoordinates: MarkerCoordinates[] = [
-
-    {latitude: 47.63333, longitude: 26.25, title: 'Suceava'},
-    {latitude: 47.45, longitude: 26.3, title: 'Falticeni'},
-    {latitude: 47.35, longitude: 25.25, title: 'Dorna'}
-];
 
 export default function Second(){
-
-    function navigate(navigation){
-        setFirstMapsIcon(!firstMapsIcon);
-        navigation.navigate('Home');
-    }
 
     function handleButtonPress(source: string) {
         changeSize(source);
@@ -95,9 +85,11 @@ export default function Second(){
 
             const unAttendingFacultiesRequest = () => axios.post('http://192.168.1.5:8080/unattending', {username: 'a'});
             const userAdmissionsRequest = () => axios.post('http://192.168.1.5:8080/user/faculties', {username: 'a'});
+            const userAccommodationRequest = () => axios.post('http://192.168.1.5:8080/userAccommodation', {username: 'a'});
 
-            const [unAttendingFacultiesResponse, userAdmissionsResponse] = await axios.all([unAttendingFacultiesRequest(), userAdmissionsRequest()]);
+            const [unAttendingFacultiesResponse, userAdmissionsResponse, userAccommodationResponse] = await axios.all([unAttendingFacultiesRequest(), userAdmissionsRequest(), userAccommodationRequest()]);
             setFaculties(unAttendingFacultiesResponse.data);
+            setUserAccommodation(userAccommodationResponse.data);
             setFacultiesName(unAttendingFacultiesResponse.data.map(faculty => faculty.name));
             setUserAdmissions(userAdmissionsResponse.data);
             setRender(true);
@@ -225,11 +217,14 @@ export default function Second(){
         setDestinations(destinations);
     }
 
-    const[destinations, setDestinations] = useState<LocationData[]>(destinationsStartData);
+    const [userAccommodation, setUserAccommodation] = useState<UserAccommodation>({name: '', address: '', checkIn: '', checkOut: ''});
+
+    const[destinations, setDestinations] = useState<LocationData[]>([]);
 
     const[currentSelected, setCurrentSelected] = useState('');
 
     const[render, setRender] = useState(false);
+    const [renderMaps, setRenderMaps] = useState(false);
 
     const[faculties, setFaculties] = useState<Faculty[]>([]);
     const[facultiesName, setFacultiesName] = useState<string[]>([]);
@@ -284,8 +279,8 @@ export default function Second(){
 
             <Animated.View style={styles.middleContainer}>
                 {!firstMapsIcon && <Home destinations={destinations} currentLocation={currentLocation}/> ||
-                    !firstCalIcon && <CalendarScreen userAdmissions={userAdmissions}/> ||
-                    !firstAccIcon && <Accommodation displayMap={setFirstMapsIcon} setAccommodationDetails={setDestinations} setCurrentLocation={setCurrentLocation} faculties={[...faculties, ...userAdmissions]} setMultiplier={setMultiplier}/> ||
+                    !firstCalIcon && <CalendarScreen userAdmissions={userAdmissions} userAccommodation={userAccommodation}/> ||
+                    !firstAccIcon && <Accommodation displayMap={setFirstMapsIcon} setAccommodationDetails={setDestinations} setCurrentLocation={setCurrentLocation} faculties={[...faculties, ...userAdmissions]} setMultiplier={setMultiplier} setUserAccommodation={setUserAccommodation}/> ||
                     <Admissions faculties={faculties} userAdmissions={userAdmissions} setFaculties={setFaculties} setUserAdmissions={setUserAdmissions} handleFacultyLocationPress={handleFacultyLocationPress}/>
                 }
 

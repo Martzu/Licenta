@@ -37,29 +37,31 @@ export default function FacultySelectionAcc(props: FacultySelectionAccProps){
         return result.data.result['formatted_phone_number'];
     }
 
+    async function getAccommodationData(place): Promise<LocationData>{
+        let data: LocationData;
+        let accommodationDetail: AccommodationData = {title: '', address: '', distance: '', phoneNumber: '', website: ''};
+        accommodationDetail.title = place.name;
+        accommodationDetail.address = place.vicinity;
+        accommodationDetail.phoneNumber = await getPhoneNumber(place.place_id);
+        accommodationDetail.website = await getWebsite(place.place_id);
+        let accommodationLocation: MarkerCoordinates = {latitude: place.geometry.location.lat, longitude: place.geometry.location.lng, title: accommodationDetail.title};
+
+        const directionResult = await axios.get(directionsCallForDistance(accommodationLocation.latitude, accommodationLocation.longitude));
+        accommodationDetail.distance = directionResult.data.routes[0].legs[0].distance.text;
+
+        data = {accommodationDetails: accommodationDetail, location: accommodationLocation};
+        return data;
+    }
+
+
     async function handleFacultyClick() {
-        let data: LocationData[] = [];
+        let data: LocationData[];
         props.setCurrentLocation(props.coordinates);
         const accommodationResult: any = await axios.get(accommodationsFromRegion());
-        console.log(accommodationResult.data);
-        accommodationResult.data.results.map(async place => {
-           let accommodationDetail: AccommodationData = {title: '', address: '', distance: '', phoneNumber: '', website: ''};
-           accommodationDetail.title = place.name;
-           accommodationDetail.address = place.vicinity;
-           accommodationDetail.phoneNumber = await getPhoneNumber(place.place_id);
-           accommodationDetail.website = await getWebsite(place.place_id);
-           console.log(accommodationDetail.phoneNumber);
-           let accommodationLocation: MarkerCoordinates = {latitude: place.geometry.location.lat, longitude: place.geometry.location.lng, title: accommodationDetail.title};
-           //let accommodationLocation = place.geometry.location;
-           (async (accommodationDetail : AccommodationData) => {
-               const directionResult = await axios.get(directionsCallForDistance(accommodationLocation.latitude, accommodationLocation.longitude));
-               accommodationDetail.distance = directionResult.data.routes[0].legs[0].distance.text;
-           })(accommodationDetail);
-
-           data[data.length] = {accommodationDetails: accommodationDetail, location: accommodationLocation};
-        });
+        data = await Promise.all(accommodationResult.data.results.map(async (place): Promise<LocationData> => {
+            return await getAccommodationData(place);
+        }));
         props.setAccommodationDetails(data);
-        debugger;
         props.displayNavigate();
 
 

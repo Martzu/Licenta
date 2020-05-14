@@ -266,6 +266,9 @@ export default function Home(props: MapsProps){
             await computeLocation(props.destinations.length);
             setRender(true);
         })();
+
+        console.log('Pe maps');
+        console.log(props.destinations.length);
     },[]);
 
 
@@ -277,7 +280,8 @@ export default function Home(props: MapsProps){
             setDistance(destination.accommodationDetails.distance);
             setAddress(destination.accommodationDetails.address);
             setPhoneNumber(destination.accommodationDetails.phoneNumber);
-            setViewAccDetails(!viewAccDetails);
+            //setViewAccDetails(!viewAccDetails);
+            setViewAccDetails(true);
             setWebsite(destination.accommodationDetails.website);
         }
         else{
@@ -292,6 +296,8 @@ export default function Home(props: MapsProps){
         setRegion(destinationRegion);
 
     }
+
+
 
     const [viewAccDetails, setViewAccDetails] = useState(false);
 
@@ -333,13 +339,8 @@ export default function Home(props: MapsProps){
         }
 
         setRegion({latitude: latitude, longitude: longitude, latitudeDelta: 0.03, longitudeDelta:0.02 });
-        setMarkerCoordinates({latitude, longitude, title: 'Hello'});
+        setMarkerCoordinates({latitude, longitude, title: props.currentLocation.title});
 
-
-        const test = markerCoordinates;
-        debugger;
-        //setRegion({latitude: currentLocation.coords.latitude, longitude: currentLocation.coords.longitude, latitudeDelta: 0.03, longitudeDelta:0.02 });
-        //setMarkerCoordinates({latitude: currentLocation.coords.latitude, longitude: currentLocation.coords.longitude, title: 'Hello'});
     };
 
 
@@ -347,14 +348,15 @@ export default function Home(props: MapsProps){
     useEffect(() => {
         setShowDirections(false);
     },[viewDirections]);
+
+
     return (
         <View style={styles.mapContainer}>
             <View>
                 <Mapview style={styles.map} region={region} customMapStyle={customMapStyle} ref={mapRef}>
 
                     <Marker
-                        onPress={() => setVisible(!visible)}
-                        pinColor={'blue'}
+                        onPress={() => handleMarkerPress({location: {latitude: markerCoordinates.latitude, longitude: markerCoordinates.longitude, title: ''}, accommodationDetails: {title: markerCoordinates.title, address: '', phoneNumber: '', website: '', distance: ''} })}
                         key={1}
                         coordinate={markerCoordinates}>
 
@@ -376,8 +378,6 @@ export default function Home(props: MapsProps){
                             <View/>
                     }
 
-
-
                 </Mapview>
             </View>
 
@@ -385,7 +385,7 @@ export default function Home(props: MapsProps){
             <View style={styles.middleContainer}/>
 
             <View style={styles.bottomContainer}>
-                { visible && <AccommodationDetails address={'stefan cel mare 91'} distance={'2.7 km'} title={'casa cu doi brazi'} phoneNumber={''} website={''}/> ||
+                {
                     viewDirections && props.destinations.length === 1 && <DirectionsScreen destinationCoords={props.destinations[0].location} destination={destinationName} originCoords={markerCoordinates} showDirections={setShowDirections} setMode={setMode}/>
                                     || viewAccDetails && <AccommodationDetails title={title} distance={distance} address={address} phoneNumber={phoneNumber} website={website}/>
                 }

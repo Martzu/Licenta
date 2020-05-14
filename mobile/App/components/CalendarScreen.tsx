@@ -16,6 +16,8 @@ import MonthConverter from "../types/MonthConverter";
 import ButtonContainer from "./ButtonContainer";
 import Faculty from "../types/Faculty";
 import CalendarDays from "../types/CalendarDays";
+import UserAccommodation from "../types/UserAccommodation";
+import {Overlay} from "react-native-elements";
 
 
 
@@ -32,7 +34,8 @@ let WeekOn = require('../icons/WeekOn.png');
 let WeekOff = require('../icons/WeekOff.png');
 
 interface CalendarScreenProps {
-    userAdmissions: Faculty[]
+    userAdmissions: Faculty[],
+    userAccommodation: UserAccommodation,
 }
 
 
@@ -56,6 +59,24 @@ function addSignUpDatesToCalendar(monthDays: CalendarDays, signUpDate: string, f
     for(let date = startDate; date <= endDate; date++){
         addToCalendar(monthDays, date, facultyName, 'sign up');
     }
+}
+
+function userHasAccommodation(userAccommodation: UserAccommodation){
+    return userAccommodation.name && userAccommodation.address && userAccommodation.checkOut && userAccommodation.checkIn;
+}
+
+function addAccommodationToCalendar(monthDays: CalendarDays, userAccommodation: UserAccommodation){
+    if(userHasAccommodation(userAccommodation)){
+        console.log('inside');
+        console.log(userAccommodation);
+        let checkInDay = parseInt(userAccommodation.checkIn.split('/')[0]);
+        let checkOutDay = parseInt(userAccommodation.checkOut.split('/')[0]);
+
+        addToCalendar(monthDays, checkInDay, userAccommodation.name + ' accommodation', 'check in');
+        addToCalendar(monthDays, checkOutDay, userAccommodation.name + ' accommodation', 'check out');
+
+    }
+
 }
 
 function filterCalendarDays(days: CalendarEntryProps[], setDaysToDisplay: (daysToDisplay: CalendarEntryProps[]) => void, filterType: number){
@@ -94,7 +115,14 @@ function filterCalendarDays(days: CalendarEntryProps[], setDaysToDisplay: (daysT
 
 }
 
-
+function fitCalendarEntryData(data: string){
+    let transformed: string = '';
+    if(data){
+        let nrOfEnters: number = data.split('\n').length - 1;
+        transformed = nrOfEnters === 1 ? data : data.substr(0,60) + '...';
+    }
+    return transformed;
+}
 
 export default function CalendarScreen(props: CalendarScreenProps){
 
@@ -105,6 +133,10 @@ export default function CalendarScreen(props: CalendarScreenProps){
     const [render, setRender] = useState(false);
 
     let todayDate = new Date();
+
+    const [displayCalendarDayData, setDisplayCalendarDayDate] = useState(false);
+
+    const [currentSelectedDayData, setCurrentSelectedDayData] = useState('');
 
     const [buttons, setButtons] = useState<boolean[]>([false, true, false]);
 
@@ -137,12 +169,17 @@ export default function CalendarScreen(props: CalendarScreenProps){
 
 
         });
+        console.log("1");
+        addAccommodationToCalendar(monthDays, props.userAccommodation);
+
         console.log('yes');
         console.log(monthDays);
 
         if(days.length === 0){
             for(let i = 1; i <= currentMonthDays; i++){
-                days[days.length] = {dayNumber: i.toString(), description: monthDays[i.toString()], month: Months[todayDate.getMonth()], textColor: i === todayDate.getDate() ? '#00e600' : '#98A3A7'};
+                days[days.length] = {
+
+                    dayNumber: i.toString(), description: monthDays[i.toString()], month: Months[todayDate.getMonth()], textColor: i === todayDate.getDate() ? '#00e600' : '#98A3A7'};
         }}
 
         filterCalendarDays(days, setDaysToDisplay,2);
@@ -156,6 +193,11 @@ export default function CalendarScreen(props: CalendarScreenProps){
     }
     return(
         <ScrollView>
+            <Overlay isVisible={displayCalendarDayData} onBackdropPress={() => setDisplayCalendarDayDate(false)}>
+                <Text>
+                    {currentSelectedDayData}
+                </Text>
+            </Overlay>
             <View style={styles.imageContainer}>
                 <View style={styles.topButtonContainer}>
 
@@ -181,7 +223,12 @@ export default function CalendarScreen(props: CalendarScreenProps){
 
             {
                 daysToDisplay.map((day, index) =>
-                    <CalendarEntry dayNumber={day.dayNumber} month={day.month} description={day.description} textColor={day.textColor} key={index}/>
+                    <CalendarEntry dayNumber={day.dayNumber} month={day.month} wholeDescription={day.description} description={fitCalendarEntryData(day.description)}
+                                   textColor={day.textColor}
+                                   key={index}
+                                   setCurrentSelectedDayData={setCurrentSelectedDayData}
+                                   setDisplayCalendarDayDate={setDisplayCalendarDayDate}
+                    />
                 )
             }
         </ScrollView>

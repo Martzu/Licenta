@@ -9,7 +9,7 @@ import LocationData from "../types/LocationData";
 import displayFromText from '../constants/Constants';
 
 let Details = require('../icons/Details.png');
-let Cancel = require('../icons/Cancel.png');
+let Cancel = require('../icons/RemoveAdmission.png');
 let Location = require('../icons/Location.png');
 let Box = require('../icons/Box.png');
 let FacultyDetails = require('../icons/FacultyDetails.png');
@@ -47,7 +47,7 @@ export default function Entry(props: EntryProps){
                         <TouchableOpacity onPress={() => props.handleFacultyLocationPress([
                             {
                                 location: {latitude: props.faculty.latitude, longitude: props.faculty.longitude, title: props.faculty.name},
-                                accommodationDetails: {title: '0', distance: '0', address: '0'}
+                                accommodationDetails: {title: props.faculty.name, distance: '0', address: props.faculty.address, phoneNumber: '0', website: ''}
                             }])}>
                             <Image source={Location} style={styles.button}/>
                         </TouchableOpacity>

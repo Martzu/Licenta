@@ -13,7 +13,7 @@ interface ConflictCardProps{
 export default function ConflictCard(props: ConflictCardProps){
 
     return(
-        <Overlay isVisible={props.overlayVisible} overlayStyle={styles.modalDetails} onBackdropPress={() => props.setOverlayVisible(false)}>
+        <Overlay animationType={'fade'} isVisible={props.overlayVisible} overlayStyle={styles.modalDetails} onBackdropPress={() => props.setOverlayVisible(false)}>
             <ImageBackground source={Card} style={{height: 250,width: 250, alignItems:'center', backgroundColor: 'transparent'}}>
                 <Text style={styles.text}>
                     {props.conflictMessage}

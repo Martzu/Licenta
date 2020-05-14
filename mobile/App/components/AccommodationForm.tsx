@@ -15,37 +15,33 @@ import KeyboardListener from 'react-native-keyboard-listener';
 import * as React from "react";
 import FormInput from "./FormInput";
 import {useEffect, useState} from "react";
+import UserAccommodation from "../types/UserAccommodation";
 
-const formTypes: string[] = ['Accommodation Name', 'Address', 'Check-in date', 'Check-out date'];
+import axios from 'axios';
+
 let BackButton = require('../icons/BackButton.png');
 let ConfirmButton = require('../icons/ConfirmButton.png');
 
+
+const formTypes: string[] = ['Accommodation Name', 'Address', 'Check-in date', 'Check-out date'];
+
 interface AccommodationFormProps{
     setDisplayPages: (displayPages: boolean[]) => void,
-    setMultiplier: (multiplier: number) => void
+    setMultiplier: (multiplier: number) => void,
+    setUserAccommodation: (userAccommodation: UserAccommodation) => void
 }
 
-//const multiplier = 2; //pentru status bar, modificat de tastatura cand apare si dispare
-
-
-const {height} = Dimensions.get('window');
-
 export default function AccommodationForm(props: AccommodationFormProps){
-
-    const [fieldClicked, setFieldClicked] = useState(false);
 
     const [keyboardDidShowListener, setKeyboardDidShowListener] = useState<KeyboardListener>();
 
     const [keyboardDidHideListener, setKeyboardDidHideListener] = useState<KeyboardListener>();
 
+    const [accommodation, setAccommodation] = useState<UserAccommodation>({name: '', address: '', checkIn: '', checkOut: ''});
+
     useEffect(() => {
         setKeyboardDidShowListener(Keyboard.addListener('keyboardDidShow', () => props.setMultiplier(1.75)));
         setKeyboardDidHideListener(Keyboard.addListener('keyboardDidHide', () => props.setMultiplier(1)));
-
-        /*return () => {
-            keyboardDidHideListener.remove();
-            keyboardDidShowListener.remove();
-        };*/
 
     }, []);
 
@@ -53,11 +49,15 @@ export default function AccommodationForm(props: AccommodationFormProps){
         <ScrollView contentContainerStyle={styles.container}>
             {
                 formTypes.map((formType, index) =>
-                    <FormInput inputName={formType} key={index} setFieldClicked={setFieldClicked}/>
+                    <FormInput inputName={formType} key={index} setAccommodation={setAccommodation} fieldName={Object.keys(accommodation)[index]} accommodation={accommodation}/>
                 )
             }
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => {
+                props.setUserAccommodation(accommodation);
+                axios.post('http://192.168.1.5:8080/accommodation', {username: 'a', accommodationDTO: accommodation});
+
+            }}>
                 <Image source={ConfirmButton} style={styles.backButton}/>
             </TouchableOpacity>
 

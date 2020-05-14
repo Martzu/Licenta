@@ -1,7 +1,8 @@
 
 import * as React from 'react';
-import {Text, View, StyleSheet, Image, ImageBackground, TouchableHighlight, TouchableOpacity} from "react-native";
+import {Text, View, StyleSheet, Image, ImageBackground, TouchableHighlight, TouchableOpacity, Linking} from "react-native";
 import AccommodationData from "../types/AccommodationData";
+
 
 
 let descriptionImage = require('../icons/AccPopUp.png');
@@ -9,6 +10,21 @@ let descriptionImage = require('../icons/AccPopUp.png');
 let PhoneIcon = require('../icons/PhoneIcon.png');
 
 let WebsiteIcon = require('../icons/WebsiteIcon.png');
+
+
+function handleLinking(linkingTarget: string, linkingType: string){
+
+    return Linking.openURL(linkingType === 'tel' ? `${linkingType}:${linkingTarget}` : `${linkingTarget}`);
+
+}
+
+function handleWebsitePress(website: string){
+    return handleLinking(website, 'web');
+}
+
+function handlePhonePress(phoneNumber: string) {
+    return handleLinking(phoneNumber, 'tel');
+}
 
 export default function AccommodationDetails(props: AccommodationData){
     return(
@@ -20,16 +36,17 @@ export default function AccommodationDetails(props: AccommodationData){
                         props.title + "\n" + props.distance + "\n" + props.address
                     }
                 </Text>
-                <View style={styles.buttonContainer}>
-                    <TouchableOpacity onPress={() => console.log('hey')}>
-                        <Image source={PhoneIcon} style={styles.image}/>
-                    </TouchableOpacity>
+                {props.distance === '' ? <View/> :
+                    <View style={styles.buttonContainer}>
+                        <TouchableOpacity onPress={() => handlePhonePress(props.phoneNumber)}>
+                            <Image source={PhoneIcon} style={styles.image}/>
+                        </TouchableOpacity>
 
-                    <TouchableOpacity onPress={() => console.log('hey')}>
-                        <Image source={WebsiteIcon} style={styles.image}/>
-                    </TouchableOpacity>
-                </View>
-
+                        <TouchableOpacity onPress={() => handleWebsitePress(props.website)}>
+                            <Image source={WebsiteIcon} style={styles.image}/>
+                        </TouchableOpacity>
+                    </View>
+                }
 
             </ImageBackground>
         </View>
@@ -53,7 +70,7 @@ const styles = StyleSheet.create({
     },
 
     imageBackground:{
-        width: 355,
+        width: 365,
         height: 230,
         marginBottom: 20
     },

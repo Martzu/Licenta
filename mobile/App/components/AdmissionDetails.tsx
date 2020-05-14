@@ -12,7 +12,7 @@ let Card = require('../icons/Card.png');
 
 export default function AdmissionDetails(props : DetailsProps){
     return(
-            <Overlay overlayStyle={styles.modalDetails} isVisible={props.overlayVisible} onBackdropPress={() => props.setOverlayVisible(false)}>
+            <Overlay animationType={'fade'} overlayStyle={styles.modalDetails} isVisible={props.overlayVisible} onBackdropPress={() => props.setOverlayVisible(false)}>
                 <ImageBackground source={Card} style={{height: 200,width: 200, alignItems:'center', backgroundColor: 'transparent'}}>
                     <Text style={styles.text}>
                         {props.displayText}
