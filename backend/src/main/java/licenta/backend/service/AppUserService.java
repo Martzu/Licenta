@@ -1,7 +1,9 @@
 package licenta.backend.service;
 
 
+import licenta.backend.dto.AccommodationDTO;
 import licenta.backend.dto.FacultyDTO;
+import licenta.backend.model.Accommodation;
 import licenta.backend.model.AppUser;
 import licenta.backend.model.Faculty;
 import licenta.backend.repository.FactoryRepository;
@@ -32,6 +34,11 @@ public class AppUserService {
         return  factoryRepository.createFacultyRepository().findAll().stream().filter(faculty -> !faculty.getAppUsers().contains(appUser)).map(FacultyDTO::new).collect(Collectors.toList());
     }
 
+    public AccommodationDTO getUserAccommodation(String username) throws Exception{
+        AppUser appUser = factoryRepository.createAppUserRepository().findByUsername(username).orElseThrow(() -> new Exception("Username does not exist"));
+        return new AccommodationDTO(factoryRepository.createAccommodationRepository().getAccommodationByAppUser(appUser).orElseGet(Accommodation::new));
+    }
+
     @Transactional
     public void participateToFacultyAdmission(String username, Integer facultyId) throws Exception {
         Faculty faculty = factoryRepository.createFacultyRepository().findById(facultyId).orElseThrow(() -> new Exception("Incorrect facultyId"));
@@ -41,6 +48,19 @@ public class AppUserService {
 
         factoryRepository.createFacultyRepository().save(faculty);
 
+    }
+
+    @Transactional
+    public void addAccommodationToUser(String username, AccommodationDTO accommodationDTO) throws Exception{
+        AppUser appUser = factoryRepository.createAppUserRepository().findByUsername(username).orElseThrow(() -> new Exception("Username does not exist"));
+
+        Accommodation accommodation = factoryRepository.createAccommodationRepository().save(new Accommodation(accommodationDTO));
+
+        accommodation.setAppUser(appUser);
+        appUser.setAccommodation(accommodation);
+
+        factoryRepository.createAccommodationRepository().save(accommodation);
+        factoryRepository.createAppUserRepository().save(appUser);
     }
 
     @Transactional

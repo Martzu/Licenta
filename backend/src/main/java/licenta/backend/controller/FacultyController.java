@@ -1,6 +1,7 @@
 package licenta.backend.controller;
 
 
+import licenta.backend.dto.AccommodationDTO;
 import licenta.backend.dto.FacultyDTO;
 import licenta.backend.dto.Test;
 import licenta.backend.model.AppUser;
@@ -30,9 +31,25 @@ public class FacultyController {
         serviceFactory.appUserService().removeParticipationFromFacultyAdmission(test.getUsername(), test.getFacultyId());
     }
 
+    @PostMapping("/accommodation")
+    public void addAccommodation(@RequestBody Test test) throws Exception{
+        serviceFactory.appUserService().addAccommodationToUser(test.getUsername(), test.getAccommodationDTO());
+    }
+
+    @PostMapping("/userAccommodation")
+    public AccommodationDTO getUserAccommodation(@RequestBody Test test) throws Exception{
+        return serviceFactory.appUserService().getUserAccommodation(test.getUsername());
+    }
+
     @PostMapping("/unattending")
     public List<FacultyDTO> getAdmissionsNotParticipating(@RequestBody Test test) throws Exception {
         return serviceFactory.appUserService().getAppUserNotSignedAdmissions(test.getUsername()).stream().sorted(Comparator.comparing(FacultyDTO::getName)).collect(Collectors.toList());
+    }
+
+    @GetMapping("/documents")
+    public List<String> getAllDocumentsRequire(){
+        return List.of("Bacalaureat diploma", "3x4 cm photos", "Identity Card", "Medical certificate", "Report Card", "Admission application");
+
     }
 
     @GetMapping("/faculties")

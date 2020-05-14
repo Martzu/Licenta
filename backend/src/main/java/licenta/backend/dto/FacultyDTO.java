@@ -20,6 +20,8 @@ public class FacultyDTO {
     private String signUpDate;
     private String examDate;
     private String resultsDate;
+    private Integer universityAdmissionFee;
+    private Integer facultyAdmissionFee;
 
     public FacultyDTO(Faculty faculty) {
         this.id = faculty.getId();
@@ -31,5 +33,7 @@ public class FacultyDTO {
         this.signUpDate = faculty.getSignUpDate();
         this.examDate = faculty.getExamDate();
         this.resultsDate = faculty.getResultsDate();
+        this.universityAdmissionFee = faculty.getUniversityAdmissionFee();
+        this.facultyAdmissionFee = faculty.getFacultyAdmissionFee();
     }
 }

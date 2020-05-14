@@ -12,6 +12,8 @@ public class FactoryRepositoryImplementation implements FactoryRepository{
 
     private final FacultyRepository facultyRepository;
 
+    private final AccommodationRepository accommodationRepository;
+
     @Override
     public AppUserRepository createAppUserRepository() {
         return appUserRepository;
@@ -21,4 +23,7 @@ public class FactoryRepositoryImplementation implements FactoryRepository{
     public FacultyRepository createFacultyRepository() {
         return facultyRepository;
     }
+
+    @Override
+    public AccommodationRepository createAccommodationRepository() { return accommodationRepository; }
 }

@@ -5,4 +5,6 @@ public interface FactoryRepository {
     public AppUserRepository createAppUserRepository();
 
     public FacultyRepository createFacultyRepository();
+
+    public AccommodationRepository createAccommodationRepository();
 }

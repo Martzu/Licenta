@@ -11,4 +11,5 @@ public class Test {
 
     private String username;
     private Integer facultyId;
+    private AccommodationDTO accommodationDTO;
 }

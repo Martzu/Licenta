@@ -27,7 +27,8 @@ public class Faculty {
     private String signUpDate;
     private String examDate;
     private String resultsDate;
-
+    private Integer universityAdmissionFee;
+    private Integer facultyAdmissionFee;
 
 
     @ManyToMany(cascade = {CascadeType.ALL})
@@ -39,7 +40,7 @@ public class Faculty {
     private List<AppUser> appUsers = new ArrayList<>();
 
     public String toString(){
-        return this.name + ' ' + this.latitude + ' ' + this.longitude + ' ' + this.address + ' ' + this.signUpDate + ' ' + this.signUpPlace + ' ' + this.examDate + ' ' + this.resultsDate;
+        return this.name + ' ' + this.latitude + ' ' + this.longitude + ' ' + this.address + ' ' + this.signUpDate + ' ' + this.signUpPlace + ' ' + this.examDate + ' ' + this.resultsDate + ' ' + this.universityAdmissionFee + ' ' + this.facultyAdmissionFee;
     }
 
 }

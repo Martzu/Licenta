@@ -29,4 +29,8 @@ public class AppUser {
 
     @ManyToMany(mappedBy = "appUsers", cascade = {CascadeType.ALL})
     private List<Faculty> faculties;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "accommodation_id", referencedColumnName = "id")
+    private Accommodation accommodation;
 }
