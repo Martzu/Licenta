@@ -11,6 +11,7 @@ import Details from "./AdmissionDetails";
 import {Overlay} from "react-native-elements";
 import AdmissionDetails from "./AdmissionDetails";
 import ConflictCard from "./ConflictCard";
+import AdmissionFees from "./AdmissionFees";
 
 let AvailableOff = require('../icons/Available.png');
 let AvailableOn = require('../icons/AvailableOn.png');
@@ -125,7 +126,7 @@ export default function Admissions(props: AdmissionsProps){
                 </TouchableOpacity>
 
             </View>
-
+            {goingOn && <AdmissionFees userAdmissions={props.userAdmissions}/>}
             <AdmissionDetails overlayVisible={overlayVisible} setOverlayVisible={setOverlayVisible} displayText={requiredDocuments}/>
             {
                 faculties.map((faculty, index) =>

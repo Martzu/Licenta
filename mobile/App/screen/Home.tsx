@@ -264,36 +264,48 @@ export default function Home(props: MapsProps){
     useEffect( () => {
         (async() => {
             await computeLocation(props.destinations.length);
-            setRender(true);
+
         })();
 
         console.log('Pe maps');
+        console.log(markerCoordinates.longitude);
+        console.log(markerCoordinates.latitude);
+        console.log(markerCoordinates.title);
         console.log(props.destinations.length);
+        setRender(true);
+
     },[]);
 
 
     function handleMarkerPress(destination: LocationData){
-        let destinationRegion: Region = {latitude: destination.location.latitude, latitudeDelta: 0.0001, longitude: destination.location.longitude, longitudeDelta: 0.032};
 
-        if(props.destinations.length > 1){
-            setTitle(destination.accommodationDetails.title);
-            setDistance(destination.accommodationDetails.distance);
-            setAddress(destination.accommodationDetails.address);
-            setPhoneNumber(destination.accommodationDetails.phoneNumber);
-            //setViewAccDetails(!viewAccDetails);
-            setViewAccDetails(true);
-            setWebsite(destination.accommodationDetails.website);
+        setVisible(false);
+        if(destination.location.longitude === region.longitude && destination.location.latitude === region.latitude){
+            setViewAccDetails(!viewAccDetails);
         }
         else{
-            setDestinationName(destination.location.title);
-            setDestination(destinationRegion);
-            setViewDirections(!viewDirections);
-            setShowDirections(!showDirections);
+            let destinationRegion: Region = {latitude: destination.location.latitude, latitudeDelta: 0.0001, longitude: destination.location.longitude, longitudeDelta: 0.032};
+            if(props.destinations.length > 1){
+                setTitle(destination.accommodationDetails.title);
+                setDistance(destination.accommodationDetails.distance);
+                setAddress(destination.accommodationDetails.address);
+                setPhoneNumber(destination.accommodationDetails.phoneNumber);
+                //setViewAccDetails(!viewAccDetails);
+                setViewAccDetails(true);
+                setWebsite(destination.accommodationDetails.website);
+            }
+            else{
+                setDestinationName(destination.location.title);
+                setDestination(destinationRegion);
+                setViewDirections(!viewDirections);
+                setShowDirections(!showDirections);
+            }
+            console.log(destinationRegion);
+            mapRef.current.animateCamera({center:destinationRegion}, {duration: 10000});
+
+            setRegion(destinationRegion);
         }
 
-        mapRef.current.animateCamera({center:destinationRegion}, {duration: 2000});
-
-        setRegion(destinationRegion);
 
     }
 
@@ -323,40 +335,54 @@ export default function Home(props: MapsProps){
 
     const [region, setRegion] = useState<Region>({latitude: 0, latitudeDelta: 0.0001, longitude: 0, longitudeDelta: 0.032});
 
-    const [markerCoordinates, setMarkerCoordinates] = useState<MarkerCoordinates>(props.destinations.length > 1 ? props.currentLocation : {latitude: 0, longitude: 0, title: ''});
+    const [regionListener, setRegionListener] = useState<Region>({latitude: 0, latitudeDelta: 0.0001, longitude: 0, longitudeDelta: 0.032});
 
-    const computeLocation = async (length: number) => {
+    const [markerCoordinates, setMarkerCoordinates] = useState<MarkerCoordinates>(props.destinations.length > 1 ? props.currentLocation : {latitude: 0, longitude: 0, title: 'Your current position.'});
+
+    async function computeLocation(length: number){
         debugger;
-        let latitude: number, longitude: number;
+        let latitude: number, longitude: number, title = '';
         if(length === 1){
             let currentLocation = await getLocation();
+            console.log('faculty');
             latitude = currentLocation.coords.latitude;
             longitude = currentLocation.coords.longitude;
+            console.log('lat:');
+            console.log(latitude);
+            console.log('long:');
+            console.log(longitude);
         }
         else{
+            console.log('accomm');
             latitude = props.currentLocation.latitude;
             longitude = props.currentLocation.longitude;
         }
 
+
         setRegion({latitude: latitude, longitude: longitude, latitudeDelta: 0.03, longitudeDelta:0.02 });
-        setMarkerCoordinates({latitude, longitude, title: props.currentLocation.title});
+        setMarkerCoordinates(markerCoordinates => ({...markerCoordinates, latitude: latitude, longitude: longitude}));
 
-    };
-
-
+    }
 
     useEffect(() => {
         setShowDirections(false);
     },[viewDirections]);
 
-
+    if(!render){
+        return <ActivityIndicator/>
+    }
     return (
         <View style={styles.mapContainer}>
             <View>
                 <Mapview style={styles.map} region={region} customMapStyle={customMapStyle} ref={mapRef}>
 
                     <Marker
-                        onPress={() => handleMarkerPress({location: {latitude: markerCoordinates.latitude, longitude: markerCoordinates.longitude, title: ''}, accommodationDetails: {title: markerCoordinates.title, address: '', phoneNumber: '', website: '', distance: ''} })}
+                        onPress={() => {
+                            console.log(markerCoordinates.title);
+                            setRegion(region => ({...region, latitude: props.currentLocation.latitude, longitude: props.currentLocation.longitude}));
+                            setVisible(!visible);
+                            setViewAccDetails(false);
+                        }}
                         key={1}
                         coordinate={markerCoordinates}>
 
@@ -386,6 +412,7 @@ export default function Home(props: MapsProps){
 
             <View style={styles.bottomContainer}>
                 {
+                    visible && <AccommodationDetails title={markerCoordinates.title} distance={''} address={''} phoneNumber={''} website={''}/> ||
                     viewDirections && props.destinations.length === 1 && <DirectionsScreen destinationCoords={props.destinations[0].location} destination={destinationName} originCoords={markerCoordinates} showDirections={setShowDirections} setMode={setMode}/>
                                     || viewAccDetails && <AccommodationDetails title={title} distance={distance} address={address} phoneNumber={phoneNumber} website={website}/>
                 }
