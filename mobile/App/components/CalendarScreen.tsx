@@ -33,6 +33,8 @@ let MonthOff = require('../icons/MonthOff.png');
 let WeekOn = require('../icons/WeekOn.png');
 let WeekOff = require('../icons/WeekOff.png');
 
+let Card = require('../icons/Card.png');
+
 interface CalendarScreenProps {
     userAdmissions: Faculty[],
     userAccommodation: UserAccommodation,
@@ -193,10 +195,14 @@ export default function CalendarScreen(props: CalendarScreenProps){
     }
     return(
         <ScrollView>
-            <Overlay isVisible={displayCalendarDayData} onBackdropPress={() => setDisplayCalendarDayDate(false)}>
-                <Text>
-                    {currentSelectedDayData}
-                </Text>
+            <Overlay animationType={"fade"} overlayStyle={styles.modalDetails} isVisible={displayCalendarDayData} onBackdropPress={() => setDisplayCalendarDayDate(false)}>
+                <ImageBackground source={Card} style={{height: 250,width: 250, alignItems:'center', backgroundColor: 'transparent'}}>
+                    <Text style={styles.modalText}>
+                        {currentSelectedDayData}
+                    </Text>
+                </ImageBackground>
+
+
             </Overlay>
             <View style={styles.imageContainer}>
                 <View style={styles.topButtonContainer}>
@@ -242,6 +248,24 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
         marginBottom: -50
+    },
+
+    modalText:{
+        marginTop: 25,
+        marginLeft: 25,
+        marginRight: 25,
+        fontFamily: 'montserrat',
+        color: "#98A3A7"
+    },
+
+    modalDetails:{
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'transparent',
+        width: 150,
+        height: 150
     },
 
     image:{

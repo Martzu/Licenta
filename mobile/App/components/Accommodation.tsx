@@ -9,6 +9,7 @@ import {useState} from "react";
 import AccommodationMainPage from "./AcommodationMainPage";
 import AccommodationForm from "./AccommodationForm";
 import UserAccommodation from "../types/UserAccommodation";
+import AccommodationDisplay from "./AccommodationDisplay";
 
 
 let BackButton = require('../icons/BackButton.png');
@@ -19,7 +20,8 @@ interface AccommodationProps{
     setAccommodationDetails: (accommodationDetails: LocationData[]) => void,
     faculties: Faculty[],
     setMultiplier: (multiplier: number) => void,
-    setUserAccommodation: (userAccommodation: UserAccommodation) => void
+    setUserAccommodation: (userAccommodation: UserAccommodation) => void,
+    userAccommodation: UserAccommodation
 }
 
 export default function Accommodation(props: AccommodationProps){
@@ -29,9 +31,14 @@ export default function Accommodation(props: AccommodationProps){
         //props.closeAccommodation(true);
     }
 
+    function hasAccommodation(){
+        return props.userAccommodation.checkOut && props.userAccommodation.checkIn && props.userAccommodation.name && props.userAccommodation.address;
+    }
+
     const [displayPages, setDisplayPages] = useState<boolean[]>([true, false, false]);
 
     return (
+        hasAccommodation() && <AccommodationDisplay userAccommodation={props.userAccommodation}/>|| 
         <View style={displayPages[1] && {marginTop: 80}}>
             {
                 displayPages[1] && <ScrollView>

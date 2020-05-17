@@ -3,8 +3,8 @@
   "expoServerPort": null,
   "packagerPort": null,
   "packagerPid": null,
-  "expoServerNgrokUrl": "https://wm-fkh.anonymous.app.exp.direct",
-  "packagerNgrokUrl": "https://packager.wm-fkh.anonymous.app.exp.direct",
-  "ngrokPid": 8090,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "webpackServerPort": null
 }

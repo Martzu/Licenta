@@ -280,7 +280,7 @@ export default function Second(){
             <Animated.View style={styles.middleContainer}>
                 {!firstMapsIcon && <Home destinations={destinations} currentLocation={currentLocation}/> ||
                     !firstCalIcon && <CalendarScreen userAdmissions={userAdmissions} userAccommodation={userAccommodation}/> ||
-                    !firstAccIcon && <Accommodation displayMap={setFirstMapsIcon} setAccommodationDetails={setDestinations} setCurrentLocation={setCurrentLocation} faculties={[...faculties, ...userAdmissions]} setMultiplier={setMultiplier} setUserAccommodation={setUserAccommodation}/> ||
+                    !firstAccIcon && <Accommodation displayMap={setFirstMapsIcon} setAccommodationDetails={setDestinations} setCurrentLocation={setCurrentLocation} faculties={[...faculties, ...userAdmissions]} setMultiplier={setMultiplier} setUserAccommodation={setUserAccommodation} userAccommodation={userAccommodation}/> ||
                     <Admissions faculties={faculties} userAdmissions={userAdmissions} setFaculties={setFaculties} setUserAdmissions={setUserAdmissions} handleFacultyLocationPress={handleFacultyLocationPress}/>
                 }
 

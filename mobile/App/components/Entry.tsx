@@ -40,9 +40,9 @@ export default function Entry(props: EntryProps){
 
 
                     <View style={styles.middleSection}>
-                        <TouchableOpacity onPress={() => props.setOverlayVisible(true)}>
-                            <Image source={props.going ? Details : FacultyDetails} style={styles.button}/>
-                        </TouchableOpacity>
+                        {!props.going && <TouchableOpacity onPress={() => props.setOverlayVisible(true)}>
+                            <Image source={FacultyDetails} style={styles.button}/>
+                        </TouchableOpacity> }
 
                         <TouchableOpacity onPress={() => props.handleFacultyLocationPress([
                             {
