@@ -3,6 +3,7 @@ import {
     StyleSheet,
     TouchableHighlight,
     View,
+    Text,
     Animated, ActivityIndicator
 } from 'react-native';
 import * as React from 'react';
@@ -17,6 +18,9 @@ import LocationData from "../types/LocationData";
 import Faculty from "../types/Faculty";
 import axios from 'axios';
 import UserAccommodation from "../types/UserAccommodation";
+import {parse} from "react-native-svg";
+import {Overlay} from "react-native-elements";
+import FacultyConfirmation from "../components/FacultyConfirmation";
 
 let uniOn = require('../icons/UniOn.png');
 let uniOff = require('../icons/UniOff.png');
@@ -78,6 +82,8 @@ export default function Second(){
         }
 
     }
+
+
 
     useEffect(() => {
 
@@ -244,7 +250,33 @@ export default function Second(){
     const [firstUniIcon, setFirstUniIcon] = useState(false);
     const [firstCalIcon, setFirstCalIcon] = useState(true);
 
+
+    useEffect(() => {
+        let today = new Date();
+        const currentDay = today.getDate();
+        let userAdmissionsWithExpiredSignUp: Faculty[] = userAdmissions.filter((userAdmission, index) =>
+            parseInt(userAdmission.signUpDate.slice(-2)) + 4 === currentDay//modify here to check for expiration date of sign up
+        );
+
+        let clicked: boolean[] = [];
+        for(let i = 0; i < userAdmissionsWithExpiredSignUp.length; i++){
+            clicked.push(true);
+        }
+
+        setClicked(clicked);
+        setIsSignUpConfirmationVisible(userAdmissionsWithExpiredSignUp.length > 0);
+        setWaitingForConfirmationAdmissions(userAdmissionsWithExpiredSignUp);
+
+        //sterge backend, updateaza liste front end
+    },[userAdmissions]);
+
     const [multiplier, setMultiplier] = useState(1);
+
+    const [clicked, setClicked] = useState<boolean[]>([]);
+
+    const [waitingForConfirmationAdmissions, setWaitingForConfirmationAdmissions] = useState<Faculty[]>([]);
+
+    const [isSignUpConfirmationVisible, setIsSignUpConfirmationVisible] = useState(false);
 
     if(!render) {
         return <ActivityIndicator/>
@@ -276,6 +308,8 @@ export default function Second(){
                 </View>
 
             </Animated.View>
+
+            <FacultyConfirmation isSignUpConfirmationVisible={isSignUpConfirmationVisible} waitingForConfirmationAdmissions={waitingForConfirmationAdmissions} clicked={clicked} setIsSignUpConfirmationVisible={setIsSignUpConfirmationVisible} setUserAdmissions={setUserAdmissions} userAdmissions={userAdmissions}/>
 
             <Animated.View style={styles.middleContainer}>
                 {!firstMapsIcon && <Home destinations={destinations} currentLocation={currentLocation}/> ||

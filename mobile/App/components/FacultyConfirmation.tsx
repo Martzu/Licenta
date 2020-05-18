@@ -1,0 +1,117 @@
+import {Image, Text, TouchableOpacity, View, StyleSheet, ScrollView, ImageBackground} from "react-native";
+import {Overlay} from "react-native-elements";
+import * as React from "react";
+import Faculty from "../types/Faculty";
+import {useEffect, useState} from "react";
+import axios from "axios";
+
+let ConfirmParticipation = require('../icons/ConfirmParticipation.png');
+let ConfirmParticipationOff = require('../icons/ConfirmParticipationOff.png');
+
+let UnconfirmAdmission = require('../icons/UnconfirmAdmission.png');
+let UnconfirmAdmissionOff = require('../icons/UnconfirmAdmissionOff.png');
+
+let BigCard = require('../icons/BigCard.png');
+
+interface FacultyConfirmationProps{
+    isSignUpConfirmationVisible: boolean,
+    setIsSignUpConfirmationVisible: (visible: boolean) => void,
+    clicked: boolean[],
+    waitingForConfirmationAdmissions: Faculty[],
+    userAdmissions: Faculty[],
+    setUserAdmissions: (userAdmissions: Faculty[]) => void
+}
+
+
+export default function FacultyConfirmation(props: FacultyConfirmationProps){
+
+    const [confirmVisible, setConfirmVisible] = useState<boolean[]>(props.clicked);
+    const [removeVisible, setRemoveVisible] = useState<boolean[]>(props.clicked);
+
+
+    function handlePress(isConfirm: boolean, buttonIndex: number){
+        let array = isConfirm? removeVisible : confirmVisible;
+        let modifiedArray = array.map((value, index) => index === buttonIndex ? false : value);
+        isConfirm? setRemoveVisible(modifiedArray) : setConfirmVisible(modifiedArray) ;
+    }
+
+    async function removeAdmission(facultyId){
+        const response = await axios.delete('http://192.168.1.5:8080/faculty', {data: {username: 'a', facultyId: facultyId}});
+        if(response.status === 200){
+            let userAdmissions: Faculty[] = props.userAdmissions.filter(faculty => faculty.id !== facultyId);
+            props.setUserAdmissions(userAdmissions);
+        }
+    }
+
+    function canExit(): boolean{
+        let confirmedAdmissions: number = 0;
+        for(let i = 0; i < confirmVisible.length; i++){
+            confirmedAdmissions += !(confirmVisible[i] && removeVisible[i]) ?  1 : 0;
+        }
+
+        return confirmedAdmissions === props.clicked.length;
+    }
+
+    return (
+        <Overlay isVisible={props.isSignUpConfirmationVisible} overlayStyle={styles.modalDetails} onBackdropPress={() => props.setIsSignUpConfirmationVisible(!canExit())}>
+            <ImageBackground source={BigCard} style={{height: 600,width: 380, alignItems:'center', backgroundColor: 'transparent'}}>
+                <Text style={[styles.text, {position: 'relative', top: 50}]}>
+                    Confirm the admissions you signed up to {'\n'}before tapping outside!
+                </Text>
+                <View style={{height: 60}}/>
+                <ScrollView>
+                    {
+                        props.waitingForConfirmationAdmissions.map((admission, index) =>
+                            <View style={styles.admissionEntry}>
+                                <View style={{width: 140}}>
+                                    <Text style={styles.text}>
+                                        {
+                                            admission.name
+                                        }
+                                    </Text>
+                                </View>
+                                {<TouchableOpacity onPress={() => handlePress(true, index)} style={{marginRight: -15}}><Image style={styles.confirmImage} source={confirmVisible[index] && ConfirmParticipation || ConfirmParticipationOff}/></TouchableOpacity>}
+                                {<TouchableOpacity onPress={() => {handlePress(false, index); removeAdmission(admission.id);}}><Image style={styles.unconfirmImage} source={removeVisible[index] && UnconfirmAdmission || UnconfirmAdmissionOff}/></TouchableOpacity>}
+                            </View>
+
+                        )
+                    }
+                </ScrollView>
+                <View style={{height: 50}}/>
+            </ImageBackground>
+        </Overlay>
+
+    );
+}
+
+const styles = StyleSheet.create({
+
+    admissionEntry:{
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+
+    modalDetails:{
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'transparent',
+        width: 320,
+        height: 520
+    },
+
+    text:{
+        fontFamily: 'montserrat',
+        color: "#98A3A7"
+    },
+    confirmImage:{
+        width: 80,
+        height: 80
+    },
+
+    unconfirmImage:{
+        width: 110,
+        height: 60,
+    }
+});

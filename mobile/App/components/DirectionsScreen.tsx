@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Image, ImageBackground, StyleSheet, Text, TouchableHighlight, View} from "react-native";
+import {Image, ImageBackground, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View} from "react-native";
 import {useEffect, useState} from "react";
 import {Region} from "react-native-maps";
 import PlaceCoordinate from "../types/PlaceCoordinate";
@@ -65,17 +65,17 @@ export default function DirectionsScreen(props: directionsScreenProps){
                 </View>
 
                 <View style={styles.iconContainer}>
-                    <TouchableHighlight onPress={() => handlePress(1)}>
+                    <TouchableOpacity onPress={() => handlePress(1)}>
                         <Image source={Car} style={styles.image}/>
-                    </TouchableHighlight>
+                    </TouchableOpacity>
 
-                    <TouchableHighlight onPress={() => handlePress(2)}>
+                    <TouchableOpacity onPress={() => handlePress(2)}>
                         <Image source={Walk} style={styles.image}/>
-                    </TouchableHighlight>
+                    </TouchableOpacity>
 
-                    <TouchableHighlight onPress={() => handlePress(3)}>
+                    <TouchableOpacity onPress={() => handlePress(3)}>
                         <Image source={Bicycle} style={styles.image}/>
-                    </TouchableHighlight>
+                    </TouchableOpacity>
                 </View>
 
                 <View style={styles.durationContainer}>

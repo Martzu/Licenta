@@ -27,9 +27,18 @@ interface EntryProps{
 
 export default function Entry(props: EntryProps){
 
+    const [render, setRender] = useState<boolean>(false);
+
+    useEffect(() => {
+        //TODO: modify here to display before or after the signupDate
+        let today = new Date();
+        let day = today.getDate();
+        setRender(day <= parseInt(props.faculty.signUpDate.slice(-2)));
+    },[]);
+
     return(
 
-            <ImageBackground source={Box} style={styles.container}>
+            props.going ? <ImageBackground source={Box} style={styles.container}>
 
                     <View style={styles.auxTopSection}/>
                     <View style={styles.topSection}>
@@ -60,7 +69,40 @@ export default function Entry(props: EntryProps){
                     </View>
 
 
-            </ImageBackground>
+            </ImageBackground> :
+
+                render && <ImageBackground source={Box} style={styles.container}>
+
+                    <View style={styles.auxTopSection}/>
+                    <View style={styles.topSection}>
+                        <Text style={styles.text}>
+                            {displayFromText(props.faculty.name)}
+                        </Text>
+                    </View>
+
+
+                    <View style={styles.middleSection}>
+                        {!props.going && <TouchableOpacity onPress={() => props.setOverlayVisible(true)}>
+                            <Image source={FacultyDetails} style={styles.button}/>
+                        </TouchableOpacity> }
+
+                        <TouchableOpacity onPress={() => props.handleFacultyLocationPress([
+                            {
+                                location: {latitude: props.faculty.latitude, longitude: props.faculty.longitude, title: props.faculty.name},
+                                accommodationDetails: {title: props.faculty.name, distance: '0', address: props.faculty.address, phoneNumber: '0', website: ''}
+                            }])}>
+                            <Image source={Location} style={styles.button}/>
+                        </TouchableOpacity>
+                    </View>
+
+                    <View style={styles.bottomSection}>
+                        <TouchableOpacity onPress={() => props.handleBottomButtonClick(props.faculty)}>
+                            <Image source={props.going ? Cancel : Participate} style={props.going ? styles.cancelButton : styles.participateButton}/>
+                        </TouchableOpacity>
+                    </View>
+
+
+                </ImageBackground>
 
 
     );
