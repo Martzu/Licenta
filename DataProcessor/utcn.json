@@ -6,7 +6,9 @@
         "resultsDate": "19",
         "latitude": 46.7558368,
         "longitude": 23.5925559,
-        "name": "Arhitectura si urbanism"
+        "name": "Arhitectura si urbanism",
+        "universityAdmissionFee": 50,
+        "facultyAdmissionFee": 300
     },
     {
         "address": "str. G. Bari\u0163iu nr. 26-28, Cluj-Napoca",
@@ -15,7 +17,9 @@
         "resultsDate": "13",
         "latitude": 46.7724476,
         "longitude": 23.5856411,
-        "name": "Automatica si calculatoare"
+        "name": "Automatica si calculatoare",
+        "universityAdmissionFee": 50,
+        "facultyAdmissionFee": 150
     },
     {
         "address": "str. G. Bari\u0163iu nr. 26-28, Cluj-Napoca",
@@ -24,7 +28,9 @@
         "resultsDate": "14",
         "latitude": 46.7724476,
         "longitude": 23.5856411,
-        "name": "Constructii de masini"
+        "name": "Constructii de masini",
+        "universityAdmissionFee": 50,
+        "facultyAdmissionFee": 100
     },
     {
         "address": "str. G. Bari\u0163iu nr. 25 Cluj-Napoca",
@@ -33,7 +39,9 @@
         "resultsDate": "14",
         "latitude": 46.7720686,
         "longitude": 23.5854946,
-        "name": "Constructii"
+        "name": "Constructii",
+        "universityAdmissionFee": 50,
+        "facultyAdmissionFee": 100
     },
     {
         "address": "str. G. Bari\u0163iu nr. 26-28, Cluj-Napoca",
@@ -42,7 +50,9 @@
         "resultsDate": "13",
         "latitude": 46.7724476,
         "longitude": 23.5856411,
-        "name": "Electronica telecomunicatii si tehnologia informatiei"
+        "name": "Electronica telecomunicatii si tehnologia informatiei",
+        "universityAdmissionFee": 50,
+        "facultyAdmissionFee": 150
     },
     {
         "address": "str. G. Bari\u0163iu nr. 26-28, Cluj-Napoca",
@@ -51,7 +61,9 @@
         "resultsDate": "14",
         "latitude": 46.7724476,
         "longitude": 23.5856411,
-        "name": "Ingineria materialelor si a mediului"
+        "name": "Ingineria materialelor si a mediului",
+        "universityAdmissionFee": 50,
+        "facultyAdmissionFee": 100
     },
     {
         "address": "str. G. Bari\u0163iu nr. 25 Cluj-Napoca",
@@ -60,7 +72,9 @@
         "resultsDate": "14",
         "latitude": 46.7720686,
         "longitude": 23.5854946,
-        "name": "Inginerie electrica"
+        "name": "Inginerie electrica",
+        "universityAdmissionFee": 50,
+        "facultyAdmissionFee": 100
     },
     {
         "address": "str. G. Bari\u0163iu nr. 26-28, Cluj-Napoca",
@@ -69,7 +83,9 @@
         "resultsDate": "14",
         "latitude": 46.7724476,
         "longitude": 23.5856411,
-        "name": "Instalatii"
+        "name": "Instalatii",
+        "universityAdmissionFee": 50,
+        "facultyAdmissionFee": 100
     },
     {
         "address": "str. G. Bari\u0163iu nr. 26-28, Cluj-Napoca",
@@ -78,6 +94,8 @@
         "resultsDate": "13",
         "latitude": 46.7724476,
         "longitude": 23.5856411,
-        "name": "Mecanica"
+        "name": "Mecanica",
+        "universityAdmissionFee": 50,
+        "facultyAdmissionFee": 100
     }
 ]

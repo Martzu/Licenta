@@ -6,7 +6,7 @@ import json
 import functools
 from tika import parser
 
-input_urls = open('/home/martzu/Facultate/Licenta/MainScrapper/mainScrapper/crawled.txt', 'r')
+input_urls = open('../MainScrapper/mainScrapper/crawled.txt', 'r')
 urls = input_urls.read().split("\n")
 urls = urls[2:]
 del urls[-1]
@@ -19,7 +19,7 @@ def extract_relevant_data(input_data):
         extracted_data = re.findall('[0-9]+-[0-9]+', input_data)
         extracted_data = functools.reduce(lambda x, y: x + ' ' + y, extracted_data)
     elif 'Înscrieri' in input_data:
-        extracted_data= input_data.split(':')[1][1:]
+        extracted_data = input_data.split(':')[1][1:]
         if '(' in extracted_data:
             extracted_data = re.sub('\s{1}\(.+\),', '', extracted_data)
         elif 'şi' in extracted_data:
@@ -32,6 +32,8 @@ def extract_relevant_data(input_data):
 
 
 def convert_json_format(values, url):
+    taxes = values[len(values) - 1]
+
     values = values[:-1]
 
     if len(values) == 3:
@@ -48,13 +50,30 @@ def convert_json_format(values, url):
 
     address = address.replace('.', '').replace(',', '').replace(' ', '+')
 
-    coordinates = requests.get(f'https://maps.googleapis.com/maps/api/geocode/json?address={address}&key=AIzaSyBDlY8RJxrk2UVf2dSe5Z9Ults6ylGqUVE').json()['results'][0]['geometry']['location']
+    coordinates = requests.get(
+        f'https://maps.googleapis.com/maps/api/geocode/json?address={address}&key=AIzaSyBDlY8RJxrk2UVf2dSe5Z9Ults6ylGqUVE').json()[
+        'results'][0]['geometry']['location']
     for key, value in zip(keys[-3:], coordinates):
         data_dictionary[key] = coordinates[value]
 
     faculty_name = url.split('/')[5].replace('-', ' ')
     first_letter = faculty_name[0].upper()
     data_dictionary['name'] = first_letter + faculty_name[1:]
+
+    if 'electronica' in url:
+        taxes = re.findall('[0-9]+\slei\staxa', taxes)
+        data_dictionary['universityAdmissionFee'] = int(taxes[0].split(' ')[0])
+        data_dictionary['facultyAdmissionFee'] = int(taxes[1].split(' ')[0])
+    elif 'mecanica' in url:
+        data_dictionary['universityAdmissionFee'] = 50
+        data_dictionary['facultyAdmissionFee'] = 100
+    else:
+        taxes = taxes.split('-')
+
+        data_dictionary['universityAdmissionFee'] = [int(x) for x in re.findall('\d+', taxes[1])][0]
+
+        data_dictionary['facultyAdmissionFee'] = [int(x) for x in re.findall('\d+', taxes[3])][0]
+
     return data_dictionary
 
 
@@ -68,8 +87,9 @@ def scrape_data_from_url(url):
     data = []
 
     for elem in soup(text=re.compile(
-            r'Înscrieri:|Afişarea rezultatelor iniţiale|Proba de concurs|Înscrierea candidaţilor:|\+ Etapa II')):
+            r'Înscrieri:|Afişarea rezultatelor iniţiale|Proba de concurs|Înscrierea candidaţilor:|Taxa de înscriere')):
         part = elem.parent.parent
+
         data.append(part.text if 'Etapa' in part.text else part.parent.text)
         if current_information_processed == 4:
             break
@@ -77,13 +97,17 @@ def scrape_data_from_url(url):
 
     data[0] = data[0].split('Cluj-Napoca')[0] + 'Cluj-Napoca'
     # [print(data) for data in data]
-    return convert_json_format(data, url)
+
+    partial_data = convert_json_format(data, url)
+
+    return partial_data
 
 
-'''converted_json_data = [scrape_data_from_url(url) for url in urls if 'regulament' not in url]
+converted_json_data = [scrape_data_from_url(url) for url in urls if 'regulament' not in url]
+
 file = open('utcn.json', 'w')
-json.dump(converted_json_data, file, indent=4)'''
-requiredDocuments = requests.get('https://www.utcluj.ro/media/documents/2020/acte_necesare_admitere_2020.pdf')
+json.dump(converted_json_data, file, indent=4)
+'''requiredDocuments = requests.get('https://www.utcluj.ro/media/documents/2020/acte_necesare_admitere_2020.pdf')
 pdfFile = open('requiredDocuments.pdf', 'wb')
 pdfFile.write(requiredDocuments.content)
 
@@ -92,10 +116,9 @@ pdfFile.close()
 raw = parser.from_file("requiredDocuments.pdf")
 pdfData = raw['content']
 pdfData = pdfData.split('ÎNSCRIERE')[2]
+
 pdfData = re.sub('\n{3,}', '\n\n', pdfData)
 
 file = open('requiredDocumentx.txt', 'w')
 file.write(pdfData)
-file.close()
-
-
+file.close()'''

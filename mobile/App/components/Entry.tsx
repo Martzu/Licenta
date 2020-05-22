@@ -27,13 +27,13 @@ interface EntryProps{
 
 export default function Entry(props: EntryProps){
 
-    const [render, setRender] = useState<boolean>(false);
+    const [render, setRender] = useState<boolean>(true);
 
     useEffect(() => {
         //TODO: modify here to display before or after the signupDate
-        let today = new Date();
+        /*let today = new Date();
         let day = today.getDate();
-        setRender(day <= parseInt(props.faculty.signUpDate.slice(-2)));
+        setRender(day <= parseInt(props.faculty.signUpDate.slice(-2)));*/
     },[]);
 
     return(

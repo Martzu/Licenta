@@ -27,8 +27,8 @@ public class Seed implements CommandLineRunner {
 
     //private static final String requiredDocumentsFilePath = "/home/martzu/Facultate/Licenta/DataProcessor/requiredDocumentx.txt";
 
-    private static final String[] dataPaths = {"/home/martzu/Facultate/Licenta/UbbTest/ubb.json",
-                                        "/home/martzu/Facultate/Licenta/DataProcessor/utcn.json"};
+    private static final String[] dataPaths = {"D:\\Facultate\\Licenta\\Licenta\\UbbTest\\ubb.json",
+                                        "D:\\Facultate\\Licenta\\Licenta\\DataProcessor\\utcn.json"};
 
     public void run(String... args) throws Exception {
 

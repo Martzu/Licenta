@@ -6,7 +6,8 @@ interface DetailsProps{
     displayText: string,
     overlayVisible: boolean,
     setOverlayVisible: (visible: boolean) => void,
-    userAdmissionsNumber: number
+    userAdmissionsNumber: number,
+    goingOn: boolean
 }
 
 let Card = require('../icons/Card.png');
@@ -15,14 +16,24 @@ export default function AdmissionDetails(props : DetailsProps){
 
     function generateDisplayText(text: string): string{
         let partialDocumentsText: string = '';
-        if(text.length > 0){
-            partialDocumentsText =  text.split(':')[1].split('\n').slice(2).map(value => {
+        console.log(props.goingOn);
+        if(props.goingOn){
+            if(text.length > 0){
+                partialDocumentsText =  text.split(':')[1].split('\n').slice(2).map(value => {
+                    let firstChar = value.charAt(0);
+                    return firstChar === '4' ? (props.userAdmissionsNumber * 4) + ' ' + value.substring(1) : value.includes('diploma') || value.includes('Report')? value : props.userAdmissionsNumber + ' ' + value;
+                }).reduce(((previousValue, currentValue) => previousValue + '\n' + currentValue + ' '));
 
-                let firstChar = value.charAt(0);
-                return firstChar === '4' ? (props.userAdmissionsNumber * 4) + ' ' + value.substring(1) : value.includes('diploma') || value.includes('Report')? value : props.userAdmissionsNumber + ' ' + value;
-            }).reduce(((previousValue, currentValue) => previousValue + '\n' + currentValue + ' '));
-            partialDocumentsText += '\n' + (props.userAdmissionsNumber - 1 + ' BAC Diploma Receipt') + '\n';
-            partialDocumentsText += (props.userAdmissionsNumber - 1 + ' Report Card Receipt') + '\n';
+                if(props.userAdmissionsNumber > 1){
+                    partialDocumentsText += '\n' + (props.userAdmissionsNumber - 1 + ' BAC Diploma Receipt') + '\n';
+                    partialDocumentsText += (props.userAdmissionsNumber - 1 + ' Report Card Receipt') + '\n';
+                }
+                console.log(partialDocumentsText);
+
+            }
+        }
+        else{
+            partialDocumentsText =  text.split(':')[1].split('\n').slice(2).reduce((previousValue, currentValue) => previousValue + '\n'+ currentValue + '');
         }
 
 

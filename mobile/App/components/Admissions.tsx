@@ -128,7 +128,7 @@ export default function Admissions(props: AdmissionsProps){
 
             </View>
             {props.userAdmissions.length > 0 && goingOn && <UserAdmissionsDetails userAdmissions={props.userAdmissions} setOverlayVisible={setOverlayVisible}/>}
-            <AdmissionDetails overlayVisible={overlayVisible} setOverlayVisible={setOverlayVisible} displayText={requiredDocuments} userAdmissionsNumber={props.userAdmissions.length}/>
+            <AdmissionDetails goingOn={goingOn} overlayVisible={overlayVisible} setOverlayVisible={setOverlayVisible} displayText={requiredDocuments} userAdmissionsNumber={props.userAdmissions.length}/>
             {
                 faculties.map((faculty, index) =>
                         <Entry faculty={faculty} key={index} going={goingOn} handleBottomButtonClick={handleCancelOrParticipate} handleFacultyLocationPress={props.handleFacultyLocationPress} setOverlayVisible={setOverlayVisible}/>
