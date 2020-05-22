@@ -16,12 +16,12 @@ export default function AdmissionDetails(props : DetailsProps){
 
     function generateDisplayText(text: string): string{
         let partialDocumentsText: string = '';
-        console.log(props.goingOn);
         if(props.goingOn){
+
             if(text.length > 0){
                 partialDocumentsText =  text.split(':')[1].split('\n').slice(2).map(value => {
                     let firstChar = value.charAt(0);
-                    return firstChar === '4' ? (props.userAdmissionsNumber * 4) + ' ' + value.substring(1) : value.includes('diploma') || value.includes('Report')? value : props.userAdmissionsNumber + ' ' + value;
+                    return firstChar === '3' ? (props.userAdmissionsNumber * 4) + ' ' + value : value.includes('diploma') || value.includes('Report')? value : props.userAdmissionsNumber + ' ' + value;
                 }).reduce(((previousValue, currentValue) => previousValue + '\n' + currentValue + ' '));
 
                 if(props.userAdmissionsNumber > 1){
@@ -33,6 +33,9 @@ export default function AdmissionDetails(props : DetailsProps){
             }
         }
         else{
+            console.log('haha');
+            console.log(props.displayText);
+            console.log(text);
             partialDocumentsText =  text.split(':')[1].split('\n').slice(2).reduce((previousValue, currentValue) => previousValue + '\n'+ currentValue + '');
         }
 

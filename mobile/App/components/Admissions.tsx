@@ -1,7 +1,17 @@
 import {ScrollView} from "react-native-gesture-handler";
 import Entry from "./Entry";
 import * as React from "react";
-import {Button, Image, ImageBackground, Modal, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {
+    ActivityIndicator,
+    Button,
+    Image,
+    ImageBackground,
+    Modal,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View
+} from "react-native";
 import * as Font from 'expo-font';
 import {useEffect, useState} from "react";
 import Faculty from "../types/Faculty";
@@ -59,12 +69,15 @@ export default function Admissions(props: AdmissionsProps){
 
     const[requiredDocuments, setRequiredDocuments] = useState('');
 
+    const[render, setRender] = useState(false);
+
     useEffect(() => {
         (async () => {
             let documentsResponse = await axios.get('http://192.168.1.5:8080/documents');
             let documents: string = documentsResponse.data.reduce((previousValue, currentValue) => previousValue + '\n' + currentValue);
             console.log(documents);
             setRequiredDocuments('Required documents: \n\n' + documents);
+            setRender(true);
         })();
 
     }, []);
@@ -111,6 +124,9 @@ export default function Admissions(props: AdmissionsProps){
         setFaculties(going ? props.userAdmissions : props.faculties);
     }
 
+    if(!render){
+        return <ActivityIndicator/>
+    }
     return (
         <ScrollView style={{backgroundColor: "#343434"}}>
             <ConflictCard conflictMessage={conflictMessage} overlayVisible={conflict} setOverlayVisible={setConflict}/>

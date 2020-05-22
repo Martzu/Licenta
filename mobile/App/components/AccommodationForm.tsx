@@ -26,6 +26,7 @@ let ConfirmButton = require('../icons/ConfirmButton.png');
 
 
 const formTypes: string[] = ['Accommodation Name', 'Address', 'Check-in date', 'Check-out date'];
+const objectFields: string[] = ['name', 'address', 'checkIn', 'checkOut'];
 const regexes: string[] = ['^(\\w){3,}$', '^(.){3,}$', '^[0-9]{2}\/[0-9]{2}$', '^[0-9]{2}\/[0-9]{2}$'];
 
 interface AccommodationFormProps{
@@ -74,7 +75,7 @@ function dateNotInPast(date: string){
         console.log(day);
         console.log(parseInt(data[1]));
         console.log(month);
-        if(parseInt(data[0]) <= day && parseInt(data[1]) <= month + 1){
+        if(parseInt(data[0]) < day && parseInt(data[1]) <= month + 1){
             valid = false;
         }
         console.log(valid);
@@ -95,6 +96,8 @@ export default function AccommodationForm(props: AccommodationFormProps){
 
     const [accommodation, setAccommodation] = useState<UserAccommodation>({name: '', address: '', checkIn: '', checkOut: ''});
 
+
+
     useEffect(() => {
         setKeyboardDidShowListener(Keyboard.addListener('keyboardDidShow', () => props.setMultiplier(1.75)));
         setKeyboardDidHideListener(Keyboard.addListener('keyboardDidHide', () => props.setMultiplier(1)));
@@ -105,9 +108,10 @@ export default function AccommodationForm(props: AccommodationFormProps){
         <ScrollView contentContainerStyle={styles.container}>
             {
                 formTypes.map((formType, index) =>
-                    <FormInput inputName={formType} key={index} setAccommodation={setAccommodation} fieldName={Object.keys(accommodation)[index]} accommodation={accommodation} regex={regexes[index]} dateNotInPast={dateNotInPast} checkOutDateIsCorrect={checkOutDateIsCorrect}/>
+                    <FormInput key={index} inputName={formType} setAccommodation={setAccommodation} fieldName={objectFields[index]} accommodation={accommodation} regex={regexes[index]} dateNotInPast={dateNotInPast} checkOutDateIsCorrect={checkOutDateIsCorrect}/>
                 )
             }
+
             <Overlay isVisible={displaySuccessful} onBackdropPress={() => props.setDisplayPages([true, false, false])} overlayStyle={{backgroundColor: '#1f1f1f'}}>
                 <Text style={{fontFamily: 'montserrat', textAlign: 'center', color: '#00e600', fontSize: 30}}>
                     Successful!

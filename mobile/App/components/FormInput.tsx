@@ -12,7 +12,7 @@ interface FormInputProps{
     accommodation: UserAccommodation,
     dateNotInPast: (date: string) => boolean,
     checkOutDateIsCorrect: (accommodation: UserAccommodation) => boolean,
-    regex: string
+    regex: string,
 }
 
 function isDateField(fieldName: string){
@@ -27,6 +27,7 @@ export default function FormInput(props: FormInputProps){
         let errorEncountered: boolean = false;
         let errorMessage: string = '';
         let regex = new RegExp(props.regex);
+        console.log(props.accommodation);
         if(regex.test(value)){
             if(isDateField(props.fieldName)){
                 if(!props.dateNotInPast(value)){
@@ -70,7 +71,10 @@ export default function FormInput(props: FormInputProps){
                 {props.inputName === 'Check-in date' || props.inputName === 'Check-out date' ? 'dd/mm' : ''}
             </Text>
             <ImageBackground source={InputField} style={styles.inputForm}>
-                <TextInput style={styles.textInput} onBlur={() => {currentFieldIsValid(); }} onChangeText={(text) => props.setAccommodation({...props.accommodation, [props.fieldName]: text})}/>
+                <TextInput style={styles.textInput} onBlur={() => {currentFieldIsValid(); }} onChangeText={(text) => {
+                    console.log(Object.keys(props.accommodation));
+                    console.log(props.fieldName);
+                    props.setAccommodation({...props.accommodation, [props.fieldName]: text})}}/>
             </ImageBackground>
             {
                 error && <Text style={styles.errorText}>{displayMessage}</Text>

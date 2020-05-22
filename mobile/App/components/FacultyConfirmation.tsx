@@ -27,7 +27,7 @@ export default function FacultyConfirmation(props: FacultyConfirmationProps){
 
     const [confirmVisible, setConfirmVisible] = useState<boolean[]>(props.clicked);
     const [removeVisible, setRemoveVisible] = useState<boolean[]>(props.clicked);
-
+    const [admissionFacultyIdToRemove, setAdmissionFacultyIdToRemove] = useState<number[]>([]);
 
     function handlePress(isConfirm: boolean, buttonIndex: number){
         let array = isConfirm? removeVisible : confirmVisible;
@@ -35,21 +35,26 @@ export default function FacultyConfirmation(props: FacultyConfirmationProps){
         isConfirm? setRemoveVisible(modifiedArray) : setConfirmVisible(modifiedArray) ;
     }
 
-    async function removeAdmission(facultyId){
-        const response = await axios.delete('http://192.168.1.5:8080/faculty', {data: {username: 'a', facultyId: facultyId}});
-        if(response.status === 200){
-            let userAdmissions: Faculty[] = props.userAdmissions.filter(faculty => faculty.id !== facultyId);
-            props.setUserAdmissions(userAdmissions);
-        }
+    function removeAdmission(facultyId){
+        setAdmissionFacultyIdToRemove(admissionFacultyIdToRemove => [...admissionFacultyIdToRemove, facultyId]);
+        let userAdmissions: Faculty[] = props.userAdmissions.filter(faculty => faculty.id !== facultyId);
+        props.setUserAdmissions(userAdmissions);
     }
 
+
     function canExit(): boolean{
+        let canExit = false;
         let confirmedAdmissions: number = 0;
         for(let i = 0; i < confirmVisible.length; i++){
             confirmedAdmissions += !(confirmVisible[i] && removeVisible[i]) ?  1 : 0;
         }
 
-        return confirmedAdmissions === props.clicked.length;
+        if(confirmedAdmissions === props.clicked.length){
+
+            (async () => axios.all(admissionFacultyIdToRemove.map(facultyId => axios.delete('http://192.168.1.5:8080/faculty',{data: {username: 'a', facultyId: facultyId}}))))();
+            canExit = true;
+        }
+        return canExit;
     }
 
     return (
@@ -71,7 +76,7 @@ export default function FacultyConfirmation(props: FacultyConfirmationProps){
                                     </Text>
                                 </View>
                                 {<TouchableOpacity onPress={() => handlePress(true, index)} style={{marginRight: -15}}><Image style={styles.confirmImage} source={confirmVisible[index] && ConfirmParticipation || ConfirmParticipationOff}/></TouchableOpacity>}
-                                {<TouchableOpacity onPress={() => {handlePress(false, index); removeAdmission(admission.id);}}><Image style={styles.unconfirmImage} source={removeVisible[index] && UnconfirmAdmission || UnconfirmAdmissionOff}/></TouchableOpacity>}
+                                {<TouchableOpacity onPress={async() => {handlePress(false, index); removeAdmission(admission.id);}}><Image style={styles.unconfirmImage} source={removeVisible[index] && UnconfirmAdmission || UnconfirmAdmissionOff}/></TouchableOpacity>}
                             </View>
 
                         )

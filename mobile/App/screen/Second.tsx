@@ -251,23 +251,28 @@ export default function Second(){
     const [firstCalIcon, setFirstCalIcon] = useState(true);
 
 
-    useEffect(() => {
-        let today = new Date();
-        const currentDay = today.getDate();
-        let userAdmissionsWithExpiredSignUp: Faculty[] = userAdmissions.filter((userAdmission, index) =>
-            parseInt(userAdmission.signUpDate.slice(-2)) + 4 === currentDay//modify here to check for expiration date of sign up
-        );
+    const [runOnce, setRunOnce] = useState(true);
 
-        let clicked: boolean[] = [];
-        for(let i = 0; i < userAdmissionsWithExpiredSignUp.length; i++){
-            clicked.push(true);
+    useEffect( () => {
+        //let today = new Date();
+        //const currentDay = today.getDate();
+        /*let userAdmissionsWithExpiredSignUp: Faculty[] = userAdmissions.filter((userAdmission, index) =>
+            parseInt(userAdmission.signUpDate.slice(-2)) + 4 === currentDay//modify here to check for expiration date of sign up
+        );*/
+        if(userAdmissions.length === 3){
+            let userAdmissionsWithExpiredSignUp: Faculty[] = userAdmissions;
+
+            let clicked: boolean[] = [];
+            for(let i = 0; i < userAdmissionsWithExpiredSignUp.length; i++){
+                clicked.push(true);
+            }
+
+            setClicked(clicked);
+            setIsSignUpConfirmationVisible(userAdmissionsWithExpiredSignUp.length > 0);
+            setWaitingForConfirmationAdmissions(userAdmissionsWithExpiredSignUp);
         }
 
-        setClicked(clicked);
-        setIsSignUpConfirmationVisible(userAdmissionsWithExpiredSignUp.length > 0);
-        setWaitingForConfirmationAdmissions(userAdmissionsWithExpiredSignUp);
 
-        //sterge backend, updateaza liste front end
     },[userAdmissions]);
 
     const [multiplier, setMultiplier] = useState(1);

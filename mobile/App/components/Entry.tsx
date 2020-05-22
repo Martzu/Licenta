@@ -30,10 +30,17 @@ export default function Entry(props: EntryProps){
     const [render, setRender] = useState<boolean>(true);
 
     useEffect(() => {
-        //TODO: modify here to display before or after the signupDate
         /*let today = new Date();
         let day = today.getDate();
-        setRender(day <= parseInt(props.faculty.signUpDate.slice(-2)));*/
+        setRender(day <= parseInt(props.faculty.signUpDate.slice(-2)));
+        if(props.faculty.name !== 'Automatica si calculatoare' && props.faculty.name !== 'Chimie inginerie chimica' && props.faculty.name !== 'Constructii' && props.faculty.name !== 'Mecanica')
+        {
+            setRender(false);
+        }
+        else
+        {
+            setRender(true);
+        }*/
     },[]);
 
     return(
