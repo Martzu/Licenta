@@ -22,9 +22,13 @@ export default function App() {
   if(!render){
     return <ActivityIndicator/>
   }
-  return (
-      <Second/>
+
+  return(
+      <MyStack/>
   );
+  /*return (
+      <Second/>
+  );*/
 }
 
 const styles = StyleSheet.create({
