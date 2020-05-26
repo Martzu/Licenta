@@ -30,6 +30,10 @@ public class Faculty {
     private Integer universityAdmissionFee;
     private Integer facultyAdmissionFee;
 
+    @ManyToOne
+    @JoinColumn(name = "university_id")
+    private University university;
+
 
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(

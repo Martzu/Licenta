@@ -7,4 +7,6 @@ public interface FactoryRepository {
     public FacultyRepository createFacultyRepository();
 
     public AccommodationRepository createAccommodationRepository();
+
+    public UniversityRepository createUniversityRepository();
 }
