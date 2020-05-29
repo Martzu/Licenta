@@ -79,4 +79,22 @@ public class AppUserService {
 
     }
 
+    @Transactional
+    public void updateUserFilters(String username, boolean[] cityFilter, boolean[] facultyTypeFilter) throws Exception{
+        AppUser appUser = factoryRepository.createAppUserRepository().findByUsername(username).orElseThrow(() -> new Exception("Username does not exist"));
+        appUser.setIasiFilter(cityFilter[0]);
+        appUser.setClujFilter(cityFilter[1]);
+        appUser.setBucurestiFilter(cityFilter[2]);
+
+        appUser.setTechnicFilter(facultyTypeFilter[0]);
+        appUser.setUmanisticFilter(facultyTypeFilter[1]);
+
+        factoryRepository.createAppUserRepository().save(appUser);
+    }
+
+    public AppUser authenticateUser(String username, String password) throws Exception{
+        AppUser appUser = factoryRepository.createAppUserRepository().findByUsername(username).orElseThrow(() -> new Exception("Username does not exist"));
+        return password.equals(appUser.getPassword()) ? appUser : new AppUser();
+    }
+
 }

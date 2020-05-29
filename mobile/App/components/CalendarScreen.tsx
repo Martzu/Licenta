@@ -69,8 +69,7 @@ function userHasAccommodation(userAccommodation: UserAccommodation){
 
 function addAccommodationToCalendar(monthDays: CalendarDays, userAccommodation: UserAccommodation){
     if(userHasAccommodation(userAccommodation)){
-        console.log('inside');
-        console.log(userAccommodation);
+
         let checkInDay = parseInt(userAccommodation.checkIn.split('/')[0]);
         let checkOutDay = parseInt(userAccommodation.checkOut.split('/')[0]);
 
@@ -156,6 +155,7 @@ export default function CalendarScreen(props: CalendarScreenProps){
         props.userAdmissions.forEach(faculty => {
             let signUpDates: string[] = faculty.signUpDate.length > 2 ? faculty.signUpDate.split(' ') : [faculty.signUpDate];
             if(signUpDates.length > 1){
+
                 signUpDates.forEach(signUpDate => {
                     addSignUpDatesToCalendar(monthDays, signUpDate, faculty.name);
                 });
@@ -171,11 +171,9 @@ export default function CalendarScreen(props: CalendarScreenProps){
 
 
         });
-        console.log("1");
+
         addAccommodationToCalendar(monthDays, props.userAccommodation);
 
-        console.log('yes');
-        console.log(monthDays);
 
         if(days.length === 0){
             for(let i = 1; i <= currentMonthDays; i++){

@@ -20,6 +20,7 @@ import UserAccommodation from "../types/UserAccommodation";
 import axios from 'axios';
 import {parse} from "react-native-svg";
 import {Overlay} from "react-native-elements";
+import {BACKEND_URL} from "../constants/Constants";
 
 let BackButton = require('../icons/BackButton.png');
 let ConfirmButton = require('../icons/ConfirmButton.png');
@@ -71,14 +72,11 @@ function dateNotInPast(date: string){
         const month = today.getMonth();
 
         const data = date.split('/');
-        console.log(parseInt(data[0]));
-        console.log(day);
-        console.log(parseInt(data[1]));
-        console.log(month);
+
         if(parseInt(data[0]) < day && parseInt(data[1]) <= month + 1){
             valid = false;
         }
-        console.log(valid);
+
     }
     return valid;
 
@@ -122,7 +120,7 @@ export default function AccommodationForm(props: AccommodationFormProps){
                     props.setUserAccommodation(accommodation);
                     setDisplaySuccessful(true);
 
-                    axios.post('http://192.168.1.5:8080/accommodation', {username: 'a', accommodationDTO: accommodation});
+                    axios.post(BACKEND_URL + '/accommodation', {username: 'a', accommodationDTO: accommodation});
                 }
             }}>
                 <Image source={ConfirmButton} style={styles.backButton}/>

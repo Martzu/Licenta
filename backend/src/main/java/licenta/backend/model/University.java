@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,6 +15,7 @@ import java.util.List;
 public class University {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private String abbreviation;
@@ -30,5 +28,9 @@ public class University {
         this.name = name;
         this.abbreviation = Arrays.stream(name.split(" ")).reduce("", (accummulator, element) -> accummulator + element.charAt(0));
         System.out.println(abbreviation);
+    }
+
+    public String toString(){
+        return this.name + " " + this.abbreviation;
     }
 }

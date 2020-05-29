@@ -12,6 +12,9 @@ import {
 import * as React from 'react';
 import {useEffect, useState} from "react";
 import KeyboardListener from 'react-native-keyboard-listener';
+import User from "../types/User";
+import axios from 'axios';
+import {BACKEND_URL} from "../constants/Constants";
 
 let UsernameInput = require('../icons/UsernameInput.png');
 let PasswordInput = require('../icons/PasswordInput.png');
@@ -23,6 +26,36 @@ export default function Login({navigation}){
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
+    async function handleLogin(){
+        let loginResponse = await axios.post(BACKEND_URL + '/login', {username, password});
+        console.log(loginResponse.status);
+        if(loginResponse.status === 200){
+            let user: User = loginResponse.data;
+            console.log("login");
+            console.log(user);
+            if(user.username){
+                navigation.navigate('Second', {currentUser: user})
+            }
+            else{
+                alert("Incorrect password!");
+            }
+        }
+        else{
+            alert("Wrong credentials!");
+        }
+
+    }
+
+    /*const [user, setUser] = useState<User>({
+        bucurestiFilter: false,
+        clujFilter: true,
+        iasiFilter: false,
+        id: 0,
+        technicFilter: true,
+        umanisticFilter: false,
+        username: "a"
+    });*/
 
     return (
 
@@ -40,7 +73,7 @@ export default function Login({navigation}){
 
 
 
-            <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate('Second')}>
+            <TouchableOpacity style={styles.loginButton} onPress={async () => await handleLogin()}>
                 <Image source={LoginButton} style={styles.loginButton}/>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.navigate('SignUp')} style={styles.signUpButton}>

@@ -6,6 +6,8 @@ export const DRIVING = 'DRIVING';
 
 export const WALKING = 'WALKING';
 
+export const BACKEND_URL = 'http://192.168.1.2:8080';
+
 export const BICYCLING = 'BICYCLING';
 
 let displayFromText;

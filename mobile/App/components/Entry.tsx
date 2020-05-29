@@ -4,7 +4,6 @@ import {TouchableHighlight} from "react-native-gesture-handler";
 import * as Font from "expo-font";
 import {useEffect, useState} from "react";
 import Faculty from "../types/Faculty";
-import axios from 'axios';
 import LocationData from "../types/LocationData";
 import displayFromText from '../constants/Constants';
 
@@ -41,6 +40,7 @@ export default function Entry(props: EntryProps){
         {
             setRender(true);
         }*/
+        console.log();
     },[]);
 
     return(
@@ -50,7 +50,7 @@ export default function Entry(props: EntryProps){
                     <View style={styles.auxTopSection}/>
                     <View style={styles.topSection}>
                         <Text style={styles.text}>
-                            {displayFromText(props.faculty.name)}
+                            {displayFromText(props.faculty.name) + '\n' + props.faculty.university}
                         </Text>
                     </View>
 
@@ -83,7 +83,7 @@ export default function Entry(props: EntryProps){
                     <View style={styles.auxTopSection}/>
                     <View style={styles.topSection}>
                         <Text style={styles.text}>
-                            {displayFromText(props.faculty.name)}
+                            {displayFromText(props.faculty.name) + '\n' + props.faculty.university}
                         </Text>
                     </View>
 
@@ -157,6 +157,7 @@ const styles = StyleSheet.create({
     },
 
     middleSection:{
+        marginTop: 20,
         justifyContent: 'space-around',
         display: 'flex',
         flex: 0.2,

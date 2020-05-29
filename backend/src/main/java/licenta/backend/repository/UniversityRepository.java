@@ -9,4 +9,8 @@ public interface UniversityRepository extends Repository<University, Integer> {
 
     public Optional<University> findById(Integer id);
 
+    public Optional<University> findByAbbreviation(String abbreviation);
+
+    public University save(University university);
+
 }

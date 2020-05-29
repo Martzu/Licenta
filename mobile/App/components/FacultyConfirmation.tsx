@@ -4,6 +4,7 @@ import * as React from "react";
 import Faculty from "../types/Faculty";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import {BACKEND_URL} from "../constants/Constants";
 
 let ConfirmParticipation = require('../icons/ConfirmParticipation.png');
 let ConfirmParticipationOff = require('../icons/ConfirmParticipationOff.png');
@@ -51,7 +52,7 @@ export default function FacultyConfirmation(props: FacultyConfirmationProps){
 
         if(confirmedAdmissions === props.clicked.length){
 
-            (async () => axios.all(admissionFacultyIdToRemove.map(facultyId => axios.delete('http://192.168.1.5:8080/faculty',{data: {username: 'a', facultyId: facultyId}}))))();
+            (async () => axios.all(admissionFacultyIdToRemove.map(facultyId => axios.delete(BACKEND_URL + '/faculty',{data: {username: 'a', facultyId: facultyId}}))))();
             canExit = true;
         }
         return canExit;

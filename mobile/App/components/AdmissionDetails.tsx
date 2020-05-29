@@ -28,14 +28,12 @@ export default function AdmissionDetails(props : DetailsProps){
                     partialDocumentsText += '\n' + (props.userAdmissionsNumber - 1 + ' BAC Diploma Receipt') + '\n';
                     partialDocumentsText += (props.userAdmissionsNumber - 1 + ' Report Card Receipt') + '\n';
                 }
-                console.log(partialDocumentsText);
+
 
             }
         }
         else{
-            console.log('haha');
-            console.log(props.displayText);
-            console.log(text);
+
             partialDocumentsText =  text.split(':')[1].split('\n').slice(2).reduce((previousValue, currentValue) => previousValue + '\n'+ currentValue + '');
         }
 

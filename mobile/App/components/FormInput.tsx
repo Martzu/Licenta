@@ -27,7 +27,7 @@ export default function FormInput(props: FormInputProps){
         let errorEncountered: boolean = false;
         let errorMessage: string = '';
         let regex = new RegExp(props.regex);
-        console.log(props.accommodation);
+
         if(regex.test(value)){
             if(isDateField(props.fieldName)){
                 if(!props.dateNotInPast(value)){
@@ -72,8 +72,7 @@ export default function FormInput(props: FormInputProps){
             </Text>
             <ImageBackground source={InputField} style={styles.inputForm}>
                 <TextInput style={styles.textInput} onBlur={() => {currentFieldIsValid(); }} onChangeText={(text) => {
-                    console.log(Object.keys(props.accommodation));
-                    console.log(props.fieldName);
+
                     props.setAccommodation({...props.accommodation, [props.fieldName]: text})}}/>
             </ImageBackground>
             {

@@ -22,9 +22,26 @@ public class AppUser {
     private String username;
     private String password;
 
+    private Boolean iasiFilter;
+    private Boolean clujFilter;
+    private Boolean bucurestiFilter;
+
+    private Boolean technicFilter;
+    private Boolean umanisticFilter;
+
     public AppUser(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public AppUser(String username, String password, Boolean iasiFilter, Boolean clujFilter, Boolean bucurestiFilter, Boolean technicFilter, Boolean umanisticFilter){
+        this.username = username;
+        this.password = password;
+        this.iasiFilter = iasiFilter;
+        this.clujFilter = clujFilter;
+        this.bucurestiFilter = bucurestiFilter;
+        this.technicFilter = technicFilter;
+        this.umanisticFilter = umanisticFilter;
     }
 
     @ManyToMany(mappedBy = "appUsers", cascade = {CascadeType.ALL})

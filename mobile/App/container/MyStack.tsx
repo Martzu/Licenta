@@ -13,14 +13,15 @@ export default function MyStack(){
     return(
         <NavigationContainer>
             <Stack.Navigator headerMode={null}>
-                <Stack.Screen
-                    name= 'SignUp'
-                    component = {SignUp}
-                />
 
                 <Stack.Screen
                     name = 'Login'
                     component = {Login}
+                />
+
+                <Stack.Screen
+                    name= 'SignUp'
+                    component = {SignUp}
                 />
 
                 <Stack.Screen

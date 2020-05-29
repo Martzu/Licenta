@@ -31,16 +31,6 @@ public class FacultyController {
         serviceFactory.appUserService().removeParticipationFromFacultyAdmission(test.getUsername(), test.getFacultyId());
     }
 
-    @PostMapping("/accommodation")
-    public void addAccommodation(@RequestBody Test test) throws Exception{
-        serviceFactory.appUserService().addAccommodationToUser(test.getUsername(), test.getAccommodationDTO());
-    }
-
-    @PostMapping("/userAccommodation")
-    public AccommodationDTO getUserAccommodation(@RequestBody Test test) throws Exception{
-        return serviceFactory.appUserService().getUserAccommodation(test.getUsername());
-    }
-
     @PostMapping("/unattending")
     public List<FacultyDTO> getAdmissionsNotParticipating(@RequestBody Test test) throws Exception {
         return serviceFactory.appUserService().getAppUserNotSignedAdmissions(test.getUsername()).stream().sorted(Comparator.comparing(FacultyDTO::getName)).collect(Collectors.toList());
@@ -57,9 +47,6 @@ public class FacultyController {
         return serviceFactory.facultyService().getAllFaculties().stream().sorted(Comparator.comparing(FacultyDTO::getName)).collect(Collectors.toList());
     }
 
-    @PostMapping("/user/faculties")
-    public List<FacultyDTO> getAllUserAdmissions(@RequestBody Test test) throws Exception {
-        return serviceFactory.appUserService().getAppUserAdmissions(test.getUsername()).stream().sorted(Comparator.comparing(FacultyDTO::getName)).collect(Collectors.toList());
-    }
+
 
 }

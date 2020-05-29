@@ -22,6 +22,8 @@ public class FacultyDTO {
     private String resultsDate;
     private Integer universityAdmissionFee;
     private Integer facultyAdmissionFee;
+    private String university;
+    private Boolean isTechnic;
 
     public FacultyDTO(Faculty faculty) {
         this.id = faculty.getId();
@@ -35,5 +37,7 @@ public class FacultyDTO {
         this.resultsDate = faculty.getResultsDate();
         this.universityAdmissionFee = faculty.getUniversityAdmissionFee();
         this.facultyAdmissionFee = faculty.getFacultyAdmissionFee();
+        this.university = faculty.getUniversity().getAbbreviation();
+        this.isTechnic = faculty.getIsTechnic();
     }
 }

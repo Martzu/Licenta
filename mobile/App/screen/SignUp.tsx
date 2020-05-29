@@ -115,6 +115,7 @@ const styles = StyleSheet.create({
     cityContainer:{
         flexDirection: 'row'
     },
+
     facultyTypeContainer:{
         flexDirection: 'row',
         justifyContent: "space-between"

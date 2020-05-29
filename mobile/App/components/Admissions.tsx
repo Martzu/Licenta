@@ -23,12 +23,29 @@ import AdmissionDetails from "./AdmissionDetails";
 import ConflictCard from "./ConflictCard";
 import AdmissionFees from "./AdmissionFees";
 import UserAdmissionsDetails from "./UserAdmissionsDetails";
+import {BACKEND_URL} from "../constants/Constants";
+import User from "../types/User";
 
 let AvailableOff = require('../icons/Available.png');
 let AvailableOn = require('../icons/AvailableOn.png');
 
 let GoingOff  = require('../icons/Going.png');
 let GoingOn = require('../icons/GoingOn.png');
+
+let ClujOn = require('../icons/ClujOn.png');
+let ClujOff = require('../icons/ClujOff.png')
+
+let IasiOn = require('../icons/IasiOn.png');
+let IasiOff = require('../icons/IasiOff.png');
+
+let BucurestiOn = require('../icons/BucurestiOn.png');
+let BucurestiOff = require('../icons/BucurestiOff.png');
+
+let TechnicOn = require('../icons/TechnicOn.png');
+let TechnicOff = require('../icons/TechnicOff.png');
+
+let UmanisticOn = require('../icons/UmanisticOn.png');
+let UmanisticOff = require('../icons/UmanisticOff.png');
 
 
 function checkAdmissionsConflict(currentFaculty: Faculty, userAdmissions: Faculty[], setConflictMessage: (message: string) => void){
@@ -43,8 +60,11 @@ function checkAdmissionsConflict(currentFaculty: Faculty, userAdmissions: Facult
         }
     });
     setConflictMessage(conflictMessage);
-    console.log(conflict);
     return conflict;
+}
+
+function handlePress(array: boolean[], givenIndex: number): boolean[]{
+    return array.map((element,index) => index === givenIndex ? ! element : element);
 }
 
 interface AdmissionsProps{
@@ -52,7 +72,11 @@ interface AdmissionsProps{
     setFaculties: (faculties: Faculty[]) => void,
     setUserAdmissions: (userAdmissions: Faculty[]) => void,
     handleFacultyLocationPress: (destinations: LocationData[]) => void,
-    userAdmissions: Faculty[]
+    userAdmissions: Faculty[],
+    currentUsername: string,
+    cityFilter: boolean[],
+    facultyTypeFilter: boolean[],
+    updateUserFilters: (cityFilter: boolean[], facultyTypeFilter: boolean[]) => void,
 }
 
 export default function Admissions(props: AdmissionsProps){
@@ -61,22 +85,54 @@ export default function Admissions(props: AdmissionsProps){
 
     const[faculties, setFaculties] = useState<Faculty[]>(props.faculties);
 
+    //sa inceapa cu faculatile dupa filtrul userului
+    //const[facultiesToDisplay, setFacultiesToDisplay] = useState<Faculty[]>(props.faculties);
+
     const[overlayVisible, setOverlayVisible] = useState(false);
 
     const[conflict, setConflict] = useState(false);
 
     const[conflictMessage, setConflictMessage] = useState('');
 
+    const[facultyTypeFilter, setFacultyTypeFilter] = useState<boolean[]>(props.facultyTypeFilter);
+
     const[requiredDocuments, setRequiredDocuments] = useState('');
+
+    //must be user's filter
+    const[cityFilter, setCityFilter] = useState<boolean[]>(props.cityFilter);
 
     const[render, setRender] = useState(false);
 
     useEffect(() => {
+        let currentFilter: number[] = cityFilter.map((city, index) => city ? index : -1).filter(city => city !== -1);
+        let admissionsToDisplay: Faculty[] = [];
+
+        let facultiesToIterate = goingOn ? props.userAdmissions : props.faculties;
+        currentFilter.map(city =>
+            city === 0 ? facultiesToIterate.filter(faculty => faculty.address.includes('Iași')) :
+                city === 1 ? facultiesToIterate.filter(faculty => faculty.address.includes('Cluj')) :
+                    facultiesToIterate.filter(faculty => faculty.address.includes('București'))
+        ).forEach(cityFaculties => {
+            admissionsToDisplay = [...admissionsToDisplay, ...cityFaculties];
+        });
+
+        if(facultyTypeFilter[0] !== facultyTypeFilter[1]){
+            admissionsToDisplay = admissionsToDisplay.filter(admission => !facultyTypeFilter[0] ? admission.isTechnic : !admission.isTechnic);
+
+        }
+
+        setFaculties(admissionsToDisplay);
+        (async() => await props.updateUserFilters(cityFilter, facultyTypeFilter))();
+
+    },[cityFilter, goingOn, facultyTypeFilter]);
+
+    useEffect(() => {
         (async () => {
-            let documentsResponse = await axios.get('http://192.168.1.5:8080/documents');
+            let documentsResponse = await axios.get(BACKEND_URL + '/documents');
+
             let documents: string = documentsResponse.data.reduce((previousValue, currentValue) => previousValue + '\n' + currentValue);
-            console.log(documents);
             setRequiredDocuments('Required documents: \n\n' + documents);
+
             setRender(true);
         })();
 
@@ -94,7 +150,7 @@ export default function Admissions(props: AdmissionsProps){
 
     async function handleCancelOrParticipate(currentFaculty: Faculty){
         if(goingOn){
-            const response = await axios.delete('http://192.168.1.5:8080/faculty', {data: {username: 'a', facultyId: currentFaculty.id}});
+            const response = await axios.delete(BACKEND_URL + '/faculty', {data: {username: 'a', facultyId: currentFaculty.id}});
             if(response.status === 200){
                 let userAdmissions: Faculty[] = props.userAdmissions.filter(faculty => faculty.id !== currentFaculty.id);
                 setFaculties(userAdmissions);
@@ -104,7 +160,7 @@ export default function Admissions(props: AdmissionsProps){
         }
         else{
             if(!checkAdmissionsConflict(currentFaculty, props.userAdmissions, setConflictMessage)){
-                const response = await axios.post('http://192.168.1.5:8080/faculty', {username: 'a', facultyId: currentFaculty.id});
+                const response = await axios.post(BACKEND_URL + '/faculty', {username: 'a', facultyId: currentFaculty.id});
                 if(response.status === 200){
                     let filteredFaculties = props.faculties.filter(faculty => faculty.id !== currentFaculty.id);
                     setFaculties(filteredFaculties);
@@ -121,7 +177,10 @@ export default function Admissions(props: AdmissionsProps){
 
     function handleOnPress(going: boolean){
         setGoingOn(going);
-        setFaculties(going ? props.userAdmissions : props.faculties);
+        //setFaculties(going ? props.userAdmissions : props.faculties);
+        //TODO: acel faculties, filteredFAculties tre sa fie props.faculties dar cred ca-i ok si asa
+        //setFacultiesToDisplay(going ? props.userAdmissions : filteredFaculties);
+        setFaculties(going ? props.userAdmissions : faculties);
     }
 
     if(!render){
@@ -143,6 +202,31 @@ export default function Admissions(props: AdmissionsProps){
                 </TouchableOpacity>
 
             </View>
+            <View style={[styles.buttonFilterContainer, {marginTop: 15}]}>
+                <TouchableOpacity onPress={() => setCityFilter(handlePress(cityFilter, 0))} style={styles.leftButton}>
+                    <Image source={!cityFilter[0] && IasiOff || IasiOn} style={styles.leftButton}/>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => setCityFilter(handlePress(cityFilter, 1))} style={styles.middleButton}>
+                    <Image source={!cityFilter[1] && ClujOff || ClujOn} style={styles.middleButton}/>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => setCityFilter(handlePress(cityFilter, 2))} style={styles.rightButton}>
+                    <Image source={!cityFilter[2] && BucurestiOff || BucurestiOn} style={styles.rightButton}/>
+                </TouchableOpacity>
+
+            </View>
+
+            <View style={styles.facultyTypeContainer}>
+                <TouchableOpacity onPress={() => setFacultyTypeFilter(handlePress(facultyTypeFilter, 0))} style={styles.leftRightType}>
+                    <Image source={!facultyTypeFilter[0] && TechnicOff || TechnicOn} style={styles.leftRightType}/>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => setFacultyTypeFilter(handlePress(facultyTypeFilter, 1))} style={styles.leftRightType}>
+                    <Image source={!facultyTypeFilter[1] && UmanisticOff || UmanisticOn} style={styles.leftRightType}/>
+                </TouchableOpacity>
+            </View>
+
             {props.userAdmissions.length > 0 && goingOn && <UserAdmissionsDetails userAdmissions={props.userAdmissions} setOverlayVisible={setOverlayVisible}/>}
             <AdmissionDetails goingOn={goingOn} overlayVisible={overlayVisible} setOverlayVisible={setOverlayVisible} displayText={requiredDocuments} userAdmissionsNumber={props.userAdmissions.length}/>
             {
@@ -162,6 +246,19 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
 
+    leftRightType:{
+        width: 130,
+        height: 100
+    },
+
+    facultyTypeContainer:{
+        flexDirection: 'row',
+        justifyContent: "space-around",
+        position: 'relative',
+        bottom: 45,
+        marginBottom: -50
+    },
+
 
     buttonText:{
         marginTop: 10,
@@ -171,6 +268,27 @@ const styles = StyleSheet.create({
     button:{
         width: 120,
         height: 40
+    },
+
+    middleButton:{
+        width: 150,
+        height: 150,
+        position: 'relative',
+        bottom: 10
+    },
+
+    leftButton:{
+        width: 120,
+        height: 100,
+        position: 'relative',
+        left: 10
+    },
+
+    rightButton:{
+        width: 120,
+        height: 100,
+        position: 'relative',
+        right: 10
     }
 
 });

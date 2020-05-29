@@ -1,4 +1,5 @@
 export default interface Faculty{
+
     id: number,
     name: string,
     latitude: number,
@@ -9,6 +10,8 @@ export default interface Faculty{
     examDate: string,
     resultsDate: string,
     facultyAdmissionFee: number,
-    universityAdmissionFee: number
+    universityAdmissionFee: number,
+    university: string,
+    isTechnic: boolean
 
 }

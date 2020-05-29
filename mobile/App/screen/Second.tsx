@@ -21,6 +21,8 @@ import UserAccommodation from "../types/UserAccommodation";
 import {parse} from "react-native-svg";
 import {Overlay} from "react-native-elements";
 import FacultyConfirmation from "../components/FacultyConfirmation";
+import {BACKEND_URL} from "../constants/Constants";
+import User from "../types/User";
 
 let uniOn = require('../icons/UniOn.png');
 let uniOff = require('../icons/UniOff.png');
@@ -32,6 +34,8 @@ let calOn = require('../icons/CalendarOn.png');
 let calOff = require('../icons/CalendarOff.png');
 
 
+
+
 //47.516924599 25.8585465658
 const destinationsStartData:  LocationData[] = [
 
@@ -40,7 +44,8 @@ const destinationsStartData:  LocationData[] = [
 ];
 
 
-export default function Second(){
+
+export default function Second({route, navigation}){
 
     function handleButtonPress(source: string) {
         changeSize(source);
@@ -84,16 +89,16 @@ export default function Second(){
     }
 
 
-
     useEffect(() => {
 
         (async() => {
 
-            const unAttendingFacultiesRequest = () => axios.post('http://192.168.1.5:8080/unattending', {username: 'a'});
-            const userAdmissionsRequest = () => axios.post('http://192.168.1.5:8080/user/faculties', {username: 'a'});
-            const userAccommodationRequest = () => axios.post('http://192.168.1.5:8080/userAccommodation', {username: 'a'});
+            const unAttendingFacultiesRequest = () => axios.post(BACKEND_URL + '/unattending', {username: 'a'});
+            const userAdmissionsRequest = () => axios.post(BACKEND_URL + '/user/faculties', {username: 'a'});
+            const userAccommodationRequest = () => axios.post(BACKEND_URL + '/userAccommodation', {username: 'a'});
 
             const [unAttendingFacultiesResponse, userAdmissionsResponse, userAccommodationResponse] = await axios.all([unAttendingFacultiesRequest(), userAdmissionsRequest(), userAccommodationRequest()]);
+
             setFaculties(unAttendingFacultiesResponse.data);
             setUserAccommodation(userAccommodationResponse.data);
             setFacultiesName(unAttendingFacultiesResponse.data.map(faculty => faculty.name));
@@ -102,6 +107,19 @@ export default function Second(){
         })();
 
     },[]);
+
+    async function updateUserFilters(cityFilter: boolean[], facultyTypeFilter: boolean[]){
+
+        currentUser = {...currentUser, iasiFilter: cityFilter[0], clujFilter: cityFilter[1], bucurestiFilter: cityFilter[2],
+            technicFilter: facultyTypeFilter[0], umanisticFilter: facultyTypeFilter[1]
+        }
+        console.log(cityFilter);
+        console.log(facultyTypeFilter);
+        navigation.setParams({currentUser});
+        await axios.post(BACKEND_URL + '/user', {username: currentUser.username, cityFilter, facultyTypeFilter: facultyTypeFilter});
+    }
+
+
 
     function changeSize(source:string){
 
@@ -225,6 +243,8 @@ export default function Second(){
 
     const [userAccommodation, setUserAccommodation] = useState<UserAccommodation>({name: '', address: '', checkIn: '', checkOut: ''});
 
+    let {currentUser} = route.params;
+
     const[destinations, setDestinations] = useState<LocationData[]>([]);
 
     const[currentSelected, setCurrentSelected] = useState('');
@@ -259,7 +279,7 @@ export default function Second(){
         /*let userAdmissionsWithExpiredSignUp: Faculty[] = userAdmissions.filter((userAdmission, index) =>
             parseInt(userAdmission.signUpDate.slice(-2)) + 4 === currentDay//modify here to check for expiration date of sign up
         );*/
-        if(userAdmissions.length === 3){
+        /*if(userAdmissions.length === 3){
             let userAdmissionsWithExpiredSignUp: Faculty[] = userAdmissions;
 
             let clicked: boolean[] = [];
@@ -270,7 +290,7 @@ export default function Second(){
             setClicked(clicked);
             setIsSignUpConfirmationVisible(userAdmissionsWithExpiredSignUp.length > 0);
             setWaitingForConfirmationAdmissions(userAdmissionsWithExpiredSignUp);
-        }
+        }*/
 
 
     },[userAdmissions]);
@@ -320,7 +340,7 @@ export default function Second(){
                 {!firstMapsIcon && <Home destinations={destinations} currentLocation={currentLocation}/> ||
                     !firstCalIcon && <CalendarScreen userAdmissions={userAdmissions} userAccommodation={userAccommodation}/> ||
                     !firstAccIcon && <Accommodation displayMap={setFirstMapsIcon} setAccommodationDetails={setDestinations} setCurrentLocation={setCurrentLocation} faculties={[...faculties, ...userAdmissions]} setMultiplier={setMultiplier} setUserAccommodation={setUserAccommodation} userAccommodation={userAccommodation}/> ||
-                    <Admissions faculties={faculties} userAdmissions={userAdmissions} setFaculties={setFaculties} setUserAdmissions={setUserAdmissions} handleFacultyLocationPress={handleFacultyLocationPress}/>
+                    <Admissions updateUserFilters={updateUserFilters} currentUsername={currentUser.username} facultyTypeFilter={[currentUser.technicFilter, currentUser.umanisticFilter]} cityFilter={[currentUser.iasiFilter, currentUser.clujFilter, currentUser.bucurestiFilter]} faculties={faculties} userAdmissions={userAdmissions} setFaculties={setFaculties} setUserAdmissions={setUserAdmissions} handleFacultyLocationPress={handleFacultyLocationPress}/>
                 }
 
 
