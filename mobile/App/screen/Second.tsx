@@ -113,8 +113,6 @@ export default function Second({route, navigation}){
         currentUser = {...currentUser, iasiFilter: cityFilter[0], clujFilter: cityFilter[1], bucurestiFilter: cityFilter[2],
             technicFilter: facultyTypeFilter[0], umanisticFilter: facultyTypeFilter[1]
         }
-        console.log(cityFilter);
-        console.log(facultyTypeFilter);
         navigation.setParams({currentUser});
         await axios.post(BACKEND_URL + '/user', {username: currentUser.username, cityFilter, facultyTypeFilter: facultyTypeFilter});
     }

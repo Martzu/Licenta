@@ -67,6 +67,8 @@ function handlePress(array: boolean[], givenIndex: number): boolean[]{
     return array.map((element,index) => index === givenIndex ? ! element : element);
 }
 
+
+
 interface AdmissionsProps{
     faculties: Faculty[],
     setFaculties: (faculties: Faculty[]) => void,
@@ -103,11 +105,11 @@ export default function Admissions(props: AdmissionsProps){
 
     const[render, setRender] = useState(false);
 
-    useEffect(() => {
+    function filterFacultiesAccordingToUserFilter(faculties: Faculty[]): Faculty[]{
+
         let currentFilter: number[] = cityFilter.map((city, index) => city ? index : -1).filter(city => city !== -1);
         let admissionsToDisplay: Faculty[] = [];
-
-        let facultiesToIterate = goingOn ? props.userAdmissions : props.faculties;
+        let facultiesToIterate = goingOn ? props.userAdmissions : faculties;
         currentFilter.map(city =>
             city === 0 ? facultiesToIterate.filter(faculty => faculty.address.includes('Iași')) :
                 city === 1 ? facultiesToIterate.filter(faculty => faculty.address.includes('Cluj')) :
@@ -115,12 +117,21 @@ export default function Admissions(props: AdmissionsProps){
         ).forEach(cityFaculties => {
             admissionsToDisplay = [...admissionsToDisplay, ...cityFaculties];
         });
-
         if(facultyTypeFilter[0] !== facultyTypeFilter[1]){
             admissionsToDisplay = admissionsToDisplay.filter(admission => !facultyTypeFilter[0] ? admission.isTechnic : !admission.isTechnic);
-
         }
 
+        return admissionsToDisplay;
+    }
+
+    function computeFacultiesToDisplay(): Faculty[]{
+
+        return filterFacultiesAccordingToUserFilter(goingOn ? props.userAdmissions : props.faculties);
+
+    }
+
+    useEffect(() => {
+        let admissionsToDisplay: Faculty[] = computeFacultiesToDisplay();
         setFaculties(admissionsToDisplay);
         (async() => await props.updateUserFilters(cityFilter, facultyTypeFilter))();
 
@@ -161,11 +172,19 @@ export default function Admissions(props: AdmissionsProps){
         else{
             if(!checkAdmissionsConflict(currentFaculty, props.userAdmissions, setConflictMessage)){
                 const response = await axios.post(BACKEND_URL + '/faculty', {username: 'a', facultyId: currentFaculty.id});
+
+                //dFaculties = filterFacultiesAccordingToUserFilter(props.faculties.filter(faculty => faculty.id !== currentFaculty.id));
                 if(response.status === 200){
-                    let filteredFaculties = props.faculties.filter(faculty => faculty.id !== currentFaculty.id);
-                    setFaculties(filteredFaculties);
+                    //let filteredFaculties = faculties.filter(faculty => faculty.id !== currentFaculty.id);
+
+                    let remainingFaculties = props.faculties.filter(faculty => faculty.id !== currentFaculty.id);
+                    let filteredFacultiesToDisplay = filterFacultiesAccordingToUserFilter(props.faculties).filter(faculty => faculty.id !== currentFaculty.id);
+                    //console.log(filteredFaculties);
+                    //filteredFaculties tre sa-l mai filtrez odata dupa filtru userului
+                    setFaculties(filteredFacultiesToDisplay);
+                    props.setFaculties(remainingFaculties);
                     props.setUserAdmissions([...props.userAdmissions, currentFaculty]);
-                    props.setFaculties(filteredFaculties);
+                    //props.setFaculties(filteredFaculties);
                 }
             }
             else{
@@ -181,6 +200,7 @@ export default function Admissions(props: AdmissionsProps){
         //TODO: acel faculties, filteredFAculties tre sa fie props.faculties dar cred ca-i ok si asa
         //setFacultiesToDisplay(going ? props.userAdmissions : filteredFaculties);
         setFaculties(going ? props.userAdmissions : faculties);
+       // setFaculties(props.userAdmissions);
     }
 
     if(!render){

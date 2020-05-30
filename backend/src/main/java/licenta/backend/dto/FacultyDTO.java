@@ -24,6 +24,8 @@ public class FacultyDTO {
     private Integer facultyAdmissionFee;
     private String university;
     private Boolean isTechnic;
+    private Boolean confirmed;
+    private String result;
 
     public FacultyDTO(Faculty faculty) {
         this.id = faculty.getId();

@@ -7,10 +7,7 @@ import licenta.backend.dto.Test;
 import licenta.backend.service.ServiceFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Comparator;
 import java.util.List;
@@ -47,5 +44,6 @@ public class UserController {
     public AppUserDTO loginUser(@RequestBody Test test) throws Exception{//check in front if username is not empty
         return new AppUserDTO(serviceFactory.appUserService().authenticateUser(test.getUsername(), test.getPassword()));
     }
+
 
 }

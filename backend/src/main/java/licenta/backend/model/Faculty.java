@@ -32,18 +32,13 @@ public class Faculty {
     private Boolean isTechnic;
 
 
+    @OneToMany(mappedBy = "faculty")
+    private List<UserAdmission> userAdmissions = new ArrayList<>();
+
     @ManyToOne
     @JoinColumn(name = "university_id")
     private University university;
 
-
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(
-            name = "user_admissions",
-            joinColumns = { @JoinColumn(name = "faculty_id")},
-            inverseJoinColumns = { @JoinColumn(name = "user_id")}
-    )
-    private List<AppUser> appUsers = new ArrayList<>();
 
     public Faculty(University university, String name, double latitude, double longitude, String address, String signUpPlace, String signUpDate, String examDate, String resultsDate, int universityAdmissionFee, int facultyAdmissionFee) {
         this.university = university;

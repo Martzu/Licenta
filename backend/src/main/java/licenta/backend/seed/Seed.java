@@ -6,6 +6,7 @@ import com.google.gson.reflect.TypeToken;
 import licenta.backend.model.AppUser;
 import licenta.backend.model.Faculty;
 import licenta.backend.model.University;
+import licenta.backend.model.UserAdmission;
 import licenta.backend.repository.FactoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -61,7 +62,23 @@ public class Seed implements CommandLineRunner {
 
         });
 
+
+
+
+
         factoryRepository.createFacultyRepository().findAll().forEach(System.out::println);
         factoryRepository.createAppUserRepository().save(appUser);
+
+        //for test
+        Faculty faculty = factoryRepository.createFacultyRepository().findById(1).get();
+        Faculty faculty1 = factoryRepository.createFacultyRepository().findById(2).get();
+
+        UserAdmission userAdmission = new UserAdmission(faculty, appUser);
+        UserAdmission userAdmission1 = new UserAdmission(faculty1, appUser);
+
+        factoryRepository.createUserAdmissionRepository().save(userAdmission);
+        factoryRepository.createUserAdmissionRepository().save(userAdmission1);
+
+
     }
 }

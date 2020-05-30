@@ -17,7 +17,7 @@ public interface FacultyRepository extends Repository<Faculty, Integer> {
 
     public Optional<Faculty> findByName(String name);
 
-    public List<Faculty> findByAppUsersIn(List<AppUser> appUsers);
+    //public List<Faculty> findByAppUsersIn(List<AppUser> appUsers);
 
 
 }

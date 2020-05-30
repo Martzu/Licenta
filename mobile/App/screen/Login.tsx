@@ -32,8 +32,7 @@ export default function Login({navigation}){
         console.log(loginResponse.status);
         if(loginResponse.status === 200){
             let user: User = loginResponse.data;
-            console.log("login");
-            console.log(user);
+
             if(user.username){
                 navigation.navigate('Second', {currentUser: user})
             }
@@ -46,16 +45,6 @@ export default function Login({navigation}){
         }
 
     }
-
-    /*const [user, setUser] = useState<User>({
-        bucurestiFilter: false,
-        clujFilter: true,
-        iasiFilter: false,
-        id: 0,
-        technicFilter: true,
-        umanisticFilter: false,
-        username: "a"
-    });*/
 
     return (
 

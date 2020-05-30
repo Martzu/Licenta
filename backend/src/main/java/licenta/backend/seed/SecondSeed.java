@@ -22,9 +22,7 @@ public class SecondSeed implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
-        //TODO: baga universitati la facultatile din celalalt seed si dupa baga restu de mai jos
-
+        
         University u1 = new University("Universitatea Babes Bolyai");
         University u2 = new University("Universitatea Tehnică Gheorghe Asachi");
         University u3 = new University("Universitatea Alexandru Ioan Cuza");
@@ -42,8 +40,6 @@ public class SecondSeed implements CommandLineRunner {
         universities.forEach(university -> factoryRepository.createUniversityRepository().save(university));
 
 
-
-        Faculty f1 = new Faculty(u1     ,"Facultatea de Chimie şi Inginerie Chimică",  46.770943,	23.582161,	"Str. Arany János nr. 11, Cluj-Napoca, 400028",	"Str. Arany János nr. 11, Cluj-Napoca, 400028",	"9-11 13-15",	"17",	"17",	0,	100);
         Faculty f2 = new Faculty(u1     ,"Facultatea de Biologie şi Geologie",	46.763302,	23.588771,	"Str. Republicii (Gh. Bilașcu) nr.44, Cluj-Napoca, 400015",	"Str. Republicii (Gh. Bilașcu) nr.44, Cluj-Napoca, 400015",	"9-10 13-14",	"No exam",	"16",	0	,	120);
         Faculty f14 = new Faculty(u1	,	"Facultatea de Geografie",	46.765233	,	23.579347	,	 "Str.Clinicilor Nr. 5-7, Cluj-Napoca, 400006",	 "Str.Clinicilor Nr. 5-7, Cluj-Napoca, 400006",	"9-15",	"No exam",	"17",	0	,	170);
         Faculty f15 = new Faculty(u1	,	"Facultatea de Drept",	46.770185	,	23.588782	,	"Str.Avram Iancu nr. 11, Cluj-Napoca, 400089",	"Str.Avram Iancu nr. 11, Cluj-Napoca, 400089",	"9-11 13-15",	"No exam",	"17",	0	,	250);
@@ -66,7 +62,6 @@ public class SecondSeed implements CommandLineRunner {
         Faculty f132 = new Faculty(u6	,	"Facultatea de Drept",	44.435394	,	26.082098	,	"Universitatea din București, Bulevardul Mihail Kogălniceanu 36-46, București 050107",	"Universitatea din București, Bulevardul Mihail Kogălniceanu 36-46, București 050107",	"16-26",	"29"	,"30",	0	,	360);
 
         List<Faculty> faculties = new ArrayList<>();
-        faculties.add(f1);
         faculties.add(f2);
         faculties.add(f14);
         faculties.add(f15);

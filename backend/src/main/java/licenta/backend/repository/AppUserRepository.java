@@ -15,6 +15,6 @@ public interface AppUserRepository extends Repository<AppUser, Integer> {
 
     public Optional<AppUser> findByUsername(String username);
 
-    public void removeAppUserByFacultiesIn(List<Faculty> faculties);
+    //public void removeAppUserByFacultiesIn(List<Faculty> faculties);
 
 }

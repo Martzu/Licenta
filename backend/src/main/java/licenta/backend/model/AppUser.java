@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "appUser")
@@ -44,8 +43,8 @@ public class AppUser {
         this.umanisticFilter = umanisticFilter;
     }
 
-    @ManyToMany(mappedBy = "appUsers", cascade = {CascadeType.ALL})
-    private List<Faculty> faculties;
+    @OneToMany(mappedBy = "appUser")
+    private List<UserAdmission> userAdmissions;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "accommodation_id", referencedColumnName = "id")
