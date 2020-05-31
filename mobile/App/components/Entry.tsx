@@ -14,6 +14,7 @@ let Box = require('../icons/Box.png');
 let FacultyDetails = require('../icons/FacultyDetails.png');
 let Participate = require('../icons/Participate.png');
 
+let CheckResults = require('../icons/CheckResults.png');
 
 
 interface EntryProps{
@@ -42,7 +43,7 @@ export default function Entry(props: EntryProps){
         }*/
         console.log();
     },[]);
-
+    //Functionalitatea de la props.going de jos sa fie ca afiseaza nu ca sterge admiterea :))
     return(
 
             props.going ? <ImageBackground source={Box} style={styles.container}>
@@ -71,10 +72,9 @@ export default function Entry(props: EntryProps){
 
                     <View style={styles.bottomSection}>
                         <TouchableOpacity onPress={() => props.handleBottomButtonClick(props.faculty)}>
-                            <Image source={props.going ? Cancel : Participate} style={props.going ? styles.cancelButton : styles.participateButton}/>
+                            <Image source={props.faculty.confirmed ? CheckResults : Cancel} style={props.going ? styles.cancelButton : styles.participateButton}/>
                         </TouchableOpacity>
                     </View>
-
 
             </ImageBackground> :
 

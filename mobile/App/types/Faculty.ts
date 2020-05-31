@@ -12,6 +12,8 @@ export default interface Faculty{
     facultyAdmissionFee: number,
     universityAdmissionFee: number,
     university: string,
-    isTechnic: boolean
+    isTechnic: boolean,
+    confirmed: boolean,
+    result: string
 
 }

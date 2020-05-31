@@ -6,6 +6,7 @@ import licenta.backend.model.UserAdmission;
 import org.springframework.data.repository.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserAdmissionRepository extends Repository<UserAdmission, Integer>{
 
@@ -14,5 +15,7 @@ public interface UserAdmissionRepository extends Repository<UserAdmission, Integ
     public UserAdmission save(UserAdmission userAdmission);
 
     public void removeByAppUserAndFaculty(AppUser appUser, Faculty faculty);
+
+    public Optional<UserAdmission> findByAppUserAndFaculty(AppUser appUser, Faculty faculty);
 
 }

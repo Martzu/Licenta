@@ -8,6 +8,7 @@ import licenta.backend.model.AppUser;
 import licenta.backend.model.Faculty;
 import licenta.backend.model.UserAdmission;
 import licenta.backend.repository.FactoryRepository;
+import licenta.backend.wrapper.UserAdmissionToFaculty;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +28,15 @@ public class AppUserService {
 
     public List<FacultyDTO> getAppUserAdmissions(String username) throws Exception{
         AppUser appUser = factoryRepository.createAppUserRepository().findByUsername(username).orElseThrow(() -> new Exception("Username does not exist"));
-        return getUserAttendingFacultyAdmissions(appUser).stream()
-                .map(FacultyDTO::new).collect(Collectors.toList());
+
+        List<UserAdmissionToFaculty> userAdmissionToFaculties = factoryRepository.createUserAdmissionRepository().findUserAdmissionsByAppUser(appUser).stream()
+                .map(userAdmission -> new UserAdmissionToFaculty(userAdmission,
+                        factoryRepository.createFacultyRepository().findById(userAdmission.getFaculty().getId()).get()))
+                .collect(Collectors.toList());
+
+        return userAdmissionToFaculties.stream()
+                .map(userAdmissionToFaculty -> new FacultyDTO(userAdmissionToFaculty.getFaculty(), userAdmissionToFaculty.isConfirmed()))
+                .collect(Collectors.toList());
 
     }
 
@@ -92,6 +100,19 @@ public class AppUserService {
         AppUser appUser = factoryRepository.createAppUserRepository().findByUsername(username).orElseThrow(() -> new Exception("Username does not exist"));
         Faculty faculty = factoryRepository.createFacultyRepository().findById(facultyId).orElseThrow(() -> new Exception("Faculty does not exist"));
         factoryRepository.createUserAdmissionRepository().removeByAppUserAndFaculty(appUser, faculty);
+    }
+
+    @Transactional
+    public void confirmParticipationToFacultyAdmission(String username, Integer facultyId) throws Exception{
+        AppUser appUser = factoryRepository.createAppUserRepository().findByUsername(username).orElseThrow(() -> new Exception("Username does not exist"));
+        Faculty faculty = factoryRepository.createFacultyRepository().findById(facultyId).orElseThrow(() -> new Exception("Faculty does not exist"));
+
+        UserAdmission userAdmission = factoryRepository.createUserAdmissionRepository()
+                .findByAppUserAndFaculty(appUser, faculty).orElseThrow(() -> new Exception("User not participating to the faculty's admission"));
+        userAdmission.setConfirmed(true);
+
+        factoryRepository.createUserAdmissionRepository().save(userAdmission);
+
     }
 
 

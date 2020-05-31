@@ -5,6 +5,7 @@ import Faculty from "../types/Faculty";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {BACKEND_URL} from "../constants/Constants";
+import User from "../types/User";
 
 let ConfirmParticipation = require('../icons/ConfirmParticipation.png');
 let ConfirmParticipationOff = require('../icons/ConfirmParticipationOff.png');
@@ -15,6 +16,7 @@ let UnconfirmAdmissionOff = require('../icons/UnconfirmAdmissionOff.png');
 let BigCard = require('../icons/BigCard.png');
 
 interface FacultyConfirmationProps{
+    currentUser: User,
     isSignUpConfirmationVisible: boolean,
     setIsSignUpConfirmationVisible: (visible: boolean) => void,
     clicked: boolean[],
@@ -36,10 +38,12 @@ export default function FacultyConfirmation(props: FacultyConfirmationProps){
         isConfirm? setRemoveVisible(modifiedArray) : setConfirmVisible(modifiedArray) ;
     }
 
+
+    //tre le adaug la un array si la sfarsit sa le dau remove, de aia dispar
     function removeAdmission(facultyId){
         setAdmissionFacultyIdToRemove(admissionFacultyIdToRemove => [...admissionFacultyIdToRemove, facultyId]);
-        let userAdmissions: Faculty[] = props.userAdmissions.filter(faculty => faculty.id !== facultyId);
-        props.setUserAdmissions(userAdmissions);
+        /*let userAdmissions: Faculty[] = props.userAdmissions.filter(faculty => faculty.id !== facultyId);
+        props.setUserAdmissions(userAdmissions);*/
     }
 
 
@@ -49,12 +53,26 @@ export default function FacultyConfirmation(props: FacultyConfirmationProps){
         for(let i = 0; i < confirmVisible.length; i++){
             confirmedAdmissions += !(confirmVisible[i] && removeVisible[i]) ?  1 : 0;
         }
+        console.log("butoane apasate");
+        console.log("confirm");
+        console.log(confirmVisible);
+        console.log();
+        console.log("remove");
+        console.log(removeVisible);
 
         if(confirmedAdmissions === props.clicked.length){
 
-            (async () => axios.all(admissionFacultyIdToRemove.map(facultyId => axios.delete(BACKEND_URL + '/faculty',{data: {username: 'a', facultyId: facultyId}}))))();
+            (async () => axios.all(admissionFacultyIdToRemove.map(facultyId => axios.delete(BACKEND_URL + '/faculty',{data: {username: props.currentUser.username, facultyId: facultyId}}))))();
+            let userAdmissions: Faculty[] = [];
+            admissionFacultyIdToRemove.forEach(facultyId => {
+                userAdmissions = props.userAdmissions.filter(faculty => faculty.id !== facultyId);
+            })
+
+            userAdmissions = userAdmissions.map(userAdmission => {return {...userAdmission, ["confirmed"]: true};});
+            props.setUserAdmissions(userAdmissions);
             canExit = true;
         }
+
         return canExit;
     }
 
@@ -76,7 +94,7 @@ export default function FacultyConfirmation(props: FacultyConfirmationProps){
                                         }
                                     </Text>
                                 </View>
-                                {<TouchableOpacity onPress={() => handlePress(true, index)} style={{marginRight: -15}}><Image style={styles.confirmImage} source={confirmVisible[index] && ConfirmParticipation || ConfirmParticipationOff}/></TouchableOpacity>}
+                                {<TouchableOpacity onPress={async() => {handlePress(true, index); await axios.post(BACKEND_URL + "/user-admission/confirm", {username: props.currentUser.username, facultyId: admission.id}) }} style={{marginRight: -15}}><Image style={styles.confirmImage} source={confirmVisible[index] && ConfirmParticipation || ConfirmParticipationOff}/></TouchableOpacity>}
                                 {<TouchableOpacity onPress={async() => {handlePress(false, index); removeAdmission(admission.id);}}><Image style={styles.unconfirmImage} source={removeVisible[index] && UnconfirmAdmission || UnconfirmAdmissionOff}/></TouchableOpacity>}
                             </View>
 

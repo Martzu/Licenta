@@ -22,7 +22,7 @@ public class SecondSeed implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        
+
         University u1 = new University("Universitatea Babes Bolyai");
         University u2 = new University("Universitatea Tehnică Gheorghe Asachi");
         University u3 = new University("Universitatea Alexandru Ioan Cuza");

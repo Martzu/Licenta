@@ -272,12 +272,18 @@ export default function Second({route, navigation}){
     const [runOnce, setRunOnce] = useState(true);
 
     useEffect( () => {
-        //let today = new Date();
-        //const currentDay = today.getDate();
+        let today = new Date();
+        const currentDay = today.getDate();
+
         /*let userAdmissionsWithExpiredSignUp: Faculty[] = userAdmissions.filter((userAdmission, index) =>
             parseInt(userAdmission.signUpDate.slice(-2)) + 4 === currentDay//modify here to check for expiration date of sign up
         );*/
-        /*if(userAdmissions.length === 3){
+        console.log(userAdmissions);
+        let unconfirmedAdmissions: number = userAdmissions.filter(admission => !admission.confirmed).length;
+        console.log(userAdmissions.length);
+        console.log(unconfirmedAdmissions);
+        if(unconfirmedAdmissions === userAdmissions.length){
+
             let userAdmissionsWithExpiredSignUp: Faculty[] = userAdmissions;
 
             let clicked: boolean[] = [];
@@ -288,7 +294,10 @@ export default function Second({route, navigation}){
             setClicked(clicked);
             setIsSignUpConfirmationVisible(userAdmissionsWithExpiredSignUp.length > 0);
             setWaitingForConfirmationAdmissions(userAdmissionsWithExpiredSignUp);
-        }*/
+        }
+
+
+
 
 
     },[userAdmissions]);
@@ -332,7 +341,7 @@ export default function Second({route, navigation}){
 
             </Animated.View>
 
-            <FacultyConfirmation isSignUpConfirmationVisible={isSignUpConfirmationVisible} waitingForConfirmationAdmissions={waitingForConfirmationAdmissions} clicked={clicked} setIsSignUpConfirmationVisible={setIsSignUpConfirmationVisible} setUserAdmissions={setUserAdmissions} userAdmissions={userAdmissions}/>
+            <FacultyConfirmation currentUser={currentUser} isSignUpConfirmationVisible={isSignUpConfirmationVisible} waitingForConfirmationAdmissions={waitingForConfirmationAdmissions} clicked={clicked} setIsSignUpConfirmationVisible={setIsSignUpConfirmationVisible} setUserAdmissions={setUserAdmissions} userAdmissions={userAdmissions}/>
 
             <Animated.View style={styles.middleContainer}>
                 {!firstMapsIcon && <Home destinations={destinations} currentLocation={currentLocation}/> ||
