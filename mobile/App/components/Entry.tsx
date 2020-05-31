@@ -6,6 +6,7 @@ import {useEffect, useState} from "react";
 import Faculty from "../types/Faculty";
 import LocationData from "../types/LocationData";
 import displayFromText from '../constants/Constants';
+import ConflictCard from "./ConflictCard";
 
 let Details = require('../icons/Details.png');
 let Cancel = require('../icons/RemoveAdmission.png');
@@ -29,21 +30,21 @@ export default function Entry(props: EntryProps){
 
     const [render, setRender] = useState<boolean>(true);
 
+    const [resultsVisible, setResultsVisible] = useState<boolean>(false);
+
+
     useEffect(() => {
-        /*let today = new Date();
+        let today = new Date();
         let day = today.getDate();
         setRender(day <= parseInt(props.faculty.signUpDate.slice(-2)));
-        if(props.faculty.name !== 'Automatica si calculatoare' && props.faculty.name !== 'Chimie inginerie chimica' && props.faculty.name !== 'Constructii' && props.faculty.name !== 'Mecanica')
-        {
-            setRender(false);
-        }
-        else
-        {
-            setRender(true);
-        }*/
         console.log();
     },[]);
     //Functionalitatea de la props.going de jos sa fie ca afiseaza nu ca sterge admiterea :))
+
+    function handleCheckResults(){//also set the message for the overlay and we are good togo
+        setResultsVisible(true);
+    }
+
     return(
 
             props.going ? <ImageBackground source={Box} style={styles.container}>
@@ -69,10 +70,10 @@ export default function Entry(props: EntryProps){
                             <Image source={Location} style={styles.button}/>
                         </TouchableOpacity>
                     </View>
-
+                    <ConflictCard conflictMessage={"hahayes"} setOverlayVisible={setResultsVisible} overlayVisible={resultsVisible}/>
                     <View style={styles.bottomSection}>
-                        <TouchableOpacity onPress={() => props.handleBottomButtonClick(props.faculty)}>
-                            <Image source={props.faculty.confirmed ? CheckResults : Cancel} style={props.going ? styles.cancelButton : styles.participateButton}/>
+                        <TouchableOpacity onPress={props.faculty.confirmed ? () => handleCheckResults(): () => props.handleBottomButtonClick(props.faculty)}>
+                            <Image source={props.faculty.confirmed ? CheckResults : Cancel} style={props.faculty.confirmed ? styles.participateButton : styles.cancelButton}/>
                         </TouchableOpacity>
                     </View>
 
