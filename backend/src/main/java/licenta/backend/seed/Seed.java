@@ -70,14 +70,14 @@ public class Seed implements CommandLineRunner {
         factoryRepository.createAppUserRepository().save(appUser);
 
         //for test
-        Faculty faculty = factoryRepository.createFacultyRepository().findById(1).get();
+        /*Faculty faculty = factoryRepository.createFacultyRepository().findById(1).get();
         Faculty faculty1 = factoryRepository.createFacultyRepository().findById(2).get();
 
         UserAdmission userAdmission = new UserAdmission(faculty, appUser);
         UserAdmission userAdmission1 = new UserAdmission(faculty1, appUser);
 
         factoryRepository.createUserAdmissionRepository().save(userAdmission);
-        factoryRepository.createUserAdmissionRepository().save(userAdmission1);
+        factoryRepository.createUserAdmissionRepository().save(userAdmission1);*/
 
 
     }

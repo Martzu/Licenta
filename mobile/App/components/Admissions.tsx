@@ -199,6 +199,7 @@ export default function Admissions(props: AdmissionsProps){
         //setFaculties(going ? props.userAdmissions : props.faculties);
         //TODO: acel faculties, filteredFAculties tre sa fie props.faculties dar cred ca-i ok si asa
         //setFacultiesToDisplay(going ? props.userAdmissions : filteredFaculties);
+        console.log(props.userAdmissions);
         setFaculties(going ? props.userAdmissions : faculties);
        // setFaculties(props.userAdmissions);
     }

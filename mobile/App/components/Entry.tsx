@@ -34,10 +34,13 @@ export default function Entry(props: EntryProps){
 
 
     useEffect(() => {
-        let today = new Date();
+        if(props.faculty.name.includes('Arhitectura')){
+            setRender(false);
+        }
+        /*let today = new Date();
         let day = today.getDate();
         setRender(day <= parseInt(props.faculty.signUpDate.slice(-2)));
-        console.log();
+        console.log();*/
     },[]);
     //Functionalitatea de la props.going de jos sa fie ca afiseaza nu ca sterge admiterea :))
 
@@ -70,7 +73,7 @@ export default function Entry(props: EntryProps){
                             <Image source={Location} style={styles.button}/>
                         </TouchableOpacity>
                     </View>
-                    <ConflictCard conflictMessage={"hahayes"} setOverlayVisible={setResultsVisible} overlayVisible={resultsVisible}/>
+                    <ConflictCard conflictMessage={"Tax free admitted!"} setOverlayVisible={setResultsVisible} overlayVisible={resultsVisible}/>
                     <View style={styles.bottomSection}>
                         <TouchableOpacity onPress={props.faculty.confirmed ? () => handleCheckResults(): () => props.handleBottomButtonClick(props.faculty)}>
                             <Image source={props.faculty.confirmed ? CheckResults : Cancel} style={props.faculty.confirmed ? styles.participateButton : styles.cancelButton}/>

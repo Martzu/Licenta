@@ -53,22 +53,18 @@ export default function FacultyConfirmation(props: FacultyConfirmationProps){
         for(let i = 0; i < confirmVisible.length; i++){
             confirmedAdmissions += !(confirmVisible[i] && removeVisible[i]) ?  1 : 0;
         }
-        console.log("butoane apasate");
-        console.log("confirm");
-        console.log(confirmVisible);
-        console.log();
-        console.log("remove");
-        console.log(removeVisible);
 
         if(confirmedAdmissions === props.clicked.length){
 
             (async () => axios.all(admissionFacultyIdToRemove.map(facultyId => axios.delete(BACKEND_URL + '/faculty',{data: {username: props.currentUser.username, facultyId: facultyId}}))))();
             let userAdmissions: Faculty[] = [];
+            console.log(admissionFacultyIdToRemove.length);
             admissionFacultyIdToRemove.forEach(facultyId => {
                 userAdmissions = props.userAdmissions.filter(faculty => faculty.id !== facultyId);
             })
-
-            userAdmissions = userAdmissions.map(userAdmission => {return {...userAdmission, ["confirmed"]: true};});
+            userAdmissions = (admissionFacultyIdToRemove.length > 0 ? userAdmissions : props.userAdmissions).map(userAdmission => {return {...userAdmission, ["confirmed"]: true};});
+            console.log("in confirmare");
+            console.log(userAdmissions);
             props.setUserAdmissions(userAdmissions);
             canExit = true;
         }

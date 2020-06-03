@@ -84,6 +84,7 @@ public class SecondSeed implements CommandLineRunner {
         faculties.add(f132);
         faculties.forEach(faculty -> factoryRepository.createFacultyRepository().save(faculty));
 
+        
 
     }
 }

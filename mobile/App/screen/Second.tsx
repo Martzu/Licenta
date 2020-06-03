@@ -278,6 +278,9 @@ export default function Second({route, navigation}){
         /*let userAdmissionsWithExpiredSignUp: Faculty[] = userAdmissions.filter((userAdmission, index) =>
             parseInt(userAdmission.signUpDate.slice(-2)) + 4 === currentDay//modify here to check for expiration date of sign up
         );*/
+
+
+
         console.log(userAdmissions);
         let unconfirmedAdmissions: number = userAdmissions.filter(admission => !admission.confirmed).length;
         console.log(userAdmissions.length);
@@ -295,9 +298,6 @@ export default function Second({route, navigation}){
             setIsSignUpConfirmationVisible(userAdmissionsWithExpiredSignUp.length > 0);
             setWaitingForConfirmationAdmissions(userAdmissionsWithExpiredSignUp);
         }
-
-
-
 
 
     },[userAdmissions]);
@@ -346,7 +346,7 @@ export default function Second({route, navigation}){
             <Animated.View style={styles.middleContainer}>
                 {!firstMapsIcon && <Home destinations={destinations} currentLocation={currentLocation}/> ||
                     !firstCalIcon && <CalendarScreen userAdmissions={userAdmissions} userAccommodation={userAccommodation}/> ||
-                    !firstAccIcon && <Accommodation displayMap={setFirstMapsIcon} setAccommodationDetails={setDestinations} setCurrentLocation={setCurrentLocation} faculties={[...faculties, ...userAdmissions]} setMultiplier={setMultiplier} setUserAccommodation={setUserAccommodation} userAccommodation={userAccommodation}/> ||
+                    !firstAccIcon && <Accommodation displayMap={setFirstMapsIcon} setAccommodationDetails={setDestinations} setCurrentLocation={setCurrentLocation} faculties={userAdmissions} setMultiplier={setMultiplier} setUserAccommodation={setUserAccommodation} userAccommodation={userAccommodation}/> ||
                     <Admissions updateUserFilters={updateUserFilters} currentUsername={currentUser.username} facultyTypeFilter={[currentUser.technicFilter, currentUser.umanisticFilter]} cityFilter={[currentUser.iasiFilter, currentUser.clujFilter, currentUser.bucurestiFilter]} faculties={faculties} userAdmissions={userAdmissions} setFaculties={setFaculties} setUserAdmissions={setUserAdmissions} handleFacultyLocationPress={handleFacultyLocationPress}/>
                 }
 
