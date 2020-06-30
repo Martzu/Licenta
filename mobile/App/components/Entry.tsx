@@ -1,11 +1,10 @@
 import * as React from 'react';
-import {Button, Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View} from "react-native";
-import {TouchableHighlight} from "react-native-gesture-handler";
-import * as Font from "expo-font";
-import {useEffect, useState} from "react";
+import {useEffect, useState} from 'react';
+import {Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import axios from "axios";
 import Faculty from "../types/Faculty";
 import LocationData from "../types/LocationData";
-import displayFromText from '../constants/Constants';
+import displayFromText, {BACKEND_URL} from '../constants/Constants';
 import ConflictCard from "./ConflictCard";
 
 let Details = require('../icons/Details.png');
@@ -23,8 +22,10 @@ interface EntryProps{
     handleFacultyLocationPress: (destinations: LocationData[]) => void;
     handleBottomButtonClick: (faculty: Faculty) => void;
     setOverlayVisible: (visible: boolean) => void;
+    username: string;
     going: boolean;
 }
+
 
 export default function Entry(props: EntryProps){
 
@@ -32,17 +33,14 @@ export default function Entry(props: EntryProps){
 
     const [resultsVisible, setResultsVisible] = useState<boolean>(false);
 
+    let today = new Date();
+
+    let day = today.getDate();
 
     useEffect(() => {
-        if(props.faculty.name.includes('Arhitectura')){
-            setRender(false);
-        }
-        /*let today = new Date();
-        let day = today.getDate();
         setRender(day <= parseInt(props.faculty.signUpDate.slice(-2)));
-        console.log();*/
+
     },[]);
-    //Functionalitatea de la props.going de jos sa fie ca afiseaza nu ca sterge admiterea :))
 
     function handleCheckResults(){//also set the message for the overlay and we are good togo
         setResultsVisible(true);
@@ -73,7 +71,7 @@ export default function Entry(props: EntryProps){
                             <Image source={Location} style={styles.button}/>
                         </TouchableOpacity>
                     </View>
-                    <ConflictCard conflictMessage={"Tax free admitted!"} setOverlayVisible={setResultsVisible} overlayVisible={resultsVisible}/>
+                    <ConflictCard conflictMessage={day < parseInt(props.faculty.resultsDate) ? 'Not yet available!' : 'Admitted Tax Free!'} setOverlayVisible={setResultsVisible} overlayVisible={resultsVisible}/>
                     <View style={styles.bottomSection}>
                         <TouchableOpacity onPress={props.faculty.confirmed ? () => handleCheckResults(): () => props.handleBottomButtonClick(props.faculty)}>
                             <Image source={props.faculty.confirmed ? CheckResults : Cancel} style={props.faculty.confirmed ? styles.participateButton : styles.cancelButton}/>

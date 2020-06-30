@@ -40,8 +40,9 @@ public class SecondSeed implements CommandLineRunner {
         universities.forEach(university -> factoryRepository.createUniversityRepository().save(university));
 
 
-        Faculty f2 = new Faculty(u1     ,"Facultatea de Biologie şi Geologie",	46.763302,	23.588771,	"Str. Republicii (Gh. Bilașcu) nr.44, Cluj-Napoca, 400015",	"Str. Republicii (Gh. Bilașcu) nr.44, Cluj-Napoca, 400015",	"9-10 13-14",	"No exam",	"16",	0	,	120);
-        Faculty f14 = new Faculty(u1	,	"Facultatea de Geografie",	46.765233	,	23.579347	,	 "Str.Clinicilor Nr. 5-7, Cluj-Napoca, 400006",	 "Str.Clinicilor Nr. 5-7, Cluj-Napoca, 400006",	"9-15",	"No exam",	"17",	0	,	170);
+        Faculty f2 = new Faculty(u1     ,"Facultatea de Biologie şi Geologie",	46.763302,	23.588771,	"Str. Republicii (Gh. Bilașcu) nr.44, Cluj-Napoca, 400015",	"Str. Republicii (Gh. Bilașcu) nr.44, Cluj-Napoca, 400015",	"9-10 13-29",	"No exam",	"30",	0	,	120);
+        Faculty f14 = new Faculty(u1	,	"Facultatea de Geografie",	46.765233	,	23.579347	,	 "Str.Clinicilor Nr. 5-7, Cluj-Napoca, 400006",	 "Str.Clinicilor Nr. 5-7, Cluj-Napoca, 400006",	"9-29",	"No exam",	"17",	0	,	170);
+
         Faculty f15 = new Faculty(u1	,	"Facultatea de Drept",	46.770185	,	23.588782	,	"Str.Avram Iancu nr. 11, Cluj-Napoca, 400089",	"Str.Avram Iancu nr. 11, Cluj-Napoca, 400089",	"9-11 13-15",	"No exam",	"17",	0	,	250);
         Faculty f16 = new Faculty(u1	,	"Facultatea de Litere",	46.778682	,	23.586575	,	"Str. Horea nr. 31, Cluj-Napoca, 400202",	"Str. Horea nr. 31, Cluj-Napoca, 400202",	"9-12",	"No exam",	"18",	0	,	120);
         Faculty f166 = new Faculty(u2	,	"Automatică şi Calculatoare",	47.154264	,	27.59403	,	"Universitatea Tehnică Gheorghe Asachi, Bulevardul Profesor Dr. doc. Dimitrie Mangeron 27, Iași 700050",	"Universitatea Tehnică Gheorghe Asachi, Bulevardul Profesor Dr. doc. Dimitrie Mangeron 27, Iași 700050",	"13-28",	"No exam"	,"29",	0	,	100);

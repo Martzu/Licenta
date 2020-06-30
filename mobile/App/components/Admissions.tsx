@@ -87,9 +87,6 @@ export default function Admissions(props: AdmissionsProps){
 
     const[faculties, setFaculties] = useState<Faculty[]>(props.faculties);
 
-    //sa inceapa cu faculatile dupa filtrul userului
-    //const[facultiesToDisplay, setFacultiesToDisplay] = useState<Faculty[]>(props.faculties);
-
     const[overlayVisible, setOverlayVisible] = useState(false);
 
     const[conflict, setConflict] = useState(false);
@@ -252,7 +249,7 @@ export default function Admissions(props: AdmissionsProps){
             <AdmissionDetails goingOn={goingOn} overlayVisible={overlayVisible} setOverlayVisible={setOverlayVisible} displayText={requiredDocuments} userAdmissionsNumber={props.userAdmissions.length}/>
             {
                 faculties.map((faculty, index) =>
-                        <Entry faculty={faculty} key={index} going={goingOn} handleBottomButtonClick={handleCancelOrParticipate} handleFacultyLocationPress={props.handleFacultyLocationPress} setOverlayVisible={setOverlayVisible}/>
+                        <Entry username={props.currentUsername} faculty={faculty} key={index} going={goingOn} handleBottomButtonClick={handleCancelOrParticipate} handleFacultyLocationPress={props.handleFacultyLocationPress} setOverlayVisible={setOverlayVisible}/>
                     )
             }
         </ScrollView>

@@ -115,7 +115,10 @@ public class AppUserService {
 
     }
 
-
+    @Transactional
+    public void addResultToAdmission(UserAdmission userAdmission){
+        factoryRepository.createUserAdmissionRepository().save(userAdmission);
+    }
 
     private List<Faculty> getUserAttendingFacultyAdmissions(AppUser appUser){
         return factoryRepository.createUserAdmissionRepository().findUserAdmissionsByAppUser(appUser).stream()

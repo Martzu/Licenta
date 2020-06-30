@@ -273,31 +273,20 @@ export default function Second({route, navigation}){
 
     useEffect( () => {
         let today = new Date();
+
         const currentDay = today.getDate();
 
-        /*let userAdmissionsWithExpiredSignUp: Faculty[] = userAdmissions.filter((userAdmission, index) =>
-            parseInt(userAdmission.signUpDate.slice(-2)) + 4 === currentDay//modify here to check for expiration date of sign up
-        );*/
+        let userAdmissionsWithExpiredSignUp: Faculty[] = userAdmissions.filter((userAdmission, index) =>
+            parseInt(userAdmission.signUpDate.slice(-2)) + 1 === currentDay && !userAdmission.confirmed//modify here to check for expiration date of sign up
+        );
 
-
-
-        console.log(userAdmissions);
-        let unconfirmedAdmissions: number = userAdmissions.filter(admission => !admission.confirmed).length;
-        console.log(userAdmissions.length);
-        console.log(unconfirmedAdmissions);
-        if(unconfirmedAdmissions === userAdmissions.length){
-
-            let userAdmissionsWithExpiredSignUp: Faculty[] = userAdmissions;
-
-            let clicked: boolean[] = [];
-            for(let i = 0; i < userAdmissionsWithExpiredSignUp.length; i++){
-                clicked.push(true);
-            }
-
-            setClicked(clicked);
-            setIsSignUpConfirmationVisible(userAdmissionsWithExpiredSignUp.length > 0);
-            setWaitingForConfirmationAdmissions(userAdmissionsWithExpiredSignUp);
+        let clicked: boolean[] = [];
+        for(let i = 0; i < userAdmissionsWithExpiredSignUp.length; i++){
+            clicked.push(true);
         }
+        setClicked(clicked);
+        setIsSignUpConfirmationVisible(userAdmissionsWithExpiredSignUp.length > 0);
+        setWaitingForConfirmationAdmissions(userAdmissionsWithExpiredSignUp);
 
 
     },[userAdmissions]);
